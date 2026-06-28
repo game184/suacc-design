@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SUACC — Design Specification</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{background:#f6f7f8}
+  .spec{max-width:1080px;margin:0 auto;padding:0 24px 80px}
+  .spec-head{background:linear-gradient(120deg,#0f3d36,#03bf9e 70%,#62d9c3);color:#fff;padding:40px 0 34px;margin-bottom:34px}
+  .spec-head .in{max-width:1080px;margin:0 auto;padding:0 24px}
+  .spec-head h1{color:#fff;font-size:34px;margin:0 0 6px}
+  .spec-head p{margin:0;opacity:.92;font-size:14px}
+  .card2{background:#fff;border:1px solid #e6e6e6;border-radius:16px;padding:24px 26px;margin-bottom:22px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .card2 h2{font-size:22px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  .st{font-family:var(--body);font-size:11.5px;font-weight:700;border-radius:20px;padding:3px 12px;margin-left:auto;white-space:nowrap}
+  .st.ok{background:#e3f7f2;color:#066a58}
+  .st.part{background:#e7eefb;color:#2b50c8}
+  .st.draft{background:#fff3d6;color:#7a5a12}
+  .legend2{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:#555;margin-bottom:20px;align-items:center}
+  .legend2 .st{margin:0}
+  .card2 .no{background:#d8b269;color:#0d0d0d;font-family:var(--body);font-weight:800;border-radius:8px;min-width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+  .card2 .sub{color:#6b7280;font-size:13px;margin:0 0 18px}
+  table.spec-t{width:100%;border-collapse:collapse;font-size:14.5px}
+  table.spec-t th,table.spec-t td{text-align:left;padding:9px 12px;border-bottom:1px solid #eee}
+  table.spec-t th{background:#f4f6f5;font-weight:700;font-family:var(--body)}
+  table.spec-t td.v{font-family:ui-monospace,Menlo,monospace;font-weight:600;color:#0a7256;white-space:nowrap}
+  .sw{display:flex;gap:12px;flex-wrap:wrap}
+  .sw .c{width:130px;border:1px solid #e6e6e6;border-radius:10px;overflow:hidden;background:#fff}
+  .sw .c .chip{height:54px}
+  .sw .c .m{padding:7px 10px}
+  .sw .c .nm{font-size:12.5px;font-weight:600}
+  .sw .c .hex{font-size:12px;color:#777;font-family:ui-monospace,monospace}
+  .pri{outline:2px solid #d8b269;outline-offset:-2px}
+  .typesample{border-bottom:1px solid #eee;padding:10px 0;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .typesample .lbl{font-family:ui-monospace,monospace;font-size:12px;color:#6b7280;min-width:150px}
+  .note{background:#fff7e6;border:1px dashed #d8b269;border-radius:10px;padding:10px 14px;font-size:13px;color:#7a5a12;margin-top:14px}
+  @media print{body{background:#fff}.card2{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<div class="spec-head">
+  <div class="in">
+    <h1>SUACC Website — Design Specification</h1>
+    <p>สเปกการออกแบบ (ขนาด · ฟอนต์ · สี · ระยะ) ของเว็บไซต์ สำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ · วัดจริงจากหน้าเว็บ · ที่ความกว้างจอ 1440–1710px</p>
+  </div>
+</div>
+
+<div class="spec">
+
+  <div class="legend2">
+    <b style="color:#0d0d0d">สถานะ:</b>
+    <span class="st ok">✓ ยืนยันแล้ว</span> <span>= ล็อกใน CSS แล้ว</span>
+    <span class="st part">◐ ยืนยันบางส่วน</span>
+    <span class="st draft">✎ ร่าง / รออนุมัติ</span>
+  </div>
+
+  <!-- 1. Brand colours -->
+  <div class="card2">
+    <h2><span class="no">1</span> สีแบรนด์ (Brand Colours) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">สีหลักใช้กับพื้น/หัวเรื่อง · ข้อความเล็ก/ลิงก์ใช้เฉดเข้ม #0a7256 เพื่อให้ผ่าน WCAG AA</p>
+    <div style="font-size:12px;font-weight:800;color:#0a7256;margin-bottom:8px">PRIMARY</div>
+    <div class="sw">
+      <div class="c pri"><div class="chip" style="background:#03bf9e"></div><div class="m"><div class="nm">เขียว (หลัก)</div><div class="hex">#03bf9e</div></div></div>
+      <div class="c"><div class="chip" style="background:#62d9c3"></div><div class="m"><div class="nm">เขียวอ่อน</div><div class="hex">#62d9c3</div></div></div>
+      <div class="c"><div class="chip" style="background:#0a7256"></div><div class="m"><div class="nm">เขียวเข้ม (text)</div><div class="hex">#0a7256</div></div></div>
+      <div class="c"><div class="chip" style="background:#d8b269"></div><div class="m"><div class="nm">ทอง</div><div class="hex">#d8b269</div></div></div>
+      <div class="c"><div class="chip" style="background:#f2f2f2;border-bottom:1px solid #e0e0e0"></div><div class="m"><div class="nm">ขาว (พื้น)</div><div class="hex">#f2f2f2</div></div></div>
+      <div class="c"><div class="chip" style="background:#0d0d0d"></div><div class="m"><div class="nm">ดำ (ตัวอักษร)</div><div class="hex">#0d0d0d</div></div></div>
+    </div>
+    <div style="font-size:12px;font-weight:800;color:#0a7256;margin:16px 0 8px">SECONDARY</div>
+    <div class="sw">
+      <div class="c"><div class="chip" style="background:#e9a6a0"></div><div class="m"><div class="nm">ชมพู</div><div class="hex">#e9a6a0</div></div></div>
+      <div class="c"><div class="chip" style="background:#cdbc6c"></div><div class="m"><div class="nm">เหลืองทอง</div><div class="hex">#cdbc6c</div></div></div>
+      <div class="c"><div class="chip" style="background:#c3b264"></div><div class="m"><div class="nm">เหลืองทอง</div><div class="hex">#c3b264</div></div></div>
+    </div>
+  </div>
+
+  <!-- 2. Typography -->
+  <div class="card2">
+    <h2><span class="no">2</span> ตัวอักษร (Typography) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">หัวเรื่อง: <b>Silpakorn72</b> · เนื้อหา: <b>IBM Plex Sans Thai</b> (หรือ LINE Seed)</p>
+    <div class="typesample"><span class="lbl">H1 · 60px / Bold</span><span style="font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:40px">ศิลปะ วัฒนธรรม</span></div>
+    <div class="typesample"><span class="lbl">H2 · 40px / Bold</span><span style="font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:30px">หัวข้อหลักของส่วน</span></div>
+    <div class="typesample"><span class="lbl">H3 · 26–34px / Bold</span><span style="font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:24px">หัวข้อย่อย / ชื่อการ์ด</span></div>
+    <div class="typesample"><span class="lbl">Lead · 19px</span><span style="font-size:19px">ข้อความนำ บรรยายสั้นๆ</span></div>
+    <div class="typesample"><span class="lbl">Body · 16px</span><span style="font-size:16px">ข้อความเนื้อหาทั่วไป The quick brown fox</span></div>
+    <div class="typesample"><span class="lbl">Eyebrow · 13px / Bold caps</span><span style="font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0a7256">EYEBROW LABEL</span></div>
+    <table class="spec-t" style="margin-top:16px">
+      <tr><th>ระดับ</th><th>ขนาด</th><th>น้ำหนัก</th><th>ฟอนต์</th></tr>
+      <tr><td>H1 (Hero)</td><td class="v">60px</td><td>Bold 700</td><td>Silpakorn72</td></tr>
+      <tr><td>H2</td><td class="v">40px</td><td>Bold 700</td><td>Silpakorn72</td></tr>
+      <tr><td>H3</td><td class="v">26–34px</td><td>Bold 700</td><td>Silpakorn72</td></tr>
+      <tr><td>Lead</td><td class="v">19px</td><td>Regular</td><td>IBM Plex Sans Thai</td></tr>
+      <tr><td>Body</td><td class="v">16px</td><td>Regular</td><td>IBM Plex Sans Thai</td></tr>
+      <tr><td>Caption / Eyebrow</td><td class="v">12–13px</td><td>Bold 700</td><td>IBM Plex Sans Thai</td></tr>
+    </table>
+    <div class="note">หมายเหตุ: H1–H3 ใช้ clamp() ปรับตามจอ — ค่าที่ระบุคือขนาดสูงสุดบนจอใหญ่ (desktop)</div>
+  </div>
+
+  <!-- 3. Layout & grid -->
+  <div class="card2">
+    <h2><span class="no">3</span> เลย์เอาต์ &amp; กริด (Layout &amp; Grid) <span class="st part">◐ ยืนยันบางส่วน</span></h2>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th><th>หมายเหตุ</th></tr>
+      <tr><td>ความกว้างเนื้อหาสูงสุด (Container max-width)</td><td class="v">1680px</td><td>จัดกึ่งกลาง</td></tr>
+      <tr><td>ระยะขอบข้าง (Side gutter / margin)</td><td class="v">120px</td><td>ย่อ 48px (≤1100px) / 20px (มือถือ)</td></tr>
+      <tr><td>ระยะห่างบน-ล่างของแต่ละส่วน (Section padding)</td><td class="v">72px</td><td>section .pad</td></tr>
+      <tr><td>ระยะห่างกริด/การ์ด (Grid gap)</td><td class="v">24px</td><td>ระหว่างการ์ด</td></tr>
+      <tr><td>มุมโค้งการ์ด (Card radius)</td><td class="v">16px</td><td>—</td></tr>
+    </table>
+  </div>
+
+  <!-- 4. Navigation -->
+  <div class="card2">
+    <h2><span class="no">4</span> แถบเมนู 2 ชั้น (Navigation) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">โลโก้ซ้าย · ชั้นบน = Search + เปลี่ยนภาษา · ชั้นล่าง = เมนูหลัก</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td><b>ความสูงแถบเมนูทั้งหมด</b></td><td class="v">135px</td></tr>
+      <tr><td>Padding (บน-ล่าง / ซ้าย-ขวา)</td><td class="v">20px / 120px</td></tr>
+      <tr><td>ระยะห่าง 2 ชั้น (บน↔ล่าง)</td><td class="v">14px</td></tr>
+      <tr><td>โลโก้ สูง</td><td class="v">80px</td></tr>
+      <tr><td>เมนูหลัก (ฟอนต์)</td><td class="v">Silpakorn72 Bold 20px</td></tr>
+      <tr><td>เมนูหลัก สีปกติ / hover</td><td class="v">#0d0d0d / #03bf9e + ขีดใต้ 3px</td></tr>
+      <tr><td>ระยะห่างระหว่างเมนู</td><td class="v">34px</td></tr>
+      <tr><td>Search (ฟอนต์)</td><td class="v">Silpakorn72 Bold 16px</td></tr>
+      <tr><td>Submenu (dropdown) ฟอนต์</td><td class="v">Silpakorn72 Bold 18px</td></tr>
+      <tr><td>Submenu min-width</td><td class="v">240px</td></tr>
+      <tr><td>ปุ่มเปลี่ยนภาษา</td><td class="v">soft pill · TH = เขียว #0a7256</td></tr>
+      <tr><td>ลูกศร submenu (caret)</td><td class="v">SVG chevron 13×13px</td></tr>
+    </table>
+  </div>
+
+  <!-- 5. Buttons & components -->
+  <div class="card2">
+    <h2><span class="no">5</span> ปุ่ม &amp; องค์ประกอบ (Buttons &amp; Components) <span class="st draft">✎ ร่าง</span></h2>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>ปุ่ม — ฟอนต์</td><td class="v">16px Semibold</td></tr>
+      <tr><td>ปุ่ม — padding</td><td class="v">12–15px × 24–32px</td></tr>
+      <tr><td>ปุ่ม — มุมโค้ง (radius)</td><td class="v">40px (pill)</td></tr>
+      <tr><td>ปุ่มหลัก (Primary)</td><td class="v">พื้นเขียว #03bf9e · ตัวอักษรดำ</td></tr>
+      <tr><td>ปุ่มรอง (Ghost)</td><td class="v">เส้นขอบเขียว · พื้นใส</td></tr>
+      <tr><td>Badge / Tag</td><td class="v">radius 30px · 12px Bold</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">6</span> Highlights (Carousel) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>การ์ด</td><td class="v">พื้นเข้ม #1a1a1a · มุมโค้ง 24px</td></tr>
+      <tr><td>เลย์เอาต์</td><td class="v">รูปซ้าย 46% / ข้อความขวา 54% · จัดกึ่งกลางแนวตั้ง · สูงขั้นต่ำ 540px</td></tr>
+      <tr><td>รูปภาพ</td><td class="v">แสดงเต็มใบ (contain) จัดกึ่งกลาง · padding 48px</td></tr>
+      <tr><td>Tag</td><td class="v">pill เขียว #1f7a64 · ตัวอักษรขาว 16px Bold</td></tr>
+      <tr><td>หัวข้อ</td><td class="v">Silpakorn72 Bold · 26–36px (clamp) · สีเขียว #03bf9e</td></tr>
+      <tr><td>ปุ่มควบคุม</td><td class="v">หยุด/เล่นอัตโนมัติ (icon) + dots บอกจำนวน/ตำแหน่ง · autoplay 5 วิ · รองรับ prefers-reduced-motion</td></tr>
+      <tr><td>เนื้อหา (CMS)</td><td class="v">ดึงจาก What's On / บทความ / What's Around SU ที่ admin เลือก · แสดง รูป + หัวข้อ + tag · คลิก → หน้ารายละเอียด</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">7</span> Welcome (หน้าแรก) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>พื้นหลัง</td><td class="v">gradient 125° · เขียวหลัก #03bf9e → เขียวอ่อน #62d9c3</td></tr>
+      <tr><td>ตัวอักษร</td><td class="v">เขียวเข้ม ink #0c2e29 (หัวเรื่อง + คำบรรยาย) — อ่านชัดบนพื้นเขียวสว่าง (ผ่าน AA)</td></tr>
+      <tr><td>หัวเรื่อง</td><td class="v">Silpakorn72 Bold · 26–40px (clamp)</td></tr>
+      <tr><td>คำบรรยาย</td><td class="v">22px · Semibold (600)</td></tr>
+      <tr><td>ปุ่มหลัก (นิทรรศการ)</td><td class="v">พื้นเข้ม #0c2e29 + ตัวอักษรขาว (เด่นบนพื้นเขียว)</td></tr>
+      <tr><td>ปุ่มรอง (รู้จักสำนักฯ)</td><td class="v">Ghost · เส้น/ตัวอักษร ink #0c2e29</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">8</span> What's On — หน้ารายละเอียด (Detail) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">เทมเพลตเดียว <b>whatson-detail.html</b> render ทุกอีเวนต์จากข้อมูล (<code>?id=N</code>) · sticky in-page nav + scrollspy · สเปกเต็ม + data schema ดูที่ <b>whatson-detail-TEMPLATE.md</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Banner</td><td class="v">เต็มกว้าง · รูป <code>img/bw-&lt;id&gt;.png</code> (fallback = poster)</td></tr>
+      <tr><td>แถวบน</td><td class="v">← กลับ (ซ้าย) + Share : FB/X/คัดลอกลิงก์ (ขวา)</td></tr>
+      <tr><td>เลย์เอาต์</td><td class="v">2 คอลัมน์ · ซ้าย 1fr (เนื้อหา) / ขวา 360px (กล่องรายละเอียด)</td></tr>
+      <tr><td>Sticky</td><td class="v">ชื่องาน + แท็บ (ซ้าย) และกล่องรายละเอียด (ขวา) ค้างใต้ nav · เลื่อนอ่านเฉพาะเนื้อหา</td></tr>
+      <tr><td>แท็บ (Tabs)</td><td class="v">สร้างอัตโนมัติจากเนื้อหา · Overview (ทุกหน้า) · Highlight (เมื่อมี artworks) · เส้นใต้ 2px ดำ + active เขียว 3px</td></tr>
+      <tr><td>หัวข้อ section</td><td class="v">30px Bold + เส้นคั่นใต้หัวข้อ</td></tr>
+      <tr><td>กล่องรายละเอียด</td><td class="v">สีพื้น = สีหมวดของอีเวนต์ opacity 0.22 · วันที่/เวลา/ค่าเข้า/สถานที่</td></tr>
+      <tr><td>สีหมวด (Tag)</td><td class="v">Workshop ทอง #d8b269 · ประกวด ชมพู #e9a6a0 · นิทรรศการ เขียว #62d9c3 · การแสดง ม่วง #c5a3dd · เทศกาล ส้ม #ec9a5e</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">9</span> What's Around SU (รายการ + ค้นหา) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">Hero + BG · แถบค้นหา sticky · การ์ดขาวพร้อมคณะที่จัด · ดู <b>around.html</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Hero — BG</td><td class="v">ภาพ <code>img/bg-around.jpg</code> · ไล่จางขาวด้านซ้ายรับข้อความ</td></tr>
+      <tr><td>Hero — Eyebrow / Header</td><td class="v">เท่าหน้า What's On · Eyebrow 24px #0a7256 · H1 54px Silpakorn72 Bold</td></tr>
+      <tr><td>Hero — ระยะข้อความ</td><td class="v">ชิดซ้ายตรงระยะโลโก้ (gutter 120px)</td></tr>
+      <tr><td>แถบค้นหา</td><td class="v">พื้นเขียวอ่อน #62d9c3 · <b>sticky</b> ใต้เมนู · จัดกึ่งกลาง</td></tr>
+      <tr><td>แถบค้นหา — label</td><td class="v">"คณะ" / "กิจกรรม" · Silpakorn72 Bold 21px · #0c2e29</td></tr>
+      <tr><td>แถบค้นหา — dropdown</td><td class="v">พื้นขาว · สูง ~44px · radius 9px · chevron</td></tr>
+      <tr><td>แถบค้นหา — ปุ่มค้นหา</td><td class="v">พื้นเขียวเข้ม #1f7a64 · ตัวอักษรขาว · สูง ~44px</td></tr>
+      <tr><td>ตัวกรอง</td><td class="v">คณะ (จากข้อมูลจริง) + ประเภทกิจกรรม (5 ประเภท) · กดค้นหา → กรอง + นับจำนวน</td></tr>
+      <tr><td>การ์ด</td><td class="v">variant ขาว (.light) · รูป 3/4 · tag สีหมวด · ชื่อ → <b>คณะที่จัด</b> → สถานที่</td></tr>
+      <tr><td>การ์ด — คณะ/สถานที่</td><td class="v">ไอคอน + ข้อความ สีเทา #5a5a5a (สีเดียวกัน) 14px</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">10</span> What's Around SU — หน้ารายละเอียด (Detail) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">ดีไซน์การ์ดกระจกเบลอ (เหมือน whatson-detail-v1) · ดู <b>around-detail.html</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Hero</td><td class="v">พื้นหลัง = โปสเตอร์เบลอ (blur 40px) + การ์ดกระจกขาวโปร่ง (backdrop-blur)</td></tr>
+      <tr><td>การ์ด</td><td class="v">max-width 980px จัดกึ่งกลาง · radius 26px · 2 คอลัมน์ (โปสเตอร์ 300px / ข้อมูล)</td></tr>
+      <tr><td>โปสเตอร์</td><td class="v"><b>แสดงเต็มภาพ</b> (img · ไม่ crop) · ชิดขอบบน-ล่าง-ซ้ายของการ์ด · ความสูงการ์ดตามภาพ</td></tr>
+      <tr><td>รายละเอียดในการ์ด</td><td class="v">tag (สีหมวด) → ชื่อ → วันที่ · <b>เวลา</b> · <b>ค่าเข้าชม</b> · คณะที่จัด · สถานที่</td></tr>
+      <tr><td>ส่วนเนื้อหา</td><td class="v">จัดกึ่งกลาง (max 820px) · หัวข้อ "รายละเอียด" + ปุ่มแชร์ + บทความ</td></tr>
+      <tr><td>ปุ่มกลับ</td><td class="v">← กลับไปหน้า What's Around SU</td></tr>
+    </table>
+  </div>
+
+  <div class="note" style="margin-top:8px">
+    📐 <b>วิธีตรวจค่าเองเพิ่มเติม:</b> คลิกขวาที่หน้าเว็บ → Inspect (DevTools) → เลือก element → ดูที่แท็บ <b>Computed</b> จะเห็น font-size, padding, color ฯลฯ ของจริงทุกตัว
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What's Around SU · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Hero + BG (โฟลเดอร์ What's Around SU) ===== */
+  .aru-hero{position:relative;background:#fff;overflow:hidden}
+  .aru-hero::before{content:'';position:absolute;inset:0;
+    background:url('img/bg-around.jpg') right center/cover no-repeat}
+  .aru-hero::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,#fff 20%,rgba(255,255,255,.78) 40%,rgba(255,255,255,0) 66%)}
+  .aru-hero .wrap{position:relative;z-index:2;padding-top:62px;padding-bottom:70px;min-height:300px}
+  /* Header + EYEBROW = ขนาดเท่าหน้า What's On */
+  .aru-hero .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
+  .aru-hero h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px;color:#0d0d0d;max-width:640px}
+  .aru-hero .lead{max-width:520px;margin:0;color:var(--muted);font-size:17px;line-height:1.6}
+
+  /* ===== แถบค้นหา · sticky ใต้เมนู ===== */
+  .aru-search{position:sticky;top:var(--navh,134px);z-index:30;background:#62d9c3}
+  .aru-search .wrap{display:flex;align-items:center;justify-content:center;gap:16px;padding-top:16px;padding-bottom:16px;flex-wrap:wrap}
+  .aru-search label{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:21px;color:#0c2e29;white-space:nowrap}
+  .aru-search select{appearance:none;-webkit-appearance:none;
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d0d0d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center;background-size:15px;
+    border:1px solid #cfcfcf;border-radius:9px;padding:8px 42px 8px 16px;font:inherit;font-size:16px;color:#0d0d0d;min-width:240px;cursor:pointer}
+  .aru-search select:focus{outline:2px solid #0a7256;outline-offset:1px}
+  .aru-search .go{background:#1f7a64;color:#fff;border:none;border-radius:9px;padding:8px 44px;
+    font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:17px;cursor:pointer;transition:.15s}
+  .aru-search .go:hover{background:#0a7256}
+
+  /* ===== รายการ · พื้นขาว · การ์ดขาว ===== */
+  .aru-cards{background:#fff;padding:34px 0 80px}
+  .aru-count{font-weight:700;color:#0d0d0d;font-size:16px;margin:0 0 22px}
+  #aruList{row-gap:34px}
+
+  @media(max-width:900px){
+    .aru-hero::after{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,255,255,.7))}
+    .aru-hero h1{font-size:38px}
+    .aru-search .wrap{gap:10px}
+    .aru-search select{min-width:0;flex:1}
+    .aru-search .go{width:100%}
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- Hero -->
+<section class="aru-hero">
+  <div class="wrap">
+    <p class="eyebrow">What's Around SU</p>
+    <h1>กิจกรรมจากคณะต่างๆ ในมหาวิทยาลัย</h1>
+    <p class="lead">รวมนิทรรศการ การแสดง เวิร์กช็อป ประกวด และเทศกาล จากคณะวิชาและเครือข่ายศิลปวัฒนธรรม</p>
+  </div>
+</section>
+
+<!-- แถบค้นหา (sticky) -->
+<section class="aru-search">
+  <div class="wrap">
+    <label for="facSel">คณะ</label>
+    <select id="facSel" aria-label="เลือกคณะ"></select>
+    <label for="catSel">กิจกรรม</label>
+    <select id="catSel" aria-label="เลือกประเภทกิจกรรม"></select>
+    <button class="go" id="aruGo" type="button">ค้นหา</button>
+  </div>
+</section>
+
+<!-- รายการการ์ด -->
+<section class="aru-cards">
+  <div class="wrap">
+    <p class="aru-count" id="aruCount"></p>
+    <div class="grid g4" id="aruList"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="whatson-data.js"></script>
+<script>
+  /* ตั้งค่า --navh = ความสูงแถบเมนู เพื่อให้แถบค้นหา sticky ใต้เมนูพอดี */
+  (function(){
+    function setNav(){
+      var nav = document.querySelector('.topnav');
+      if(nav) document.documentElement.style.setProperty('--navh', nav.offsetHeight+'px');
+    }
+    window.addEventListener('load', setNav);
+    window.addEventListener('resize', setNav);
+    setTimeout(setNav, 300);
+  })();
+
+  (function(){
+    var list  = document.getElementById('aruList');
+    var count = document.getElementById('aruCount');
+    var facSel = document.getElementById('facSel');
+    var catSel = document.getElementById('catSel');
+    var PAGE = 8, shown = 0, current = [];
+
+    /* dropdown คณะ — จากรายชื่อคณะที่มีจริงในข้อมูล */
+    var faculties = [];
+    AROUND.forEach(function(e){ if(e.faculty && faculties.indexOf(e.faculty)<0) faculties.push(e.faculty); });
+    faculties.sort();
+    facSel.insertAdjacentHTML('beforeend','<option value="all">ทั้งหมด</option>');
+    faculties.forEach(function(f){ facSel.insertAdjacentHTML('beforeend','<option value="'+f+'">'+f+'</option>'); });
+
+    /* dropdown ประเภทกิจกรรม */
+    var cats = ['นิทรรศการ','Workshop','ประกวด','การแสดง','เทศกาล'];
+    catSel.insertAdjacentHTML('beforeend','<option value="all">ทั้งหมด</option>');
+    cats.forEach(function(c){ catSel.insertAdjacentHTML('beforeend','<option value="'+c+'">'+c+'</option>'); });
+
+    function applyFilter(){
+      var fac = facSel.value, cat = catSel.value;
+      current = aroundNewestFirst().filter(function(e){
+        return (fac==='all' || e.faculty===fac) && (cat==='all' || e.tag===cat);
+      });
+      shown = 0; list.innerHTML = '';
+      count.textContent = current.length + ' กิจกรรม';
+      loadMore();
+    }
+    function loadMore(){
+      var next = current.slice(shown, shown+PAGE);
+      list.insertAdjacentHTML('beforeend', next.map(aroundCard2HTML).join(''));
+      shown += next.length;
+    }
+
+    document.getElementById('aruGo').addEventListener('click', applyFilter);
+    applyFilter();
+
+    window.addEventListener('scroll', function(){
+      if(shown >= current.length) return;
+      if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 600)) loadMore();
+    }, {passive:true});
+  })();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

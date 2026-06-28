@@ -1,0 +1,378 @@
+/* ============================================================
+   SUACC Website — Design System / styles.css
+   Brand: เขียว #03bf9e · เขียวอ่อน #62d9c3 · ทอง #d8b269
+   Header font: Silpakorn72 · Body: IBM Plex Sans Thai
+   Aesthetic: block-scroll (British Museum) + สดใส (Singapore Art Museum)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
+
+@font-face{font-family:'Silpakorn72';src:url('fonts/Silpakorn72-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Silpakorn72';src:url('fonts/Silpakorn72-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Silpakorn72';src:url('fonts/Silpakorn72-Light.ttf') format('truetype');font-weight:300;font-display:swap}
+
+:root{
+  --green:#03bf9e; --green-d:#028f76; --green2:#62d9c3; --gold:#d8b269;
+  --ink:#0d0d0d; --bg:#f2f2f2; --white:#fff; --pink:#e9a6a0;
+  --gold2:#cdbc6c; --muted:#6b7280; --line:#e6e6e6;
+  --maxw:1200px; --radius:16px;
+  --head:'Silpakorn72','IBM Plex Sans Thai',sans-serif;
+  --body:'IBM Plex Sans Thai',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--green-d);text-decoration:none}
+h1,h2,h3,h4{font-family:var(--head);font-weight:700;line-height:1.15;margin:0 0 .4em}
+h1{font-size:clamp(34px,5vw,60px)}
+h2{font-size:clamp(26px,3.4vw,40px)}
+h3{font-size:clamp(20px,2.2vw,26px)}
+.wrap{max-width:1680px;margin:0 auto;padding:0 120px}
+@media(max-width:1100px){.wrap{padding:0 48px}}
+@media(max-width:600px){.wrap{padding:0 20px}}
+.eyebrow{font-family:var(--body);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--green);margin:0 0 10px}
+.lead{font-size:19px;color:#333;max-width:60ch}
+.muted{color:var(--muted)}
+section{position:relative}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:600;font-size:15px;
+  padding:12px 24px;border-radius:40px;cursor:pointer;border:2px solid transparent;transition:.18s;white-space:nowrap}
+.btn.primary{background:var(--green);color:#fff}
+.btn.primary:hover{background:var(--green-d)}
+.btn.ghost{background:transparent;color:var(--green-d);border-color:var(--green)}
+.btn.ghost:hover{background:var(--green);color:#fff}
+.btn.dark{background:#0f3d36;color:#fff}
+.btn.dark:hover{background:#0a2c27}
+.btn.link{padding:0;border-radius:0;background:none;color:var(--green-d);border-bottom:2px solid var(--green);border-radius:0}
+.btn.lg{padding:15px 32px;font-size:16px}
+
+/* ---------- Top Navigation ---------- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:140px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:700;font-size:19px;color:var(--ink);line-height:1.05}
+.brand img{height:96px;width:auto;display:block}
+.foot .brand img{height:80px}
+@media(max-width:600px){.brand img{height:72px}}
+.brand .logo{width:42px;height:42px;border-radius:11px;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.brand small{display:block;font-family:var(--body);font-weight:500;font-size:11px;color:var(--muted);letter-spacing:.02em}
+.nav .menu{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav .menu > a{position:relative;padding:8px 14px;border-radius:9px;font-weight:600;font-size:15px;color:#333}
+.nav .menu > a:hover,.nav .menu > a.active{background:#eafaf6;color:var(--green-d)}
+.nav .has > a::after{content:"▾";font-size:11px;margin-left:5px;opacity:.6}
+.nav .has{position:relative}
+.nav .has .sub{position:absolute;top:100%;left:0;min-width:230px;background:#fff;border:1px solid var(--line);
+  border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.12);padding:8px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s}
+.nav .has:hover .sub{opacity:1;visibility:visible;transform:translateY(4px)}
+.nav .sub a{display:block;padding:9px 12px;border-radius:8px;font-size:14.5px;color:#333}
+.nav .sub a:hover{background:#eafaf6;color:var(--green-d)}
+.nav .lang{margin-left:8px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.nav .lang span{padding:6px 11px;font-size:12px;font-weight:700;color:#999;cursor:pointer}
+.nav .lang span.on{background:var(--green);color:#fff}
+.nav .burger{display:none;margin-left:auto;font-size:24px;background:none;border:0;cursor:pointer}
+@media(max-width:900px){
+  .nav .menu{display:none;position:absolute;top:140px;left:0;right:0;flex-direction:column;background:#fff;
+    border-bottom:1px solid var(--line);padding:10px 16px;gap:2px}
+  .nav .menu.open{display:flex}
+  .nav .has .sub{position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;padding:0 0 6px 14px}
+  .nav .burger{display:block}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0;background:linear-gradient(120deg,#0f3d36,#03bf9e 60%,#62d9c3);z-index:0}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 55%)}
+.hero .play{position:absolute;top:22px;right:28px;z-index:2;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);
+  color:#fff;border-radius:40px;padding:8px 16px;font-size:13px;font-weight:600;backdrop-filter:blur(4px)}
+.hero .inner{position:relative;z-index:2;padding:0 0 64px}
+.hero h1{color:#fff;max-width:16ch}
+.hero .lead{color:rgba(255,255,255,.92)}
+.hero .badges{margin-bottom:18px}
+
+/* ---------- Section heading ---------- */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.shead .lead{margin-top:6px}
+.pad{padding:72px 0}
+.pad-s{padding:48px 0}
+.alt{background:#fff}
+.dark-sec{background:#0f3d36;color:#fff}
+.dark-sec .eyebrow{color:var(--green2)}
+.dark-sec h2{color:#fff}
+.tint{background:linear-gradient(180deg,#eafaf6,transparent)}
+
+/* ---------- Cards & grids ---------- */
+.grid{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.10)}
+.card .thumb{aspect-ratio:4/3;position:relative;overflow:hidden}
+.card .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--head);font-size:22px;font-weight:700;text-align:center;padding:16px}
+.card .body{padding:16px 18px 20px;flex:1;display:flex;flex-direction:column;gap:6px}
+.card .body h3{margin:0;font-size:18px}
+.card .meta{font-size:13px;color:var(--muted)}
+.card .badge{position:absolute;top:12px;left:12px}
+
+/* ===== What's On card ✓ ยืนยันแล้ว — cover 1:1 · tag ใต้ cover ซ้าย · รายละเอียด + flat icon ===== */
+.won-card .thumb{aspect-ratio:1/1}
+.won-card .body{padding:14px 18px 20px;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.won-card .tag-row{display:flex;justify-content:flex-start;margin-top:-2px}
+.won-card .tag-row .badge{position:static;top:auto;left:auto}
+.won-card .body h3{margin:0;font-size:19px;line-height:1.35}
+.won-meta{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+.won-meta li{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;color:#3a3a3a;line-height:1.45}
+.won-meta svg{width:17px;height:17px;flex:none;color:var(--green-ink);margin-top:2px}
+.won-meta .free{color:var(--green-ink);font-weight:700}
+
+/* ===== What's On card v2 — พื้นการ์ด=สีหมวด (--cat) · รูปเต็มขอบ · tag ดำ+ตัวอักษรสีหมวด ===== */
+.won-card2{background:var(--cat);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;
+  text-decoration:none;color:#0d0d0d;transition:transform .2s,box-shadow .2s}
+.won-card2:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(0,0,0,.16)}
+.won-card2 .thumb{aspect-ratio:1/1;background-size:cover;background-position:center}
+.won-card2 .body{padding:16px 20px 22px;display:flex;flex-direction:column;gap:13px}
+.won-card2 .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.won-card2 .tag2{background:#0d0d0d;color:var(--cat);border-radius:30px;padding:7px 18px;font-weight:700;font-size:14px;white-space:nowrap}
+.won-card2 .date2{font-weight:700;font-size:15px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.won-card2 .body h3{margin:0;font-size:20px;line-height:1.35;font-weight:700;color:#0d0d0d}
+.won-card2 .loc{display:flex;align-items:center;gap:8px;margin:0;font-size:15px;font-weight:600;color:#0d0d0d}
+.won-card2 .loc svg{width:18px;height:18px;flex:none}
+/* variant .dark — พื้นการ์ดดำ · รูป cover เต็ม(สูง) · tag=สีหมวด · หัวข้อขาว (ใช้ใน What's Around SU) */
+.won-card2.dark{background:#0d0d0d;color:#fff}
+.won-card2.dark .thumb{aspect-ratio:3/4}
+.won-card2.dark .tag2{background:var(--cat);color:#0d0d0d}
+.won-card2.dark .date2{color:var(--cat)}
+.won-card2.dark .body h3{color:#fff}
+.won-card2.dark .loc{color:#dcdcdc}
+/* variant .light — พื้นการ์ดขาว · รูป 3/4 · tag=สีหมวด+ตัวดำ · มีบรรทัดคณะก่อนสถานที่ (What's Around SU) */
+.won-card2.light{background:#fff;border:1px solid #ececec;color:#0d0d0d}
+.won-card2.light .thumb{aspect-ratio:3/4}
+.won-card2.light .body{gap:10px}
+.won-card2.light .tag2{background:var(--cat);color:#0d0d0d}
+.won-card2.light .date2{color:#0d0d0d;text-decoration:none}
+.won-card2.light .body h3{color:#0d0d0d}
+.won-card2.light .fac,.won-card2.light .loc{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;font-weight:600;color:#5a5a5a}
+.won-card2.light .fac svg,.won-card2.light .loc svg{width:17px;height:17px;flex:none}
+
+/* placeholder image gradients */
+.ph-1{background:linear-gradient(135deg,#03bf9e,#62d9c3)}
+.ph-2{background:linear-gradient(135deg,#d8b269,#e9a6a0)}
+.ph-3{background:linear-gradient(135deg,#0f3d36,#03bf9e)}
+.ph-4{background:linear-gradient(135deg,#6b4d8f,#a47fc4)}
+.ph-5{background:linear-gradient(135deg,#e9a6a0,#cdbc6c)}
+.ph-6{background:linear-gradient(135deg,#2b7a78,#62d9c3)}
+.ph-art{position:relative}
+.ph-art::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.12),rgba(255,255,255,.12) 12px,transparent 12px,transparent 24px)}
+.card .badge,.slide .cap,.hero .inner,.hero .play{z-index:2}
+
+/* ---------- Badges / tags ---------- */
+.badge{display:inline-block;padding:4px 13px;border-radius:30px;font-size:12px;font-weight:700;color:#fff}
+.b-green{background:var(--green)} .b-gold{background:var(--gold);color:#222} .b-pink{background:var(--pink);color:#7a2e28}
+.b-red{background:#c0392b} .b-purple{background:#7b4ea3} .b-grey{background:#7a7d85} .b-orange{background:#e08a3c}
+.tag{display:inline-block;background:#eafaf6;color:var(--green-d);border-radius:6px;padding:2px 9px;font-size:12px;font-weight:600}
+
+/* ---------- Filter chips ---------- */
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.chip{padding:8px 16px;border-radius:30px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;color:#555;cursor:pointer;transition:.15s;font-family:'IBM Plex Sans Thai',sans-serif}
+.chip:hover{border-color:var(--green)}
+.chip.on{background:var(--green);color:#fff;border-color:var(--green)}
+
+/* ---------- Carousel / slider ---------- */
+.carousel{position:relative;border-radius:var(--radius);overflow:hidden}
+.slides{display:flex;transition:transform .5s ease}
+.slides > .slide{min-width:100%;position:relative}
+.slide .cap{position:absolute;left:0;right:0;bottom:0;padding:40px 32px;color:#fff;
+  background:linear-gradient(to top,rgba(0,0,0,.7),transparent)}
+.slide .cap h3{color:#fff;margin:0 0 6px;font-size:clamp(22px,3vw,34px)}
+.carousel .full{aspect-ratio:16/7;min-height:340px}
+.cbtn{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;
+  border:none;background:rgba(255,255,255,.9);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cbtn.prev{left:16px} .cbtn.next{right:16px}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.dots b{width:9px;height:9px;border-radius:50%;background:#cfcfcf;cursor:pointer}
+.dots b.on{background:var(--green);width:26px;border-radius:5px}
+
+/* ---------- Director / person ---------- */
+.person{text-align:center}
+.person .pic{aspect-ratio:1;border-radius:18px;overflow:hidden;margin-bottom:12px}
+.person h4{margin:0;font-size:17px}
+.person .role{font-size:13px;color:var(--muted)}
+
+/* ---------- Split feature ---------- */
+.split{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.split.rev{grid-template-columns:1fr 1.05fr}
+.split .media{aspect-ratio:5/4;border-radius:var(--radius);overflow:hidden}
+@media(max-width:820px){.split,.split.rev{grid-template-columns:1fr}}
+
+/* ---------- Article body ---------- */
+.article{max-width:760px;margin:0 auto}
+.article p{font-size:18px;margin:0 0 1.3em}
+.article h2{margin-top:1.6em}
+.article .cover{aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;margin:0 0 32px}
+.breadcrumb{font-size:13px;color:var(--muted);margin-bottom:18px}
+.breadcrumb a{color:var(--muted)}
+.breadcrumb b{color:#333}
+
+/* ---------- PDF / e-book viewer ---------- */
+.viewer{background:#1c1c1c;border-radius:var(--radius);padding:18px;color:#fff;text-align:center}
+.viewer .page{background:#fff;color:#333;aspect-ratio:3/4;max-width:520px;margin:14px auto;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.no-dl{display:inline-block;background:#3a2424;color:#ff9b9b;border-radius:8px;padding:5px 12px;font-size:12px;font-weight:700}
+
+/* ---------- Contact ---------- */
+.org{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.org .map{aspect-ratio:16/7;position:relative;background:linear-gradient(135deg,#cfe9e3,#eafaf6)}
+.org .map .pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);font-size:34px}
+.org .info{padding:22px 24px}
+.org.main{border-color:var(--green);box-shadow:0 10px 30px rgba(3,191,158,.12)}
+.org .info .line{display:flex;gap:10px;margin:7px 0;font-size:15px}
+.org .info .line span{width:22px;text-align:center}
+
+/* ---------- Footer ---------- */
+.foot{background:#0c2e29;color:#cfe6e0;margin-top:60px}
+.foot .wrap{padding:54px 120px 30px}
+@media(max-width:1100px){.foot .wrap{padding:48px 48px 28px}}
+@media(max-width:600px){.foot .wrap{padding:40px 20px 24px}}
+.foot .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+@media(max-width:760px){.foot .top{grid-template-columns:1fr}}
+.foot h4{color:#fff;font-family:var(--body);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.foot a{color:#cfe6e0;display:block;padding:4px 0;font-size:14.5px}
+.foot a:hover{color:#fff}
+.foot .social{display:flex;gap:10px;margin-top:14px}
+.foot .social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+.foot .bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:34px;padding-top:18px;font-size:13px;color:#8fb3ac;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- utility ---------- */
+.center{text-align:center}
+.mt0{margin-top:0}.mb0{margin-bottom:0}
+.flex{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.note-strip{background:#fff7e6;border:1px dashed var(--gold);border-radius:12px;padding:10px 16px;font-size:13px;color:#7a5a12;margin:0 0 22px}
+.divider{height:1px;background:var(--line);margin:0}
+.mock-tag{position:fixed;left:14px;bottom:14px;z-index:99;background:#0f3d36;color:#fff;border-radius:30px;
+  padding:8px 16px;font-size:12px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.2);opacity:.92}
+.mock-tag a{color:var(--green2);font-weight:700}
+
+/* ============================================================
+   ACCESSIBILITY — WCAG 2.1 AA overrides
+   brand เขียว #03bf9e / ทอง #d8b269 ยังใช้กับพื้น/หัวใหญ่เหมือนเดิม
+   เพิ่ม --green-ink (#0a7256) = เฉดเข้มของเขียวแบรนด์ ใช้เฉพาะ
+   ข้อความเล็ก/ลิงก์/เส้นขอบ/badge เพื่อให้ contrast ผ่าน AA
+   ============================================================ */
+:root{--green-ink:#0a7256}
+a{color:var(--green-ink)}
+.eyebrow{color:var(--green-ink)}
+.btn.primary{color:#0d0d0d}              /* ตัวอักษรปุ่มหลัก: ขาว→ดำ (พื้นเขียวแบรนด์คงเดิม) */
+.btn.ghost{color:var(--green-ink);border-color:var(--green-ink)}
+.btn.ghost:hover{color:#0d0d0d}
+.btn.link{color:var(--green-ink);border-bottom-color:var(--green-ink)}
+.nav .menu > a:hover,.nav .menu > a.active{color:var(--green-ink)}
+.nav .sub a:hover{color:var(--green-ink)}
+.tag{color:var(--green-ink)}
+.muted,.card .meta,.breadcrumb{color:#5b6470}
+/* badge ที่ตัวอักษรขาวบนพื้นอ่อนเกิน → เข้มขึ้นพอผ่าน (คงโทนสีเดิม) */
+.b-green{background:var(--green-ink)}
+.b-grey{background:#5b6470}
+.b-orange{background:#b5651d}
+.chip.on{background:var(--green-ink);border-color:var(--green-ink)}
+.nav .lang span.on{background:var(--green-ink)}
+.nav .lang button{padding:6px 11px;font:inherit;font-size:12px;font-weight:700;color:#5b6470;background:none;border:none;cursor:pointer}
+.nav .lang button.on{background:var(--green-ink);color:#fff}
+.nav .lang button[aria-disabled="true"]{color:#9a9a9a;cursor:not-allowed}
+
+/* keyboard focus ที่มองเห็นชัด (2.4.7) */
+:focus-visible{outline:3px solid var(--green-ink);outline-offset:2px;border-radius:4px}
+.hero :focus-visible,.dark-sec :focus-visible,.foot :focus-visible,.nav .lang :focus-visible{outline-color:#fff}
+
+/* skip link (2.4.1) */
+.skip{position:absolute;left:8px;top:-60px;z-index:200;background:#0d0d0d;color:#fff;
+  padding:10px 16px;border-radius:8px;font-weight:600;transition:top .15s}
+.skip:focus{top:8px}
+
+/* carousel controls (2.2.2 Pause + keyboard) */
+.dots button{width:9px;height:9px;border-radius:50%;background:#8a8a8a;border:none;cursor:pointer;padding:0}
+.dots button.on{background:var(--green-ink);width:26px;border-radius:5px}
+.cpause{position:absolute;top:14px;right:14px;z-index:4;background:rgba(0,0,0,.62);color:#fff;
+  border:1px solid rgba(255,255,255,.7);border-radius:30px;padding:6px 14px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.hero .play{background:rgba(0,0,0,.6);border-color:rgba(255,255,255,.85);cursor:pointer;font:inherit;font-weight:600}
+
+/* ลดการเคลื่อนไหวตามการตั้งค่าผู้ใช้ (2.3.3 / 2.2.2) */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .slides{transition:none!important}
+}
+
+/* ============================================================
+   TOP NAVIGATION — เมนู 2 ชั้น (British Museum style) · ใช้ทุกหน้า
+   ============================================================ */
+.topnav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e6e6e6}
+.topnav .bar{max-width:1680px;margin:0 auto;padding:20px 120px;
+  display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:40px;row-gap:14px;align-items:center}
+.topnav .logo-link{grid-row:1 / span 2;align-self:center}
+.topnav .logo-link img{height:80px;width:auto;display:block}
+/* ชั้นบน: search + เปลี่ยนภาษา */
+.topnav .util{grid-column:2;justify-self:end;display:flex;align-items:center;gap:24px}
+.topnav .util .search{background:none;border:none;font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:16px;color:#0d0d0d;
+  display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:2px}
+.topnav .util .search svg{width:18px;height:18px}
+.topnav .util .search:hover{color:#03bf9e}
+/* language switcher (soft pill) */
+.topnav .langsw{display:inline-flex;align-items:center;gap:2px;background:#f3f4f6;border-radius:999px;padding:4px 7px}
+.topnav .langsw button{border:none;background:none;border-radius:999px;padding:5px 13px;font:inherit;font-weight:700;font-size:12.5px;color:#5b6470;cursor:pointer;transition:.18s}
+.topnav .langsw button.on{background:#0a7256;color:#fff;box-shadow:0 2px 8px rgba(10,114,86,.35)}
+.topnav .langsw button[disabled]{color:#b0b4ba;cursor:not-allowed}
+/* ชั้นล่าง: เมนูหลัก — Silpakorn72 Bold สีดำ, hover = ขีด + เขียว */
+.topnav .main{grid-column:2;justify-self:end;display:flex;align-items:flex-end;gap:34px;flex-wrap:wrap}
+.topnav .item{position:relative}
+.topnav .item > a{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:20px;
+  color:#0d0d0d;display:inline-flex;align-items:center;gap:7px;padding-bottom:7px;
+  border-bottom:3px solid transparent;transition:color .15s,border-color .15s}
+.topnav .item:hover > a,.topnav .item:focus-within > a,.topnav .item > a:focus-visible{color:#03bf9e;border-bottom-color:#03bf9e}
+.topnav .item.active > a{border-bottom-color:#03bf9e}
+.topnav .item .caret{width:13px;height:13px;opacity:.9;margin-left:2px}
+.topnav .item .sub{position:absolute;top:100%;left:0;min-width:240px;background:#fff;border:1px solid #e6e6e6;
+  border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.12);padding:8px;
+  opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s;z-index:60}
+.topnav .item:hover .sub,.topnav .item:focus-within .sub{opacity:1;visibility:visible;transform:translateY(2px)}
+.topnav .sub a{display:block;padding:9px 12px;border-radius:8px;font-size:18px;color:#333;
+  font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700}
+.topnav .sub a:hover{background:#eafaf6;color:#0a7256}
+@media(max-width:1100px){.topnav .bar{padding:16px 48px;column-gap:24px}.topnav .main{gap:22px}.topnav .item>a{font-size:18px}.topnav .logo-link img{height:64px}}
+
+/* ============================================================
+   FOOTER — Connect + newsletter + menu (British Museum style) · ใช้ทุกหน้า
+   ============================================================ */
+.foot2{background:#0c2e29;color:#cfe0db}
+.foot2 .fwrap{max-width:1680px;margin:0 auto;padding:0 120px}
+.foot2 .ftop{display:flex;justify-content:space-between;gap:48px;flex-wrap:wrap;padding:54px 0 38px}
+.foot2 .connect h2{font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:38px;color:#fff;margin:0 0 24px}
+.foot2 .social{display:flex;gap:12px}
+.foot2 .social a{width:48px;height:48px;border-radius:50%;background:#fff;color:#0c2e29;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;text-decoration:none;transition:.15s}
+.foot2 .social a:hover{background:#62d9c3}
+.foot2 .news{flex:1;min-width:300px;max-width:480px;text-align:center}
+.foot2 .news label{display:block;font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:30px;color:#fff;margin-bottom:16px}
+.foot2 .news .row{display:flex;align-items:center;gap:0;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:5px 5px 5px 12px}
+.foot2 .news .row:focus-within{outline:2px solid #62d9c3;outline-offset:2px}
+.foot2 .news input{flex:1;border:none;background:transparent;color:#fff;padding:11px 14px;font:inherit;font-size:16px}
+.foot2 .news input::placeholder{color:#9bb5ae}
+.foot2 .news input:focus{outline:none}
+.foot2 .news button{flex:none;background:#fff;color:#0c2e29;border:none;border-radius:999px;padding:12px 26px;font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:.15s}
+.foot2 .news button:hover{background:#62d9c3}
+.foot2 .fdiv{border:0;border-top:1px solid rgba(255,255,255,.16);margin:0}
+.foot2 .fcols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;padding:44px 0}
+.foot2 .col h3{font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:24px;color:#fff;margin:0 0 14px;line-height:1.2}
+.foot2 .col h3.mt{margin-top:26px}
+.foot2 .col h3 a{color:#fff;text-decoration:none;font-size:inherit;font-weight:inherit;font-family:inherit}
+.foot2 .col h3 a:hover{text-decoration:underline}
+.foot2 .col a{display:block;font-family:'Silpakorn72',sans-serif;font-weight:700;font-size:20px;color:#cfe0db;padding:6px 0;text-decoration:none}
+.foot2 .col a:hover{color:#fff;text-decoration:underline}
+.foot2 .col .info{font-size:18px;line-height:1.8;color:#cfe0db}
+.foot2 .fbottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0 34px;font-size:14px;color:#9bb5ae}
+.foot2 .fbottom .flinks{display:flex;gap:26px}
+.foot2 .fbottom .flinks a{color:#cfe0db;text-decoration:none}
+.foot2 .fbottom .flinks a:hover{color:#fff;text-decoration:underline}
+@media(max-width:1100px){.foot2 .fwrap{padding:0 48px}.foot2 .fcols{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.foot2 .fwrap{padding:0 20px}.foot2 .fcols{grid-template-columns:1fr}.foot2 .ftop{flex-direction:column}}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What's On · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Banner slider 1366x540 ===== */
+  .won-banner{position:relative;overflow:hidden;background:#000}
+  .wb-track{display:flex;transition:transform .5s ease}
+  .wb-slide{min-width:100%;aspect-ratio:1366/540;background-size:cover;background-position:center;display:block}
+  .wb-prev,.wb-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:48px;height:48px;
+    border-radius:50%;border:none;background:rgba(255,255,255,.82);color:#222;font-size:24px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;transition:.15s}
+  .wb-prev:hover,.wb-next:hover{background:#fff}
+  .wb-prev{left:22px}.wb-next{right:22px}
+  .wb-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:8px}
+  .wb-dots button{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);border:none;cursor:pointer;padding:0;transition:.2s}
+  .wb-dots button.on{background:#fff;width:28px;border-radius:5px}
+
+  /* ===== หัวข้อ center · พื้นขาว ===== */
+  .won-intro{background:#fff;text-align:center;padding:54px 0 42px}
+  .won-intro .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
+  .won-intro h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px}
+  .won-intro .lead{max-width:640px;margin:0 auto 28px;color:var(--muted);font-size:17px}
+  .won-intro .chips{justify-content:center}
+  .chip-n{opacity:.6;font-weight:700;margin-left:3px}
+  /* สีปุ่มเลือก = สีเดียวกับ tag ในการ์ด */
+  #wonChips .c-exh{border-color:#62d9c3}  #wonChips .c-exh.on{background:#62d9c3;color:#0c2e29;border-color:#62d9c3}
+  #wonChips .c-ws{border-color:#d8b269}  #wonChips .c-ws.on{background:#d8b269;color:#3a2c0e;border-color:#d8b269}
+  #wonChips .c-comp{border-color:#e9a6a0}  #wonChips .c-comp.on{background:#e9a6a0;color:#5e211c;border-color:#e9a6a0}
+  #wonChips .c-perf{border-color:#c5a3dd}  #wonChips .c-perf.on{background:#c5a3dd;color:#2e1a45;border-color:#c5a3dd}
+  #wonChips .c-fest{border-color:#ec9a5e}  #wonChips .c-fest.on{background:#ec9a5e;color:#4a2607;border-color:#ec9a5e}
+
+  /* ===== การ์ด · bg #F7F7F7 ===== */
+  .won-cards{background:#F7F7F7;padding:48px 0 80px}
+  #wonList{row-gap:34px}
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- Banner slider (กิจกรรม) 1366x540 · ลิงก์หน้ารายละเอียด -->
+<section class="won-banner">
+  <div class="wb-track" id="wbTrack">
+    <a class="wb-slide" href="whatson-detail.html?id=9" style="background-image:url('img/banner-1.png')" aria-label="Hsinchu Glass Art &amp; Design Festival"></a>
+    <a class="wb-slide" href="whatson-detail.html?id=2" style="background-image:url('img/banner-2.png')" aria-label="ประกวดออกแบบ เวียดนามในความฝันของคุณ"></a>
+    <a class="wb-slide" href="whatson-detail.html?id=6" style="background-image:url('img/banner-3.png')" aria-label="EnNoVa Art Biennale"></a>
+  </div>
+  <button class="wb-prev" type="button" aria-label="แบนเนอร์ก่อนหน้า">‹</button>
+  <button class="wb-next" type="button" aria-label="แบนเนอร์ถัดไป">›</button>
+  <div class="wb-dots" id="wbDots" aria-label="เลือกแบนเนอร์"></div>
+</section>
+
+<!-- หัวข้อ center · พื้นขาว -->
+<section class="won-intro">
+  <div class="wrap">
+    <p class="eyebrow">What's On</p>
+    <h1>นิทรรศการ &amp; กิจกรรมของสำนักฯ</h1>
+    <p class="lead">นิทรรศการ เวิร์กช็อป ประกวด และกิจกรรม โดยสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ</p>
+    <div class="chips" id="wonChips">
+      <button class="chip c-all on" data-filter="all">ทั้งหมด</button>
+      <button class="chip c-exh" data-filter="นิทรรศการ">นิทรรศการ</button>
+      <button class="chip c-ws" data-filter="Workshop">Workshop</button>
+      <button class="chip c-comp" data-filter="ประกวด">ประกวด</button>
+      <button class="chip c-perf" data-filter="การแสดง">การแสดง</button>
+      <button class="chip c-fest" data-filter="เทศกาล">เทศกาล</button>
+    </div>
+  </div>
+</section>
+
+<!-- การ์ด · bg #F7F7F7 -->
+<section class="won-cards">
+  <div class="wrap">
+    <div class="grid g3" id="wonList"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="whatson-data.js"></script>
+<script>
+  /* ----- การ์ด: นับจำนวน + แสดง 9 + โหลดเพิ่มอัตโนมัติ ----- */
+  (function(){
+    var list = document.getElementById('wonList');
+    var chips = document.getElementById('wonChips');
+    var PAGE = 9, shown = 0, current = [];
+    chips.querySelectorAll('.chip').forEach(function(c){
+      var f = c.dataset.filter;
+      var n = (f==='all') ? WHATSON.length : WHATSON.filter(function(e){return e.tag===f;}).length;
+      c.insertAdjacentHTML('beforeend', ' <span class="chip-n">'+n+'</span>');
+    });
+    function setFilter(filter){
+      var base = wonNewestFirst();
+      current = (filter && filter!=='all') ? base.filter(function(e){return e.tag===filter;}) : base;
+      shown = 0; list.innerHTML = '';
+      loadMore();
+    }
+    function loadMore(){
+      var next = current.slice(shown, shown+PAGE);
+      list.insertAdjacentHTML('beforeend', next.map(wonCard2HTML).join(''));
+      shown += next.length;
+    }
+    setFilter('all');
+    chips.addEventListener('click', function(e){
+      var c = e.target.closest('.chip'); if(!c) return;
+      chips.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+      c.classList.add('on');
+      setFilter(c.dataset.filter);
+    });
+    window.addEventListener('scroll', function(){
+      if(shown >= current.length) return;
+      if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 600)) loadMore();
+    }, {passive:true});
+  })();
+
+  /* ----- Banner slider: autoplay + dots + ลูกศร ----- */
+  (function(){
+    var track=document.getElementById('wbTrack'); if(!track) return;
+    var n=track.children.length, i=0, timer=null, dots=document.getElementById('wbDots');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    for(var k=0;k<n;k++){ (function(k){ var b=document.createElement('button'); b.type='button';
+      b.setAttribute('aria-label','ไปแบนเนอร์ที่ '+(k+1)); if(k===0)b.className='on';
+      b.onclick=function(){go(k);}; dots.appendChild(b); })(k); }
+    function go(k){ i=(k+n)%n; track.style.transform='translateX(-'+(i*100)+'%)';
+      [].forEach.call(dots.children,function(d,idx){ d.className=idx===i?'on':''; }); }
+    document.querySelector('.wb-prev').onclick=function(){stop();go(i-1);};
+    document.querySelector('.wb-next').onclick=function(){stop();go(i+1);};
+    function start(){ if(timer||reduce)return; timer=setInterval(function(){go(i+1);},5000); }
+    function stop(){ clearInterval(timer); timer=null; }
+    var sec=document.querySelector('.won-banner');
+    sec.addEventListener('mouseenter',stop); sec.addEventListener('mouseleave',function(){if(!reduce)start();});
+    if(!reduce) start();
+  })();
+</script>
+<script src="site.js"></script>
+</body>
+</html>
