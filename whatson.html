@@ -6,10 +6,10 @@
 <title>What's On · SUACC</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ===== Banner slider 1366x540 ===== */
+  /* ===== Banner slider 1366x637 ===== */
   .won-banner{position:relative;overflow:hidden;background:#000}
   .wb-track{display:flex;transition:transform .5s ease}
-  .wb-slide{min-width:100%;aspect-ratio:1366/540;background-size:cover;background-position:center;display:block}
+  .wb-slide{min-width:100%;aspect-ratio:1366/637;background-size:cover;background-position:center;display:block}
   .wb-prev,.wb-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:48px;height:48px;
     border-radius:50%;border:none;background:rgba(255,255,255,.82);color:#222;font-size:24px;line-height:1;cursor:pointer;
     display:flex;align-items:center;justify-content:center;transition:.15s}
@@ -20,14 +20,20 @@
   .wb-dots button.on{background:#fff;width:28px;border-radius:5px}
 
   /* ===== หัวข้อ center · พื้นขาว ===== */
-  .won-intro{background:#fff;text-align:center;padding:54px 0 42px}
+  .won-intro{background:#fff;text-align:center;padding:54px 0 6px}
   .won-intro .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
   .won-intro h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px}
   .won-intro .lead{max-width:640px;margin:0 auto 28px;color:var(--muted);font-size:17px}
   .won-intro .chips{justify-content:center}
+  /* แถบหมวดหมู่ · sticky เกาะใต้เมนู */
+  .won-catbar{position:sticky;top:var(--nav-h,120px);z-index:40;background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:12px 0;box-shadow:0 6px 14px rgba(0,0,0,.05)}
+  .won-catbar .chips{justify-content:center;align-items:center;margin:0;flex-wrap:wrap}
   .chip-n{opacity:.6;font-weight:700;margin-left:3px}
   /* สีปุ่มเลือก = สีเดียวกับ tag ในการ์ด */
   #wonChips .c-exh{border-color:#62d9c3}  #wonChips .c-exh.on{background:#62d9c3;color:#0c2e29;border-color:#62d9c3}
+  #wonChips .c-talk{border-color:#6fb1e0}  #wonChips .c-talk.on{background:#6fb1e0;color:#0c2233;border-color:#6fb1e0}
   #wonChips .c-ws{border-color:#d8b269}  #wonChips .c-ws.on{background:#d8b269;color:#3a2c0e;border-color:#d8b269}
   #wonChips .c-comp{border-color:#e9a6a0}  #wonChips .c-comp.on{background:#e9a6a0;color:#5e211c;border-color:#e9a6a0}
   #wonChips .c-perf{border-color:#c5a3dd}  #wonChips .c-perf.on{background:#c5a3dd;color:#2e1a45;border-color:#c5a3dd}
@@ -44,9 +50,9 @@
 <!-- Banner slider (กิจกรรม) 1366x540 · ลิงก์หน้ารายละเอียด -->
 <section class="won-banner">
   <div class="wb-track" id="wbTrack">
-    <a class="wb-slide" href="whatson-detail.html?id=9" style="background-image:url('img/banner-1.png')" aria-label="Hsinchu Glass Art &amp; Design Festival"></a>
-    <a class="wb-slide" href="whatson-detail.html?id=2" style="background-image:url('img/banner-2.png')" aria-label="ประกวดออกแบบ เวียดนามในความฝันของคุณ"></a>
-    <a class="wb-slide" href="whatson-detail.html?id=6" style="background-image:url('img/banner-3.png')" aria-label="EnNoVa Art Biennale"></a>
+    <a class="wb-slide" href="whatson-detail.html?id=12" style="background-image:url('img/wonb-cosmology.jpg')" aria-label="นิทรรศการ โลกของแบบ Cosmology in Drawings"></a>
+    <a class="wb-slide" href="whatson-detail.html?id=16" style="background-image:url('img/wonb-saksi.jpg')" aria-label="นิทรรศการ SAKSI: A Passing Thing จักษุพยาน"></a>
+    <a class="wb-slide" href="whatson-detail.html?id=17" style="background-image:url('img/wonb-saksi-talk.jpg')" aria-label="SAKSI Talk วงสนทนา"></a>
   </div>
   <button class="wb-prev" type="button" aria-label="แบนเนอร์ก่อนหน้า">‹</button>
   <button class="wb-next" type="button" aria-label="แบนเนอร์ถัดไป">›</button>
@@ -59,16 +65,23 @@
     <p class="eyebrow">What's On</p>
     <h1>นิทรรศการ &amp; กิจกรรมของสำนักฯ</h1>
     <p class="lead">นิทรรศการ เวิร์กช็อป ประกวด และกิจกรรม โดยสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ</p>
+  </div>
+</section>
+
+<!-- แถบหมวดหมู่ · sticky เกาะใต้เมนู -->
+<div class="won-catbar" id="wonCatBar">
+  <div class="wrap">
     <div class="chips" id="wonChips">
       <button class="chip c-all on" data-filter="all">ทั้งหมด</button>
       <button class="chip c-exh" data-filter="นิทรรศการ">นิทรรศการ</button>
+      <button class="chip c-talk" data-filter="เสวนา">เสวนา</button>
       <button class="chip c-ws" data-filter="Workshop">Workshop</button>
       <button class="chip c-comp" data-filter="ประกวด">ประกวด</button>
       <button class="chip c-perf" data-filter="การแสดง">การแสดง</button>
       <button class="chip c-fest" data-filter="เทศกาล">เทศกาล</button>
     </div>
   </div>
-</section>
+</div>
 
 <!-- การ์ด · bg #F7F7F7 -->
 <section class="won-cards">
@@ -134,5 +147,18 @@
   })();
 </script>
 <script src="site.js"></script>
+<script>
+  /* วัดความสูงเมนู (.topnav) แล้วตั้งเป็น --nav-h ให้แถบหมวดหมู่เกาะพอดี */
+  (function(){
+    function setNavH(){
+      var nav=document.querySelector('.topnav');
+      var h=nav?Math.round(nav.getBoundingClientRect().height):120;
+      document.documentElement.style.setProperty('--nav-h', h+'px');
+    }
+    setNavH();
+    window.addEventListener('load', setNavH);
+    window.addEventListener('resize', setNavH);
+  })();
+</script>
 </body>
 </html>

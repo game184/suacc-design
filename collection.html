@@ -5,122 +5,376 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Collection · คลังสะสมผลงานศิลปกรรม · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Collection hero — พื้น gradient มินต์ + ข้อความกึ่งกลาง (ขนาดเท่า What's On) ===== */
+  .coll-hero{background:linear-gradient(180deg,#e7f8f3 0%,#f4fcfa 30%,#ffffff 52%);text-align:center}
+  .coll-hero .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#03bf9e;margin:0 0 10px}
+  .coll-hero h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px;color:#0d0d0d}
+  .coll-hero .lead{max-width:600px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.6}
+  .ca-cta{margin-top:22px}
+
+  /* ===== Collection Highlights · coverflow slider ===== */
+  .cf{position:relative;height:560px;margin:48px 0 4px}
+  .cf-stage{position:absolute;inset:0}
+  .cf-card{position:absolute;left:50%;top:50%;width:400px;aspect-ratio:3/4;
+    border-radius:18px;overflow:hidden;background:#222 center/cover;cursor:pointer;border:none;padding:0;
+    box-shadow:0 26px 55px rgba(0,0,0,.30);
+    transform:translate(-50%,-50%);transition:transform .55s cubic-bezier(.22,.61,.36,1),opacity .45s;will-change:transform,opacity}
+  .cf-card .badge{position:absolute;top:14px;left:14px;z-index:2}
+  .cf-cap{text-align:center;margin-top:10px;min-height:60px}
+  .cf-cap h3{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:24px;line-height:1.3;margin:0 0 4px;color:#0d0d0d}
+  .cf-cap p{margin:0;color:#5a5a5a;font-size:15px}
+  .cf-nav{display:flex;justify-content:center;gap:16px;margin-top:8px}
+  .cf-nav button{width:52px;height:52px;border-radius:50%;border:1px solid #cfcfcf;background:#fff;color:#0d0d0d;
+    font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .cf-nav button:hover{background:#0d0d0d;color:#fff;border-color:#0d0d0d}
+  @media(max-width:820px){.cf{height:440px}.cf-card{width:270px}}
+  @media(max-width:520px){.cf{height:400px}.cf-card{width:220px}}
+
+  /* ===== การ์ดผลงาน (ใช้ทั้ง Themes gallery) ===== */
+  .coll-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+  @media(max-width:1100px){.coll-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:760px){.coll-grid{grid-template-columns:repeat(2,1fr)}}
+  .coll-card{appearance:none;border:1px solid #ececec;background:#fff;text-align:left;padding:0;border-radius:16px;
+    overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;color:#0d0d0d;font:inherit}
+  .coll-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.14)}
+  .coll-thumb{aspect-ratio:4/5;background-size:cover;background-position:center;position:relative;background-color:#eee}
+  .coll-thumb .badge{position:absolute;top:12px;left:12px}
+  .coll-cardbody{padding:15px 17px 18px;display:flex;flex-direction:column;gap:5px}
+  .coll-cardbody h3{margin:0;font-size:18px;line-height:1.35;font-weight:700;color:#0d0d0d}
+  .coll-cardbody .meta{margin:0;font-size:14px;color:#5a5a5a}
+  .coll-cardbody .excerpt{margin:2px 0 0;font-size:14px;color:#555;line-height:1.55}
+  .coll-type{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:700;color:#0a7256;
+    background:#e7f6f1;border-radius:20px;padding:3px 12px}
+
+  /* ===== Themes — พื้นดำ · text/ปุ่มปรับให้อ่านชัด ===== */
+  .coll-themes{background:#0d0d0d}
+  .coll-themes .coll-thead h2{color:#fff}
+  .coll-themes .coll-thead .lead{color:rgba(255,255,255,.72)}
+  .coll-themes .coll-count{color:rgba(255,255,255,.85)}
+  .coll-themes #themeChips .chip{background:transparent;border-color:rgba(255,255,255,.28);color:#dcdcdc}
+  .coll-themes #themeChips .chip:hover{border-color:#fff;color:#fff}
+  .coll-themes #themeChips .chip.on{background:#03bf9e;border-color:#03bf9e;color:#04140f}
+
+  /* ===== Themes header — กึ่งกลาง · ขนาด/สีเท่า Collection Highlights ===== */
+  .coll-thead{text-align:center;margin-bottom:4px}
+  .coll-thead .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#03bf9e;margin:0 0 10px}
+  .coll-thead h2{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px;color:#0d0d0d}
+  .coll-thead .lead{max-width:600px;margin:0 auto;color:var(--muted);font-size:17px;line-height:1.6}
+  /* ===== Themes chips (กึ่งกลาง) ===== */
+  #themeChips{margin:26px 0 26px;justify-content:center}
+  #themeChips .chip{cursor:pointer}
+  .coll-count{font-weight:700;color:#0d0d0d;font-size:15px;margin:0 0 22px;text-align:center}
+
+  /* ===== Themes masonry — แสดงเฉพาะรูป จัดตามขนาดภาพ ===== */
+  .coll-row{display:flex;gap:12px;margin-bottom:12px}
+  .coll-tile{flex:none;margin:0;padding:0;border:none;background:none;cursor:pointer;border-radius:10px;overflow:hidden;
+    line-height:0;box-shadow:0 3px 12px rgba(0,0,0,.10);transition:transform .18s,box-shadow .18s}
+  .coll-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22);position:relative;z-index:1}
+  .coll-tile img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
+
+  /* ===== Stories — การ์ดบทความ (รูปบน + ข้อความ) ===== */
+  .story-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:38px;margin-top:44px}
+  @media(max-width:900px){.story-grid{grid-template-columns:1fr;gap:34px}}
+  /* View all — ปุ่มเส้นดำ hover เขียว */
+  .story-viewall{margin-top:20px}
+  .btn-outline-dark{display:inline-flex;align-items:center;gap:9px;border:1.5px solid #9aa0a6;border-radius:30px;
+    padding:12px 26px;font-size:15px;font-weight:700;color:#6b7075;text-decoration:none;transition:.15s}
+  .btn-outline-dark:hover{background:#03bf9e;border-color:#03bf9e;color:#fff}
+  /* Stories slider */
+  .story-slider{position:relative;margin-top:44px}
+  .story-viewport{overflow:hidden}
+  .story-track{display:flex;gap:38px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;
+    -ms-overflow-style:none;scrollbar-width:none;padding:4px 4px 8px}
+  .story-track::-webkit-scrollbar{display:none}
+  .story-track>.scard{flex:0 0 calc((100% - 76px)/3);scroll-snap-align:start}
+  @media(max-width:900px){.story-track{gap:24px}.story-track>.scard{flex:0 0 calc((100% - 24px)/2)}}
+  @media(max-width:640px){.story-track>.scard{flex:0 0 88%}}
+  .story-nav{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:6;
+    width:50px;height:50px;border-radius:50%;border:1px solid #e2e2e2;background:#fff;color:#0d0d0d;
+    font-size:26px;line-height:1;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 8px 22px rgba(0,0,0,.16);transition:.15s}
+  .story-nav:hover{background:#0d0d0d;color:#fff;border-color:#0d0d0d}
+  .story-nav.prev{left:-24px}
+  .story-nav.next{right:-24px}
+  .story-slider.has-nav .story-nav{display:flex}
+  @media(max-width:900px){.story-slider.has-nav .story-nav{display:none}}
+  .story-card{color:#0d0d0d}
+  .story-media{display:block}
+  .story-img{aspect-ratio:16/10;background-size:cover;background-position:center;background-color:#eee;border-radius:12px;margin-bottom:20px;transition:.2s}
+  .story-media:hover .story-img{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.14)}
+  .story-by{margin:0 0 8px;font-size:14px;font-weight:700;color:#0a7256}
+  .story-titlelink{text-decoration:none;color:inherit;display:inline-block}
+  .story-title{margin:0 0 12px;font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;line-height:1.3;font-weight:700;color:#0d0d0d;transition:color .15s}
+  .story-titlelink:hover .story-title{color:#03bf9e}
+  .story-ex{margin:0 0 18px;font-size:15px;line-height:1.65;color:#555}
+  .story-tags{display:flex;gap:8px;flex-wrap:wrap}
+  .story-tag{border:1px solid #dcdcdc;border-radius:20px;padding:4px 13px;font-size:13px;font-weight:600;color:#0a7256;text-decoration:none;cursor:pointer;transition:.15s}
+  .story-tag:hover{background:#0a7256;border-color:#0a7256;color:#fff}
+  /* Story card — ดีไซน์ใหม่ (รูปเต็มกล่อง + overlay) */
+  .scard{position:relative;display:block;border-radius:20px;overflow:hidden;aspect-ratio:1/1.05;
+    background-size:cover;background-position:center;background-color:#222;text-decoration:none;
+    transition:transform .2s,box-shadow .2s}
+  .scard:hover{transform:translateY(-4px)}
+  .scard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.55) 32%,rgba(0,0,0,.06) 62%,transparent 100%)}
+  .scard-body{position:absolute;left:0;right:0;bottom:0;padding:28px 28px 26px;color:#fff}
+  .scard-title{margin:0 0 11px;font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:26px;line-height:1.25;color:#fff}
+  .scard-ex{margin:0 0 20px;font-size:15px;line-height:1.6;color:rgba(255,255,255,.85);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .scard-foot{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .scard-date{font-size:14px;color:rgba(255,255,255,.82);white-space:nowrap}
+  .scard-btn{display:inline-flex;align-items:center;gap:9px;border:1.5px solid rgba(255,255,255,.6);
+    border-radius:30px;padding:11px 22px;font-size:15px;font-weight:700;color:#fff;white-space:nowrap;transition:.15s}
+  .scard:hover .scard-btn{background:#fff;color:#0d0d0d;border-color:#fff}
+  @media(max-width:640px){.scard-title{font-size:22px}.scard-body{padding:22px 22px 20px}
+    .scard-foot{flex-direction:column;align-items:flex-start;gap:12px}}
+
+  /* ===== Popup รายละเอียดผลงาน — เต็มจอ (split) ===== */
+  .cpop-overlay{position:fixed;inset:0;z-index:200;background:#fff}
+  .cpop-overlay[hidden]{display:none}
+  .cpop-dialog{position:absolute;inset:0;background:#fff;overflow:hidden}
+  .cpop-close{position:fixed;top:22px;right:24px;z-index:10;width:52px;height:52px;border-radius:50%;
+    border:1px solid #e6e6e6;background:#fff;color:#0d0d0d;font-size:26px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.12);transition:.15s}
+  .cpop-close:hover{background:#0d0d0d;color:#fff;border-color:#0d0d0d}
+  .cpop-content{display:grid;grid-template-columns:56% 44%;height:100vh;height:100dvh}
+  .cpop-gallery{background:#f4f4f3;padding:44px 56px 40px;display:flex;flex-direction:column;min-width:0}
+  .cpop-main{flex:1;min-height:0;background:center/contain no-repeat;background-color:#f4f4f3}
+  .cpop-thumbs{display:flex;gap:12px;margin-top:24px}
+  .cpop-thumb{width:70px;height:70px;border-radius:10px;background-size:cover;background-position:center;
+    border:2px solid transparent;cursor:pointer;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+  .cpop-thumb.on{border-color:#03bf9e}
+  .cpop-info{padding:60px;overflow-y:auto;height:100vh;height:100dvh}
+  .cpop-info h2{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:36px;line-height:1.25;margin:26px 0 6px;color:#0d0d0d}
+  .cpop-artist{margin:0 0 28px;font-size:19px;color:#03bf9e;font-weight:700}
+  .cpop-rows{margin:0 0 28px;display:flex;flex-direction:column}
+  .cpop-row{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #ececec}
+  .cpop-row dt{margin:0;color:#8a8a8a;font-size:15px;font-weight:600}
+  .cpop-row dd{margin:0;color:#0d0d0d;font-size:16px;line-height:1.55}
+  .cpop-concept h4{margin:0 0 10px;font-size:18px;color:#0d0d0d}
+  .cpop-concept p{margin:0 0 26px;font-size:16px;line-height:1.85;color:#333}
+  .cpop-themes{display:flex;flex-wrap:wrap;gap:10px}
+  .cpop-chip{background:#e7f6f1;color:#0a7256;border-radius:20px;padding:7px 16px;font-size:14px;font-weight:700}
+  @media(max-width:900px){
+    .cpop-content{grid-template-columns:1fr;height:auto;min-height:100dvh}
+    .cpop-gallery{padding:72px 24px 28px;min-height:56vh}
+    .cpop-info{padding:34px 24px 64px;height:auto}
+    .cpop-info h2{font-size:28px}
+  }
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
 
 <!-- A. Collection Highlights -->
-<section class="pad alt">
+<section class="pad coll-hero">
   <div class="wrap">
-    <div class="breadcrumb"><a href="index.html">หน้าแรก</a> / <b>Collection</b></div>
-    <div class="shead">
-      <div>
-        <p class="eyebrow">Collection</p>
-        <h2 class="mb0">คลังสะสมผลงานศิลปกรรม</h2>
-        <p class="lead">รวมผลงานศิลปกรรมจากสามคลังสะสมของมหาวิทยาลัยศิลปากร สำรวจตามแก่นเรื่อง ศิลปิน และเรื่องเล่าเบื้องหลังผลงาน</p>
-      </div>
-    </div>
-
-    <p class="note-strip">หมายเหตุการออกแบบ: ข้อมูลในหน้านี้ป้อนเองทั้งหมด ไม่เชื่อมต่อ API หรือฐานข้อมูลภายนอก</p>
-
-    <div class="carousel" data-carousel>
-      <div class="slides">
-        <div class="slide"><div class="full ph-2 ph-art"></div>
-          <div class="cap"><span class="badge b-red">ศิลปกรรมแห่งชาติ</span><h3>แสงเช้าเหนือทุ่งนา</h3><p>ศิลปิน: สมชาย วงศ์ศิลป์ · จิตรกรรมสีน้ำมัน รางวัลเกียรตินิยมอันดับ 1 เหรียญทอง</p></div></div>
-        <div class="slide"><div class="full ph-1 ph-art"></div>
-          <div class="cap"><span class="badge b-gold">ศิลปินรุ่นเยาว์</span><h3>เงาสะท้อนของเมือง</h3><p>ศิลปิน: ปิยะดา ภักดีศิลป์ · ประติมากรรมสื่อผสม</p></div></div>
-        <div class="slide"><div class="full ph-3 ph-art"></div>
-          <div class="cap"><span class="badge b-green">ทุนสร้างสรรค์ศิลป์ พีระศรี</span><h3>รอยทางแห่งศรัทธา</h3><p>ศิลปิน: ธีรภัทร เกียรติคุณ · ภาพพิมพ์แกะไม้</p></div></div>
-        <div class="slide"><div class="full ph-4 ph-art"></div>
-          <div class="cap"><span class="badge b-red">ศิลปกรรมแห่งชาติ</span><h3>นามธรรมหมายเลข 7</h3><p>ศิลปิน: อรวรรณ สุขเกษม · จิตรกรรมสื่อผสมบนผ้าใบ</p></div></div>
-      </div>
-      <button class="cbtn prev">‹</button><button class="cbtn next">›</button>
-      <div class="dots"></div>
+    <p class="eyebrow">Collection</p>
+    <h1>คลังสะสมผลงานศิลปกรรม</h1>
+    <p class="lead">รวมผลงานศิลปกรรมจากสามคลังสะสมของมหาวิทยาลัยศิลปากร สำรวจตามแก่นเรื่อง ศิลปิน และเรื่องเล่าเบื้องหลังผลงาน</p>
+    <div class="ca-cta"><a class="btn primary lg" href="collection-all.html">Collection All &rarr;</a></div>
+    <div class="cf" id="cf"><div class="cf-stage" id="cfStage"></div></div>
+    <div class="cf-cap" id="cfCap"></div>
+    <div class="cf-nav">
+      <button id="cfPrev" type="button" aria-label="ก่อนหน้า">&larr;</button>
+      <button id="cfNext" type="button" aria-label="ถัดไป">&rarr;</button>
     </div>
   </div>
 </section>
 
 <!-- B. Explore | Themes -->
-<section class="pad">
+<section class="pad coll-themes">
   <div class="wrap">
-    <div class="shead">
-      <div>
-        <p class="eyebrow">Explore</p>
-        <h2 class="mb0">สำรวจตามแก่นเรื่อง · Themes</h2>
-        <p class="lead">เลือกคำสำคัญเพื่อเรียกดูผลงานที่เชื่อมโยงกันด้วยแนวคิดและเรื่องราว</p>
-      </div>
+    <div class="coll-thead">
+      <p class="eyebrow">Explore</p>
+      <h2>สำรวจตามแก่นเรื่อง · Themes</h2>
+      <p class="lead">เลือกคำสำคัญเพื่อเรียกดูผลงานที่เชื่อมโยงกันด้วยแนวคิดและเรื่องราว</p>
     </div>
-
-    <div class="chips">
-      <span class="chip on">ทั้งหมด</span>
-      <span class="chip">ธรรมชาติ</span>
-      <span class="chip">มนุษย์</span>
-      <span class="chip">ศรัทธา</span>
-      <span class="chip">นามธรรม</span>
-      <span class="chip">วิถีชีวิต</span>
-    </div>
-
-    <div class="grid g4">
-      <a class="card" href="collection-detail.html"><div class="thumb ph-2 ph-art"><span class="badge b-red">ศิลปกรรมแห่งชาติ</span></div>
-        <div class="body"><h3>แสงเช้าเหนือทุ่งนา</h3><p class="meta">สมชาย วงศ์ศิลป์ · 2562</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-1 ph-art"><span class="badge b-gold">ศิลปินรุ่นเยาว์</span></div>
-        <div class="body"><h3>เงาสะท้อนของเมือง</h3><p class="meta">ปิยะดา ภักดีศิลป์ · 2564</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-3 ph-art"><span class="badge b-green">ทุนสร้างสรรค์ศิลป์ พีระศรี</span></div>
-        <div class="body"><h3>รอยทางแห่งศรัทธา</h3><p class="meta">ธีรภัทร เกียรติคุณ · 2560</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-4 ph-art"><span class="badge b-red">ศิลปกรรมแห่งชาติ</span></div>
-        <div class="body"><h3>นามธรรมหมายเลข 7</h3><p class="meta">อรวรรณ สุขเกษม · 2563</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-5 ph-art"><span class="badge b-gold">ศิลปินรุ่นเยาว์</span></div>
-        <div class="body"><h3>บทสนทนาของดอกไม้</h3><p class="meta">กมลชนก ศรีทอง · 2565</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-6 ph-art"><span class="badge b-green">ทุนสร้างสรรค์ศิลป์ พีระศรี</span></div>
-        <div class="body"><h3>วิถีริมน้ำ</h3><p class="meta">นพดล ทองคำ · 2561</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-3 ph-art"><span class="badge b-red">ศิลปกรรมแห่งชาติ</span></div>
-        <div class="body"><h3>มนุษย์และสัตว์</h3><p class="meta">วราภรณ์ จันทรา · 2558</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-1 ph-art"><span class="badge b-gold">ศิลปินรุ่นเยาว์</span></div>
-        <div class="body"><h3>ความเงียบสีคราม</h3><p class="meta">ธนกร อินทรา · 2566</p></div></a>
-    </div>
+    <div class="chips" id="themeChips"></div>
+    <p class="coll-count" id="collCount"></p>
+    <div class="coll-masonry" id="themeGrid"></div>
   </div>
 </section>
 
 <!-- C. Explore | Stories -->
-<section class="pad tint">
+<section class="pad" style="background:#fff">
   <div class="wrap">
-    <div class="shead">
-      <div>
-        <p class="eyebrow">Explore</p>
-        <h2 class="mb0">เรื่องเล่าจากคลังสะสม · Stories</h2>
-        <p class="lead">บทความและเรื่องเล่าที่ชวนมองผลงานในคลังสะสมผ่านมุมมองใหม่</p>
-      </div>
+    <div class="coll-thead">
+      <p class="eyebrow">Explore</p>
+      <h2>เรื่องเล่าจากคลังสะสม · Stories</h2>
+      <div class="story-viewall"><a class="btn-outline-dark" href="blog.html">View all &rarr;</a></div>
     </div>
-
-    <div class="grid g3">
-      <a class="card" href="collection-detail.html"><div class="thumb ph-1 ph-art"><span class="badge b-green">Story</span></div>
-        <div class="body"><h3>ธรรมชาติในงานศิลปะ</h3><p class="meta">อ่านราว 6 นาที</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-2 ph-art"><span class="badge b-pink">Story</span></div>
-        <div class="body"><h3>จิตรกรรมกับดอกไม้</h3><p class="meta">อ่านราว 5 นาที</p></div></a>
-      <a class="card" href="collection-detail.html"><div class="thumb ph-4 ph-art"><span class="badge b-purple">Story</span></div>
-        <div class="body"><h3>มนุษย์และสัตว์</h3><p class="meta">อ่านราว 7 นาที</p></div></a>
+    <div class="story-slider" id="storySlider">
+      <button class="story-nav prev" type="button" aria-label="ก่อนหน้า">&#8249;</button>
+      <div class="story-viewport"><div class="story-track" id="storyGrid"></div></div>
+      <button class="story-nav next" type="button" aria-label="ถัดไป">&#8250;</button>
     </div>
   </div>
 </section>
 
-<!-- D. Explore | More -->
+<!-- D. Explore More -->
 <section class="pad dark-sec">
   <div class="wrap">
     <div class="split">
       <div>
-        <p class="eyebrow">Explore More</p>
-        <h2>ค้นหาคลังสะสมฉบับเต็ม</h2>
-        <p class="lead" style="color:rgba(255,255,255,.92)">ผลงานในหน้านี้เป็นเพียงตัวอย่างที่คัดสรร ค้นหาคลังสะสมฉบับเต็มได้ที่สำนักหอสมุดกลาง มหาวิทยาลัยศิลปากร</p>
+        <p class="eyebrow" style="font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;letter-spacing:0;text-transform:none">Explore More</p>
+        <h2>คลังสะสมศิลปกรรมของมหาวิทยาลัยศิลปากร</h2>
+        <p class="lead" style="color:rgba(255,255,255,.92)">มหาวิทยาลัยศิลปากรได้สะสมผลงานศิลปกรรมที่เป็นผลงานเหรียญรางวัลจากการประกวดศิลปกรรมซึ่งมหาวิทยาลัยเป็นผู้จัด โดยมีหอศิลป์ มหาวิทยาลัยศิลปากรเป็นผู้ดูแลเก็บรักษา</p>
         <div class="flex" style="margin-top:18px">
-          <a class="btn primary lg" href="https://resource.lib.su.ac.th/awardsu/web/" target="_blank" rel="noopener">ไปที่คลังสะสมฉบับเต็ม →</a>
+          <a class="btn primary lg" href="https://resource.lib.su.ac.th/awardsu/web/" target="_blank" rel="noopener">คลังสะสมศิลปกรรม →</a>
         </div>
       </div>
-      <div class="media ph-6 ph-art"></div>
+      <div class="media" style="background:url('img/coll-archive.png') center/contain no-repeat"></div>
     </div>
   </div>
 </section>
 
+<!-- Popup รายละเอียดผลงาน -->
+<div class="cpop-overlay" id="cpop" hidden>
+  <div class="cpop-dialog" role="dialog" aria-modal="true" aria-label="รายละเอียดผลงาน">
+    <button class="cpop-close" id="cpopClose" type="button" aria-label="ปิด">&times;</button>
+    <div class="cpop-content" id="cpopContent"></div>
+  </div>
+</div>
+
 <div id="site-footer"></div>
+<script src="collection-data.js"></script>
+<script>
+  /* ---------- Highlights · coverflow ---------- */
+  (function(){
+    var stage=document.getElementById('cfStage');
+    var cap=document.getElementById('cfCap');
+    var items=COLLECTION.filter(function(w){return w.highlight;});
+    var n=items.length, active=0;
+    stage.innerHTML=items.map(function(w,i){
+      return '<button class="cf-card" type="button" data-i="'+i+'" data-coll-id="'+w.id+'" '+
+        'style="background-image:url(\''+collCover(w)+'\')">'+collBadgeHTML(w)+'</button>';
+    }).join('');
+    var cards=[].slice.call(stage.querySelectorAll('.cf-card'));
+    function layout(){
+      cards.forEach(function(c,i){
+        var o=i-active;
+        if(o >  n/2) o-=n;
+        if(o < -n/2) o+=n;
+        var ao=Math.abs(o), sign=o<0?-1:1, x,s,op,z;
+        if(ao===0){x=0;s=1;op=1;z=5;}
+        else if(ao===1){x=sign*62;s=.82;op=.92;z=4;}
+        else if(ao===2){x=sign*112;s=.64;op=.5;z=2;}
+        else {x=sign*150;s=.5;op=0;z=0;}
+        c.style.transform='translate(-50%,-50%) translateX('+x+'%) scale('+s+')';
+        c.style.opacity=op; c.style.zIndex=z; c.style.pointerEvents=op===0?'none':'auto';
+      });
+      var w=items[active];
+      cap.innerHTML='<h3>'+w.title+'</h3><p>'+w.artist+' · '+w.type+'</p>';
+    }
+    function go(k){ active=(k+n)%n; layout(); }
+    document.getElementById('cfPrev').onclick=function(){go(active-1);};
+    document.getElementById('cfNext').onclick=function(){go(active+1);};
+    /* คลิกการ์ดข้าง = เลื่อนมากลาง (กัน popup) · คลิกการ์ดกลาง = ปล่อยให้เปิด popup */
+    stage.addEventListener('click',function(e){
+      var c=e.target.closest('.cf-card'); if(!c)return;
+      var i=parseInt(c.dataset.i,10);
+      if(i!==active){ e.stopPropagation(); go(i); }
+    }, true);
+    layout();
+  })();
+
+  /* ---------- Themes: chip → gallery ---------- */
+  (function(){
+    var chips=document.getElementById('themeChips');
+    var grid=document.getElementById('themeGrid');
+    var count=document.getElementById('collCount');
+    var current=THEMES[0], curList=[], RATIO={};
+    /* chip = เฉพาะ keyword (ไม่มี "ทั้งหมด") */
+    chips.innerHTML=THEMES.map(function(t,idx){
+      var n=COLLECTION.filter(function(w){return (w.themes||[]).indexOf(t)>=0;}).length;
+      return '<button class="chip'+(idx===0?' on':'')+'" data-theme="'+t+'">'+t+' <span style="opacity:.6;font-weight:700">'+n+'</span></button>';
+    }).join('');
+
+    /* justified gallery: แถวเรียงซ้าย→ขวา · สูงเป้าหมาย 260px · ไม่เกิน 500px · ภาพเต็มตามสัดส่วน */
+    var GAP=12, TARGET=440, MAXH=1000;
+    function justify(){
+      var W=grid.clientWidth; if(!W || !curList.length) return;
+      var rows=[], row=[], sumR=0;
+      curList.forEach(function(w){
+        row.push(w); sumR+=(RATIO[w.id]||1);
+        if(sumR*TARGET + (row.length-1)*GAP >= W){ rows.push({items:row,sumR:sumR,full:true}); row=[]; sumR=0; }
+      });
+      if(row.length) rows.push({items:row,sumR:sumR,full:false});
+      grid.innerHTML=rows.map(function(rw){
+        var h = rw.full ? (W-(rw.items.length-1)*GAP)/rw.sumR : TARGET;
+        h=Math.min(h,MAXH);
+        return '<div class="coll-row">'+rw.items.map(function(w){
+          var tw=h*(RATIO[w.id]||1);
+          return '<button class="coll-tile" type="button" data-coll-id="'+w.id+'" aria-label="'+w.title+'" style="width:'+tw+'px;height:'+h+'px">'+
+            '<img src="'+collCover(w)+'" alt="'+w.title+'"></button>';
+        }).join('')+'</div>';
+      }).join('');
+    }
+    function render(theme){
+      current=theme;
+      curList=COLLECTION.filter(function(w){return (w.themes||[]).indexOf(theme)>=0;});
+      count.textContent=curList.length+' ผลงาน · '+theme;
+      var need=curList.filter(function(w){return RATIO[w.id]==null;});
+      if(!need.length){ justify(); return; }
+      var loaded=0;
+      need.forEach(function(w){ var im=new Image();
+        im.onload=im.onerror=function(){ RATIO[w.id]=(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:1; if(++loaded===need.length) justify(); };
+        im.src=collCover(w);
+      });
+    }
+    chips.addEventListener('click',function(e){
+      var c=e.target.closest('.chip'); if(!c)return;
+      chips.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+      c.classList.add('on'); render(c.dataset.theme);
+    });
+    render(THEMES[0]);
+    var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(justify,150); });
+  })();
+
+  /* ---------- Stories (slider) ---------- */
+  (function(){
+    var stories=window.COLL_STORIES||[];
+    var track=document.getElementById('storyGrid');
+    var slider=document.getElementById('storySlider');
+    track.innerHTML=stories.map(collStoryCardHTML).join('');
+    if(stories.length>3) slider.classList.add('has-nav');
+    function step(dir){
+      var card=track.querySelector('.scard'); if(!card) return;
+      var gap=parseFloat(getComputedStyle(track).columnGap)||38;
+      track.scrollBy({left:dir*(card.offsetWidth+gap),behavior:'smooth'});
+    }
+    slider.querySelector('.story-nav.prev').addEventListener('click',function(){step(-1);});
+    slider.querySelector('.story-nav.next').addEventListener('click',function(){step(1);});
+  })();
+
+  /* ---------- Popup ---------- */
+  (function(){
+    var overlay=document.getElementById('cpop');
+    var content=document.getElementById('cpopContent');
+    var lastFocus=null;
+    function open(id){
+      var w=collById(id); if(!w)return;
+      lastFocus=document.activeElement;
+      content.innerHTML=collPopupHTML(w);
+      overlay.hidden=false; document.body.style.overflow='hidden';
+      document.getElementById('cpopClose').focus();
+    }
+    function close(){ overlay.hidden=true; document.body.style.overflow=''; if(lastFocus)lastFocus.focus(); }
+    /* คลิกการ์ด/สไลด์ที่ไหนก็เปิด */
+    document.addEventListener('click',function(e){
+      var t=e.target.closest('[data-coll-id]');
+      if(t){ open(parseInt(t.getAttribute('data-coll-id'),10)); return; }
+      /* สลับรูปหลักในแกลเลอรี */
+      var th=e.target.closest('.cpop-thumb');
+      if(th){ document.getElementById('cpopMain').style.backgroundImage="url('"+th.dataset.src+"')";
+        content.querySelectorAll('.cpop-thumb').forEach(function(x){x.classList.remove('on');}); th.classList.add('on'); }
+    });
+    document.getElementById('cpopClose').addEventListener('click',close);
+    overlay.addEventListener('click',function(e){ if(e.target===overlay)close(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!overlay.hidden)close(); });
+  })();
+</script>
 <script src="site.js"></script>
 </body>
 </html>

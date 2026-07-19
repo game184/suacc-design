@@ -166,12 +166,12 @@
     <h2><span class="no">7</span> Welcome (หน้าแรก) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
     <table class="spec-t">
       <tr><th>รายการ</th><th>ค่า</th></tr>
-      <tr><td>พื้นหลัง</td><td class="v">gradient 125° · เขียวหลัก #03bf9e → เขียวอ่อน #62d9c3</td></tr>
-      <tr><td>ตัวอักษร</td><td class="v">เขียวเข้ม ink #0c2e29 (หัวเรื่อง + คำบรรยาย) — อ่านชัดบนพื้นเขียวสว่าง (ผ่าน AA)</td></tr>
+      <tr><td>พื้นหลัง</td><td class="v">gradient 120° · เขียวเข้ม #0f3d36 → เขียวหลัก #03bf9e (70%) → เขียวอ่อน #62d9c3</td></tr>
+      <tr><td>ตัวอักษร</td><td class="v">ขาว #fff (หัวเรื่อง + คำบรรยาย) — อ่านชัดบนพื้นเขียวเข้ม</td></tr>
       <tr><td>หัวเรื่อง</td><td class="v">Silpakorn72 Bold · 26–40px (clamp)</td></tr>
       <tr><td>คำบรรยาย</td><td class="v">22px · Semibold (600)</td></tr>
       <tr><td>ปุ่มหลัก (นิทรรศการ)</td><td class="v">พื้นเข้ม #0c2e29 + ตัวอักษรขาว (เด่นบนพื้นเขียว)</td></tr>
-      <tr><td>ปุ่มรอง (รู้จักสำนักฯ)</td><td class="v">Ghost · เส้น/ตัวอักษร ink #0c2e29</td></tr>
+      <tr><td>ปุ่มรอง (รู้จักสำนักฯ)</td><td class="v">Ghost · เส้น/ตัวอักษร ขาว #fff</td></tr>
     </table>
   </div>
 
@@ -220,6 +220,23 @@
       <tr><td>รายละเอียดในการ์ด</td><td class="v">tag (สีหมวด) → ชื่อ → วันที่ · <b>เวลา</b> · <b>ค่าเข้าชม</b> · คณะที่จัด · สถานที่</td></tr>
       <tr><td>ส่วนเนื้อหา</td><td class="v">จัดกึ่งกลาง (max 820px) · หัวข้อ "รายละเอียด" + ปุ่มแชร์ + บทความ</td></tr>
       <tr><td>ปุ่มกลับ</td><td class="v">← กลับไปหน้า What's Around SU</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">11</span> Collection (คลังสะสมผลงาน) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">data-driven จาก <b>collection-data.js</b> · 3 คลังสะสม · ดู <b>collection.html</b> + <b>collection-all.html</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Hero</td><td class="v">พื้น gradient มินต์อ่อน→ขาว · Eyebrow 24px #03bf9e + H1 54px (เท่า What's On) · จัดกึ่งกลาง · ปุ่ม <b>Collection All</b> ใต้ lead</td></tr>
+      <tr><td>Collection Highlights</td><td class="v"><b>Coverflow slider</b> 7 ชิ้น (การ์ดกลางเด่น + ข้างซ้อนเล็กลง) · คลิกกลาง = popup · คลิกข้าง = เลื่อนมากลาง</td></tr>
+      <tr><td>Popup รายละเอียด</td><td class="v"><b>เต็มจอ split</b> (ภาพซ้าย 56% พื้นสว่าง + thumbnail · รายละเอียดขวา 44% เลื่อนได้) · ปุ่มปิดวงกลมมุมขวาบน · ครบทุกฟิลด์ (ประเภท·เทคนิค·ขนาด·นิทรรศการ·รางวัล·แนวคิด·themes) · ปิดด้วย ×/Esc</td></tr>
+      <tr><td>Explore Themes</td><td class="v"><b>พื้นดำ</b> #0d0d0d · หัวข้อ/chip กึ่งกลาง (ขาว, active เขียว) · คลิก keyword โชว์เฉพาะกลุ่ม (ไม่มี "ทั้งหมด")</td></tr>
+      <tr><td>Themes — layout รูป</td><td class="v"><b>Justified gallery</b> เรียงซ้าย→ขวา · สูง ~440px (cap 1000) · ภาพเต็มตามสัดส่วน · คลิก = popup</td></tr>
+      <tr><td>Explore Stories</td><td class="v">การ์ดบล็อก (รูป 16:10 → ผู้เขียน·วันที่ → หัวข้อ → เกริ่น → <b>tag คลิกได้</b> ไป blog.html?tag=) · พื้นขาว · หัวข้อกึ่งกลาง</td></tr>
+      <tr><td>Collection All (หน้าใหม่)</td><td class="v">เหมือน Themes (พื้นดำ + justified) · <b>4 tab ตามคลังสะสม</b> — สี tab ตาม badge (แดง/ทอง/เขียว)</td></tr>
+      <tr><td>คลังสะสมศิลปกรรม (Explore More)</td><td class="v">พื้นเข้ม · รูปคอลลาจ (PNG โปร่ง) · ปุ่มไป resource.lib.su.ac.th/awardsu</td></tr>
+      <tr><td>Data model (ต่อ 1 ผลงาน)</td><td class="v">set (1 ใน 3 คลัง) · type (ประเภท) · title · artist · size · technique · exhibition · awards[] · concept · themes[] · highlight · cover/images[]</td></tr>
     </table>
   </div>
 

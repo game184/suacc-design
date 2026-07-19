@@ -9,7 +9,7 @@
   html{scroll-behavior:smooth}
   /* ===== Banner เต็มกว้าง (banner-whaton) ===== */
   .d2-hero{width:100%;background:#0d0d0d;line-height:0}
-  .d2-hero img{width:100%;display:block;aspect-ratio:1366/540;object-fit:cover}
+  .d2-hero img{width:100%;display:block;aspect-ratio:1366/637;object-fit:cover}
   /* ===== แถวบน: กลับ + Share ===== */
   .d2-top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0 8px}
   .d2-back{display:inline-flex;align-items:center;gap:8px;color:#0a7256;font-weight:700;text-decoration:none}
@@ -38,6 +38,15 @@
   .d2-arts{display:grid;grid-template-columns:1fr 1fr;gap:36px 30px}
   .d2-art{margin:0}
   .d2-art img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:14px;display:block}
+  /* รูปแทรกในเนื้อหา Overview */
+  .ov-img{margin:26px 0}
+  .ov-img img{width:100%;border-radius:14px;display:block}
+  .ov-img figcaption{margin-top:10px;font-size:14px;color:#777;text-align:center;line-height:1.5}
+  /* วิดีโอแทรกในเนื้อหา Overview */
+  .ov-video{margin:26px 0}
+  .ov-video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000}
+  .ov-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .ov-video figcaption{margin-top:10px;font-size:14px;color:#777;text-align:center;line-height:1.5}
   .d2-art .cap{margin-top:14px}
   .d2-art h4{margin:0 0 4px;font-size:20px;color:#0d0d0d}
   .d2-art .by{display:block;color:#03bf9e;font-weight:700;font-size:14px;margin-bottom:8px}
@@ -46,9 +55,9 @@
   .d2-side{position:relative}
   .d2-box{position:sticky;top:calc(var(--stick,135px) + 16px);border-radius:18px;padding:10px 26px}
   .d2-box .won-meta{gap:0;margin:0}
-  .d2-box .won-meta li{padding:16px 0;border-bottom:1px solid rgba(0,0,0,.12);font-size:16px;color:#0d0d0d;font-weight:600;align-items:center}
+  .d2-box .won-meta li{padding:18px 0;border-bottom:1px solid rgba(0,0,0,.12);font-size:17px;color:#0d0d0d;font-weight:600;align-items:center}
   .d2-box .won-meta li:last-child{border-bottom:none}
-  .d2-box .won-meta svg{width:21px;height:21px;color:#0d0d0d;margin-top:0}
+  .d2-box .won-meta svg{width:24px;height:24px;color:#0d0d0d;margin-top:0}
   .d2-box .won-meta .free{color:#0d0d0d}
   @media(max-width:900px){
     .d2-grid{grid-template-columns:1fr;gap:30px;min-height:auto}
@@ -99,9 +108,9 @@
     var ev = WHATSON.filter(function(e){return e.id===id;})[0] || WHATSON[0];
     document.title = ev.title.replace(/[“”]/g,'') + ' · SUACC';
 
-    /* banner ตาม id (banner-whaton) — ถ้าไม่มีใช้ poster */
+    /* banner = โปสเตอร์แนวนอน (landscape) ถ้ามี · ไม่มีใช้ bw-id · สุดท้าย fallback poster */
     var bImg = new Image();
-    var bSrc = 'img/bw-'+ev.id+'.png';
+    var bSrc = ev.banner || ('img/bw-'+ev.id+'.png');
     bImg.onload = function(){ document.getElementById('dBanner').src = bSrc; };
     bImg.onerror = function(){ document.getElementById('dBanner').src = ev.img; };
     bImg.src = bSrc;
@@ -119,7 +128,9 @@
     /* Overview = ข้อความ (body/desc · ไม่เอารูป) */
     var ovHtml = '';
     if(ev.body && ev.body.length){
-      ovHtml = ev.body.filter(function(b){return b.type!=='img';}).map(function(b){
+      ovHtml = ev.body.map(function(b){
+        if(b.type==='img') return '<figure class="ov-img"><img src="'+b.src+'" alt="'+(b.cap||'')+'" loading="lazy">'+(b.cap?'<figcaption>'+b.cap+'</figcaption>':'')+'</figure>';
+        if(b.type==='video') return '<figure class="ov-video"><div class="ov-video-frame"><iframe src="https://www.youtube.com/embed/'+b.yt+'" title="'+(b.cap||'')+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>'+(b.cap?'<figcaption>'+b.cap+'</figcaption>':'')+'</figure>';
         return b.type==='h' ? '<h3>'+b.text+'</h3>' : '<p>'+b.text+'</p>';
       }).join('');
     } else if(ev.desc && ev.desc.length){

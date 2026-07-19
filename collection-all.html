@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Collection All · คลังสะสมผลงานศิลปกรรม · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== พื้นดำ + header กึ่งกลาง (เหมือน section Themes) ===== */
+  .ca-sec{background:#0d0d0d;min-height:70vh}
+  .ca-sec .coll-thead{text-align:center;margin-bottom:4px}
+  .ca-sec .coll-thead .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#03bf9e;margin:0 0 10px}
+  .ca-sec .coll-thead h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:54px;line-height:1.2;margin:0 0 16px;color:#fff}
+  .ca-sec .coll-thead .lead{max-width:640px;margin:0 auto;color:rgba(255,255,255,.72);font-size:17px;line-height:1.6}
+  .ca-back{margin-bottom:18px}
+  .ca-back a{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.72);text-decoration:none;font-weight:600;font-size:15px;transition:.15s}
+  .ca-back a:hover{color:#03bf9e}
+  /* chips (กึ่งกลาง · สไตล์บนพื้นดำ) */
+  #setChips{margin:26px 0 26px;justify-content:center}
+  #setChips .chip{cursor:pointer;background:transparent;border-color:rgba(255,255,255,.28);color:#dcdcdc}
+  #setChips .chip:hover{border-color:#fff;color:#fff}
+  /* สี tab ที่เลือก = สี badge ของคลังสะสมนั้น (ตรงกับที่โชว์ใน popup) */
+  #setChips .chip.on{background:#03bf9e;border-color:#03bf9e;color:#04140f}
+  #setChips .chip.set-national.on{background:#c0392b;border-color:#c0392b;color:#fff}
+  #setChips .chip.set-young.on{background:var(--gold);border-color:var(--gold);color:#222}
+  #setChips .chip.set-silpa.on{background:var(--green-ink);border-color:var(--green-ink);color:#fff}
+  /* hint สีคลังสะสมบนตัวเลขนับ (ตอนยังไม่เลือก) */
+  #setChips .chip.set-national span{color:#e08a7f}
+  #setChips .chip.set-young span{color:var(--gold)}
+  #setChips .chip.set-silpa span{color:#4fc9a3}
+  #setChips .chip.on span{color:inherit;opacity:.85}
+  .coll-count{font-weight:700;color:rgba(255,255,255,.85);font-size:15px;margin:0 0 22px;text-align:center}
+
+  /* ===== justified masonry (เหมือน Themes) ===== */
+  .coll-row{display:flex;gap:12px;margin-bottom:12px}
+  .coll-tile{flex:none;margin:0;padding:0;border:none;background:none;cursor:pointer;border-radius:10px;overflow:hidden;
+    line-height:0;box-shadow:0 3px 12px rgba(0,0,0,.10);transition:transform .18s,box-shadow .18s}
+  .coll-tile:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.22);position:relative;z-index:1}
+  .coll-tile img{width:100%;height:100%;object-fit:cover;display:block;border-radius:10px}
+
+  /* ===== Popup รายละเอียดผลงาน — เต็มจอ (split) ===== */
+  .cpop-overlay{position:fixed;inset:0;z-index:200;background:#fff}
+  .cpop-overlay[hidden]{display:none}
+  .cpop-dialog{position:absolute;inset:0;background:#fff;overflow:hidden}
+  .cpop-close{position:fixed;top:22px;right:24px;z-index:10;width:52px;height:52px;border-radius:50%;border:1px solid #e6e6e6;background:#fff;color:#0d0d0d;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.12);transition:.15s}
+  .cpop-close:hover{background:#0d0d0d;color:#fff;border-color:#0d0d0d}
+  .cpop-content{display:grid;grid-template-columns:56% 44%;height:100vh;height:100dvh}
+  .cpop-gallery{background:#f4f4f3;padding:44px 56px 40px;display:flex;flex-direction:column;min-width:0}
+  .cpop-main{flex:1;min-height:0;background:center/contain no-repeat;background-color:#f4f4f3}
+  .cpop-thumbs{display:flex;gap:12px;margin-top:24px}
+  .cpop-thumb{width:70px;height:70px;border-radius:10px;background-size:cover;background-position:center;border:2px solid transparent;cursor:pointer;padding:0;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+  .cpop-thumb.on{border-color:#03bf9e}
+  .cpop-info{padding:60px;overflow-y:auto;height:100vh;height:100dvh}
+  .cpop-info h2{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:36px;line-height:1.25;margin:26px 0 6px;color:#0d0d0d}
+  .cpop-artist{margin:0 0 28px;font-size:19px;color:#03bf9e;font-weight:700}
+  .cpop-rows{margin:0 0 28px;display:flex;flex-direction:column}
+  .cpop-row{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #ececec}
+  .cpop-row dt{margin:0;color:#8a8a8a;font-size:15px;font-weight:600}
+  .cpop-row dd{margin:0;color:#0d0d0d;font-size:16px;line-height:1.55}
+  .cpop-concept h4{margin:0 0 10px;font-size:18px;color:#0d0d0d}
+  .cpop-concept p{margin:0 0 26px;font-size:16px;line-height:1.85;color:#333}
+  .cpop-themes{display:flex;flex-wrap:wrap;gap:10px}
+  .cpop-chip{background:#e7f6f1;color:#0a7256;border-radius:20px;padding:7px 16px;font-size:14px;font-weight:700}
+  @media(max-width:900px){
+    .cpop-content{grid-template-columns:1fr;height:auto;min-height:100dvh}
+    .cpop-gallery{padding:72px 24px 28px;min-height:56vh}
+    .cpop-info{padding:34px 24px 64px;height:auto}
+    .cpop-info h2{font-size:28px}
+    .ca-sec .coll-thead h1{font-size:38px}
+  }
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<section class="pad ca-sec">
+  <div class="wrap">
+    <div class="ca-back"><a href="collection.html">&larr; กลับหน้า Collection</a></div>
+    <div class="coll-thead">
+      <p class="eyebrow">Collection All</p>
+      <h1>คลังสะสมผลงานทั้งหมด</h1>
+      <p class="lead">รวมผลงานศิลปกรรมทั้งหมดจากสามคลังสะสมของมหาวิทยาลัยศิลปากร เลือกดูตามคลังสะสมที่สนใจ</p>
+    </div>
+    <div class="chips" id="setChips"></div>
+    <p class="coll-count" id="collCount"></p>
+    <div class="coll-masonry" id="setGrid"></div>
+  </div>
+</section>
+
+<!-- Popup รายละเอียดผลงาน -->
+<div class="cpop-overlay" id="cpop" hidden>
+  <div class="cpop-dialog" role="dialog" aria-modal="true" aria-label="รายละเอียดผลงาน">
+    <button class="cpop-close" id="cpopClose" type="button" aria-label="ปิด">&times;</button>
+    <div class="cpop-content" id="cpopContent"></div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<script src="collection-data.js"></script>
+<script>
+  /* ---------- Tabs (ตามคลังสะสม) + justified gallery ---------- */
+  (function(){
+    var chips=document.getElementById('setChips');
+    var grid=document.getElementById('setGrid');
+    var count=document.getElementById('collCount');
+    var SETS=[
+      {k:'all',      label:'Collection All'},
+      {k:'national', label:'ศิลปกรรมแห่งชาติ'},
+      {k:'young',    label:'ศิลปกรรมร่วมสมัยของศิลปินรุ่นเยาว์'},
+      {k:'silpa',    label:'ผลงานทุนสร้างสรรค์ศิลปกรรม ศิลป์ พีระศรี'}
+    ];
+    var current=SETS[0].k, curList=[], RATIO={};
+    chips.innerHTML=SETS.map(function(s,i){
+      var n=(s.k==='all')?COLLECTION.length:COLLECTION.filter(function(w){return w.set===s.k;}).length;
+      return '<button class="chip set-'+s.k+(i===0?' on':'')+'" data-set="'+s.k+'">'+s.label+' <span style="opacity:.6;font-weight:700">'+n+'</span></button>';
+    }).join('');
+    function labelOf(k){ for(var i=0;i<SETS.length;i++) if(SETS[i].k===k) return SETS[i].label; return ''; }
+
+    var GAP=12, TARGET=440, MAXH=1000;
+    function justify(){
+      var W=grid.clientWidth; if(!W || !curList.length) return;
+      var rows=[], row=[], sumR=0;
+      curList.forEach(function(w){
+        row.push(w); sumR+=(RATIO[w.id]||1);
+        if(sumR*TARGET + (row.length-1)*GAP >= W){ rows.push({items:row,sumR:sumR,full:true}); row=[]; sumR=0; }
+      });
+      if(row.length) rows.push({items:row,sumR:sumR,full:false});
+      grid.innerHTML=rows.map(function(rw){
+        var h = rw.full ? (W-(rw.items.length-1)*GAP)/rw.sumR : TARGET;
+        h=Math.min(h,MAXH);
+        return '<div class="coll-row">'+rw.items.map(function(w){
+          var tw=h*(RATIO[w.id]||1);
+          return '<button class="coll-tile" type="button" data-coll-id="'+w.id+'" aria-label="'+w.title+'" style="width:'+tw+'px;height:'+h+'px">'+
+            '<img src="'+collCover(w)+'" alt="'+w.title+'"></button>';
+        }).join('')+'</div>';
+      }).join('');
+    }
+    function render(set){
+      current=set;
+      curList=(set==='all')?COLLECTION.slice():COLLECTION.filter(function(w){return w.set===set;});
+      count.textContent=curList.length+' ผลงาน'+(set==='all'?'':' · '+labelOf(set));
+      var need=curList.filter(function(w){return RATIO[w.id]==null;});
+      if(!need.length){ justify(); return; }
+      var loaded=0;
+      need.forEach(function(w){ var im=new Image();
+        im.onload=im.onerror=function(){ RATIO[w.id]=(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:1; if(++loaded===need.length) justify(); };
+        im.src=collCover(w);
+      });
+    }
+    chips.addEventListener('click',function(e){
+      var c=e.target.closest('.chip'); if(!c)return;
+      chips.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+      c.classList.add('on'); render(c.dataset.set);
+    });
+    render(SETS[0].k);
+    var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(justify,150); });
+  })();
+
+  /* ---------- Popup ---------- */
+  (function(){
+    var overlay=document.getElementById('cpop');
+    var content=document.getElementById('cpopContent');
+    var lastFocus=null;
+    function open(id){
+      var w=collById(id); if(!w)return;
+      lastFocus=document.activeElement;
+      content.innerHTML=collPopupHTML(w);
+      overlay.hidden=false; document.body.style.overflow='hidden';
+      document.getElementById('cpopClose').focus();
+    }
+    function close(){ overlay.hidden=true; document.body.style.overflow=''; if(lastFocus)lastFocus.focus(); }
+    document.addEventListener('click',function(e){
+      var t=e.target.closest('[data-coll-id]');
+      if(t){ open(parseInt(t.getAttribute('data-coll-id'),10)); return; }
+      var th=e.target.closest('.cpop-thumb');
+      if(th){ document.getElementById('cpopMain').style.backgroundImage="url('"+th.dataset.src+"')";
+        content.querySelectorAll('.cpop-thumb').forEach(function(x){x.classList.remove('on');}); th.classList.add('on'); }
+    });
+    document.getElementById('cpopClose').addEventListener('click',close);
+    overlay.addEventListener('click',function(e){ if(e.target===overlay)close(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!overlay.hidden)close(); });
+  })();
+</script>
+<script src="site.js"></script>
+</body>
+</html>
