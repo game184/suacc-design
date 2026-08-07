@@ -250,7 +250,7 @@ window.aroundCard2HTML = function(ev){
    Blog — ข้อมูลบทความ (ใช้ใน Reading Corner / Blog) · highlight = ติ๊กให้ขึ้น Highlights
    ============================================================ */
 window.BLOG = [
-  { id:4, img:'img/wanida-01.jpg', tag:'บทสัมภาษณ์', tagColor:'#c9b3e6', title:'Cosmology: มองโลกของแบบด้วยโลกทัศน์ของอาจารย์วนิดา พึ่งสุนทร', date:'15 มิ.ย. 2569', place:'Reading Corner · Blog', highlight:true, author:'กองบรรณาธิการ SUACC',
+  { id:4, img:'img/wanida-01.jpg', tag:'บทสัมภาษณ์', tagColor:'#c9b3e6', title:'Cosmology: มองโลกของแบบด้วยโลกทัศน์ของอาจารย์วนิดา พึ่งสุนทร', date:'15 มิ.ย. 2569', place:'Reading Corner · Blog', highlight:true, featured:true, author:'กองบรรณาธิการ SUACC',
     excerpt:'สถาปัตยกรรมไทยมักถูกอธิบายผ่านความงดงามของลวดลาย ความประณีตของช่าง หรือคุณค่าทางประวัติศาสตร์ หากแต่มองให้ลึกลงไปสถาปัตยกรรมไทยเป็นดั่งผลลัพธ์ของโลกทั…',
     body:[
       {type:'p', text:'สถาปัตยกรรมไทยมักถูกอธิบายผ่านความงดงามของลวดลาย ความประณีตของช่าง หรือคุณค่าทางประวัติศาสตร์ หากแต่มองให้ลึกลงไปสถาปัตยกรรมไทยเป็นดั่งผลลัพธ์ของโลกทัศน์ที่สะท้อนความสัมพันธ์ระหว่างมนุษย์ ธรรมชาติ ความเชื่อ และโครงสร้างทางสังคมในแต่ละยุคสมัย'},
@@ -265,9 +265,9 @@ window.BLOG = [
       {type:'p', text:'ในแง่ของฐานานุศักดิ์นั้น อาจารย์ยกตัวอย่างที่ชัดเจนว่าองค์ประกอบทางสถาปัตยกรรมบางอย่าง ในอดีตถูกกำหนดไว้อย่างเคร่งครัดตามลำดับชั้นทางสังคม อาทิ หลังคาทรงปราสาทซึ่งสงวนไว้สำหรับพระมหากษัตริย์เท่านั้น หรือฉัตรที่ใช้กางกั้นตามสถานะ เช่น ฉัตรเก้าชั้นใช้ได้เฉพาะพระมหากษัตริย์ ฉัตรเจ็ดชั้นสำหรับพระราชินี และฉัตรสามชั้นสำหรับสามัญชน แม้ในปัจจุบันกฎเกณฑ์เหล่านี้จะไม่ได้ถูกบังคับใช้อย่างเคร่งครัดดังเดิม แต่สิ่งนี้สะท้อนให้เห็นว่าสถาปัตยกรรมไทยแต่โบราณมิได้เป็นเพียงเรื่องความงามเชิงรูปแบบ หากยังเป็นภาษาที่ใช้สื่อสารสถานะและอำนาจในสังคมไปพร้อมกัน ผู้ที่จะออกแบบหรือขยายแบบสถาปัตยกรรมไทยจึงจำเป็นต้องเข้าใจบริบทเชิงสัญลักษณ์เหล่านี้ควบคู่ไปกับความรู้ด้านรูปแบบและโครงสร้าง'},
       {type:'p', text:'ท้ายที่สุดโลกทัศน์ของอาจารย์วนิดา พึ่งสุนทร ทำให้เห็นว่าสถาปัตยกรรมไทยไม่ได้เป็นเพียงมรดกทางกายภาพ หากแต่เป็นมรดกทางภูมิปัญหาที่เชื่อมโยงองค์ความรู้ด้านศิลปกรรม วิศวกรรม ประวัติศาสตร์ และวัฒนธรรมเข้าไว้ด้วยกัน บางทีสิ่งที่ควรอนุรักษ์ไว้ให้ได้มากที่สุดอาจไม่ใช่แค่ตัวงานสถาปัตยกรรมเท่านั้น แต่เป็นวิธีการมองโลกให้เข้าใจอย่าถ่องแท้ ตราบใดที่โลกทัศน์ดังกล่าวนี้ยังได้รับการส่งต่อ สถาปัตยกรรมไทยก็จะสามารถพัฒนา เปลี่ยนแปลง และดำรงคุณค่าได้อย่างมีความหมายในสังคมร่วมสมัย อาจารย์วนิดาจึงฝากความหวังไว้กับเด็กรุ่นใหม่ว่าขอให้สนใจในสิ่งที่เรากำลังจะทำ และทำด้วยความรัก วันนี้อาจยังไม่เก่ง แต่หากเรียนให้รู้ ดูให้เป็น ว่าความงามนั้นงามยังไง พร้อมทั้งเอาใจใส่ในทุกรายละเอียด อีกหน่อยก็จะทำงานสถาปัตยกรรมไทยให้งดงามได้'}
     ] },
-  { id:1, img:'img/rc-blog1.jpg', tag:'บทความ', tagColor:'#9ec5e0', title:'จิตรกรรมกับดอกไม้: สัญลักษณ์และความหมายในงานศิลป์', date:'1 มิ.ย. 2569', place:'Reading Corner · Blog', highlight:false,
+  { id:1, img:'img/rc-blog1.jpg', tag:'บทความ', tagColor:'#9ec5e0', title:'จิตรกรรมกับดอกไม้: สัญลักษณ์และความหมายในงานศิลป์', date:'1 มิ.ย. 2569', place:'Reading Corner · Blog', highlight:false, featured:true,
     excerpt:'ดอกไม้ในงานจิตรกรรมไม่ได้เป็นเพียงความงามทางสายตา แต่ยังแฝงสัญลักษณ์และความหมายเชิงวัฒนธรรมที่ลึกซึ้ง บทความนี้ชวนสำรวจการตีความดอกไม้ในงานศิลป์ตั้งแต่อดีตถึงปัจจุบัน' },
-  { id:2, img:'img/hl-blog.jpg', tag:'บทความ', tagColor:'#9ec5e0', title:'ศิลปะ วัฒนธรรม และการสร้างสรรค์ ของไทยกับโลกนี้', date:'20 พ.ค. 2569', place:'Reading Corner · Blog', highlight:true,
+  { id:2, img:'img/hl-blog.jpg', tag:'บทความ', tagColor:'#9ec5e0', title:'ศิลปะ วัฒนธรรม และการสร้างสรรค์ ของไทยกับโลกนี้', date:'20 พ.ค. 2569', place:'Reading Corner · Blog', highlight:true, featured:true,
     excerpt:'มองบทบาทของศิลปะและวัฒนธรรมไทยในเวทีโลก และการสร้างสรรค์ที่เชื่อมรากเหง้ากับความร่วมสมัย' },
   { id:3, img:'img/rc-blog2.jpg', tag:'บทความ', tagColor:'#9ec5e0', title:'มนุษย์และสัตว์ในงานประติมากรรม', date:'10 พ.ค. 2569', place:'Reading Corner · Blog', highlight:false,
     excerpt:'รูปทรงของมนุษย์และสัตว์เป็นแรงบันดาลใจสำคัญของงานปั้นมาทุกยุคสมัย สำรวจความหมายที่ซ่อนอยู่' }
@@ -300,4 +300,53 @@ window.highlightCardHTML = function(it){
         (it.place?('<span class="hl-mrow">'+window.WON_ICONS.pin+'<span>'+it.place+'</span></span>'):'') +
       '</div>' +
     '</div></a>';
+};
+
+/* ============================================================
+   E-Books — ข้อมูลกลางชุดเดียว (ใช้ร่วม: index, reading, ebooks)
+   ============================================================ */
+window.EBOOKS = [
+  { id:1, img:'img/ebook-metamorphosis.jpg', title:'Metamorphosis', by:'Franz Kafka', pages:56 },
+  { id:2, img:'img/ebook-nutrition.jpg', title:'The Future of Nutrition', by:'T. Colin Campbell', pages:320 },
+  { id:3, img:'img/ebook-forbidden.jpg', title:'We Were Forbidden', by:'Jacqueline Harpman', pages:208 },
+  { id:4, img:'img/ebook-islands.jpg', title:'The Islands and the Stars', by:'Subodhana Wijeyeratne', pages:264 },
+  { id:5, img:'img/ebook-bekisar.jpg', title:'Bekisar Merah', by:'Ahmad Tohari', pages:312 },
+  { id:6, img:'img/ebook-nicaragua.jpg', title:'Nicaragua Cuenta', by:'Libros y Océanos', pages:180 }
+];
+
+/* render การ์ด E-Book (ปก 3:4 + ชื่อ + ผู้แต่ง) */
+window.ebookCardHTML = function(e, href){
+  href = href || 'ebooks.html';
+  return '<a class="eb-card" href="'+href+'">' +
+    '<div class="cover" style="background-image:url(\''+e.img+'\')"></div>' +
+    '<h4>'+e.title+'</h4>' +
+    (e.by ? '<p class="eb-by">'+e.by+'</p>' : '') +
+  '</a>';
+};
+
+/* render การ์ดบทความ (ดีไซน์ story เดิม: รูปบน + ข้อความล่าง · ใช้หน้า Reading Corner/Blog) */
+window.blogListCardHTML = function(b){
+  var link = 'blog-detail.html?id='+b.id;
+  var tag = b.tag ? '<div class="story-tags"><span class="story-tag">'+b.tag+'</span></div>' : '';
+  return '<div class="story-card">' +
+    '<a class="story-media" href="'+link+'"><div class="story-img" style="background-image:url(\''+b.img+'\')"></div></a>' +
+    '<p class="story-by">'+(b.author?b.author+' · ':'')+b.date+'</p>' +
+    '<a class="story-titlelink" href="'+link+'"><h3 class="story-title">'+b.title+'</h3></a>' +
+    '<p class="story-ex">'+(b.excerpt||'')+'</p>' +
+    tag +
+  '</div>';
+};
+
+/* render สไลด์ "บทความเด่น" (แยกจาก highlight หน้าแรก) — split รูป+ข้อความ */
+window.featuredSlideHTML = function(b){
+  return '<a class="feat-slide" href="blog-detail.html?id='+b.id+'">' +
+    '<div class="feat-img" style="background-image:url(\''+b.img+'\')"></div>' +
+    '<div class="feat-body">' +
+      '<p class="eyebrow">บทความเด่น</p>' +
+      '<h2 class="feat-title">'+b.title+'</h2>' +
+      '<p class="feat-ex">'+(b.excerpt||'')+'</p>' +
+      '<p class="feat-meta">'+b.date+(b.tag?' · '+b.tag:'')+'</p>' +
+      '<span class="btn primary feat-btn">อ่านบทความ &rarr;</span>' +
+    '</div>' +
+  '</a>';
 };

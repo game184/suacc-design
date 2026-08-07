@@ -7,7 +7,7 @@
 
   const CARET = '<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 8.5 L12 15.5 L19 8.5"/></svg>';
   const aAbout = isOn('about.html','about-who.html','about-people.html','about-portfolio.html','about-news.html');
-  const aRead  = isOn('reading.html','ebooks.html','blog.html');
+  const aRead  = isOn('reading.html','ebooks.html','blog.html','stories.html');
   const aWon   = isOn('whatson.html','whatson-detail.html');
   const aColl  = isOn('collection.html','collection-detail.html');
 
@@ -27,7 +27,10 @@
           <button disabled title="Available soon">EN</button>
         </div>
       </div>
-      <nav class="main" aria-label="Main menu">
+      <button class="burger" type="button" aria-label="เปิด/ปิดเมนู" aria-expanded="false" aria-controls="mainmenu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main" id="mainmenu" aria-label="Main menu">
         <div class="item ${isOn('index.html')}"><a href="index.html"${aria('index.html')}>Home</a></div>
         <div class="item ${aAbout}"><a href="about.html"${aAbout?' aria-current="page"':''}>About Us ${CARET}</a>
           <div class="sub">
@@ -46,6 +49,7 @@
             <a href="reading.html">Overview</a>
             <a href="ebooks.html">E-Books</a>
             <a href="blog.html">Blog</a>
+            <a href="stories.html">Stories</a>
           </div>
         </div>
         <div class="item ${isOn('contact.html')}"><a href="contact.html"${aria('contact.html')}>Contact</a></div>
@@ -107,6 +111,7 @@
           <a href="reading.html">Overview</a>
           <a href="ebooks.html">E-Books</a>
           <a href="blog.html">Blog</a>
+          <a href="stories.html">Stories</a>
           <h3 class="mt"><a href="contact.html">Contact</a></h3>
         </div>
       </div>
@@ -139,6 +144,23 @@
     let m = navNow.nextElementSibling;
     if(m){ m.id='maincontent'; m.setAttribute('tabindex','-1'); m.setAttribute('role','main'); }
   }
+
+  // mobile hamburger toggle
+  (function(){
+    const tn=document.querySelector('.topnav');
+    if(!tn) return;
+    const burger=tn.querySelector('.burger'), menu=tn.querySelector('.main');
+    if(!burger||!menu) return;
+    function setOpen(open){
+      tn.classList.toggle('menu-open',open);
+      burger.classList.toggle('open',open);
+      burger.setAttribute('aria-expanded',String(open));
+    }
+    burger.addEventListener('click',()=>setOpen(!tn.classList.contains('menu-open')));
+    // ปิดเมนูเมื่อคลิกลิงก์ / กด Esc
+    menu.addEventListener('click',e=>{ if(e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') setOpen(false); });
+  })();
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

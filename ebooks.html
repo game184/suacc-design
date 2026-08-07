@@ -5,12 +5,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>E-Books · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  .eb-hero .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
+  .eb-searchbar{display:flex;align-items:center;gap:10px;max-width:460px;margin:0 0 30px;
+    border:1.5px solid var(--line);border-radius:30px;padding:11px 20px;background:#fff}
+  .eb-searchbar svg{width:20px;height:20px;color:#8a8f96;flex-shrink:0}
+  .eb-searchbar input{border:none;outline:none;flex:1;font:inherit;font-size:15px;color:#0d0d0d;background:transparent}
+  .eb-empty{color:var(--muted);padding:30px 0}
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
 
 <!-- intro -->
-<section class="pad-s tint">
+<section class="pad-s rc-page-banner">
   <div class="wrap">
     <p class="breadcrumb"><a href="reading.html">Reading Corner</a> › <b>E-Books</b></p>
     <p class="eyebrow">E-Books</p>
@@ -19,53 +27,39 @@
   </div>
 </section>
 
-<!-- grid -->
+<!-- grid + search -->
 <section class="pad alt">
   <div class="wrap">
-    <p class="note-strip">🔒 เปิดอ่านบนเว็บเท่านั้น — ไม่อนุญาตให้ดาวน์โหลด</p>
-    <div class="grid g4">
-      <a class="card" href="#viewer"><div class="thumb ph-3 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>วารสารศิลปวัฒนธรรม ฉบับที่ 12</h3><p class="meta">2568 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-1 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>สูจิบัตรศิลปกรรมแห่งชาติ ครั้งที่ 69</h3><p class="meta">2568 · หอศิลป์ มศก.</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-6 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>คลังสะสมผลงานศิลปกรรม</h3><p class="meta">2567 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-4 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>ศิลป์ พีระศรี กับมหาวิทยาลัยศิลปากร</h3><p class="meta">2566 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-2 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>สูจิบัตรศิลปินรุ่นเยาว์</h3><p class="meta">2567 · หอศิลป์ มศก.</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-5 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>ภาพพิมพ์ร่วมสมัยในงานสะสม</h3><p class="meta">2566 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-3 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>วารสารศิลปวัฒนธรรม ฉบับที่ 11</h3><p class="meta">2567 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="#viewer"><div class="thumb ph-1 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>จดหมายเหตุนิทรรศการประจำปี</h3><p class="meta">2566 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
+    <div class="eb-searchbar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="search" id="ebSearch" placeholder="ค้นหาหนังสือ / ผู้แต่ง…" aria-label="ค้นหา E-Books">
     </div>
-  </div>
-</section>
-
-<!-- DEMO reader -->
-<section class="pad" id="viewer">
-  <div class="wrap">
-    <div class="shead">
-      <div><p class="eyebrow">ตัวอย่าง</p><h2 class="mb0">มุมมองการอ่านบนเว็บ</h2></div>
-      <span class="no-dl">⛔ ดาวน์โหลดไม่ได้</span>
-    </div>
-    <div class="viewer">
-      <div class="flex" style="justify-content:space-between;align-items:center;color:#cfcfcf;font-size:13px">
-        <span>วารสารศิลปวัฒนธรรม ฉบับที่ 12 — หน้า 1 / 48</span>
-        <span class="no-dl">⛔ ดาวน์โหลดไม่ได้</span>
-      </div>
-      <div class="page">หน้ากระดาษ PDF (ตัวอย่าง)</div>
-      <div class="flex" style="justify-content:center;color:#cfcfcf;font-size:13px">
-        <span>‹ ก่อนหน้า</span><span>•</span><span>ถัดไป ›</span>
-      </div>
-    </div>
-    <p class="center muted" style="margin-top:12px;font-size:13px">ตัวอย่างมุมมองการอ่านบนเว็บ — ระบบแสดงผลแบบป้องกันการดาวน์โหลด</p>
+    <div class="eb-grid" id="ebGridAll"></div>
+    <p class="eb-empty" id="ebEmpty" style="display:none">ไม่พบหนังสือที่ตรงกับคำค้น</p>
   </div>
 </section>
 
 <div id="site-footer"></div>
+<script src="whatson-data.js"></script>
+<script>
+  /* E-Books — render + ค้นหา · คลิกเปิดหน้าอ่าน ebook-reader.html */
+  (function(){
+    var g=document.getElementById('ebGridAll'),
+        input=document.getElementById('ebSearch'),
+        empty=document.getElementById('ebEmpty');
+    if(!g || !window.EBOOKS) return;
+    function render(q){
+      q=(q||'').trim().toLowerCase();
+      var list=EBOOKS.filter(function(e){
+        return !q || e.title.toLowerCase().indexOf(q)>=0 || (e.by||'').toLowerCase().indexOf(q)>=0;
+      });
+      g.innerHTML = list.map(function(e){ return ebookCardHTML(e, 'ebook-reader.html?id='+e.id); }).join('');
+      empty.style.display = list.length ? 'none' : '';
+    }
+    render('');
+    input.addEventListener('input', function(){ render(input.value); });
+  })();
+</script>
 <script src="site.js"></script>
 </body>
 </html>

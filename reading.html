@@ -5,16 +5,51 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Reading Corner · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Hero banner: animation ซ้าย + text ขวา */
+  .rc-hero{display:grid;grid-template-columns:0.9fr 1.1fr;gap:44px;align-items:center}
+  .rc-hero-anim{display:flex;justify-content:center}
+  .rc-hero-anim lottie-player{width:100%;max-width:440px}
+  @media(max-width:820px){
+    .rc-hero{grid-template-columns:1fr;gap:20px;text-align:center}
+    .rc-hero-anim{order:-1}
+    .rc-hero-anim lottie-player{max-width:320px}
+  }
+  /* Quote banner (ถัดจาก E-Books) */
+  .rc-quote{position:relative;background:#1a1a1a url('img/rc-banner.jpg') center/cover;
+    min-height:clamp(240px,32vw,380px);display:flex;align-items:center;justify-content:center;text-align:center}
+  .rc-quote::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
+  .rc-quote-inner{position:relative;z-index:1;max-width:none;padding:48px 24px;color:#fff}
+  .rc-quote-text{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-style:italic;
+    font-size:clamp(17px,2.7vw,34px);line-height:1.4;margin:0;white-space:nowrap}
+  .rc-quote-author{margin:18px 0 0;font-size:clamp(15px,1.4vw,18px);letter-spacing:.1em;opacity:.9}
+  @media(max-width:600px){.rc-quote-text{white-space:normal;font-size:20px}}
+  /* Stories head + bento (1 ใหญ่ซ้าย + 4 เล็กขวา · cover 1:1) */
+  .rc-stories-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+  /* EYEBROW ทุก section ในหน้านี้ ขนาดเท่ากัน (24px แบบเดียวกับหน้าอื่น) */
+  .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
+  .rc-bento{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+  .rc-bento .scard{aspect-ratio:1/1;height:auto}
+  .rc-bento-right{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.rc-bento{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
 
 <!-- HERO / intro -->
-<section class="pad tint">
+<section class="pad" style="background:linear-gradient(90deg,#62D9C3 0%,#C9FFF5 100%)">
   <div class="wrap">
-    <p class="eyebrow">Reading Corner</p>
-    <h1 class="mb0">มุมอ่าน E-Books &amp; บทความ</h1>
-    <p class="lead" style="margin-top:14px">รวมหนังสืออิเล็กทรอนิกส์ วารสาร สูจิบัตร และบทความจากสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ เปิดอ่านได้ฟรีบนเว็บ</p>
+    <div class="rc-hero">
+      <div class="rc-hero-anim">
+        <lottie-player src="lottie/library-research.json" background="transparent" speed="1" loop autoplay></lottie-player>
+      </div>
+      <div class="rc-hero-text">
+        <p class="eyebrow">Reading Corner</p>
+        <h1 class="mb0">E-Books &amp; บทความ</h1>
+        <p class="lead" style="margin-top:14px">รวมหนังสืออิเล็กทรอนิกส์ วารสาร สูจิบัตร และบทความจากสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ เปิดอ่านได้ฟรีบนเว็บ</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -23,18 +58,17 @@
   <div class="wrap">
     <div class="shead">
       <div><p class="eyebrow">E-Books</p><h2 class="mb0">หนังสือ &amp; วารสารแนะนำ</h2></div>
-      <a class="btn link" href="ebooks.html">ดูทั้งหมด →</a>
+      <a class="btn-outline-dark" href="ebooks.html">ดูทั้งหมด →</a>
     </div>
-    <div class="grid g4">
-      <a class="card" href="ebooks.html"><div class="thumb ph-3 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>วารสารศิลปวัฒนธรรม ฉบับที่ 12</h3><p class="meta">2568 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="ebooks.html"><div class="thumb ph-1 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>สูจิบัตรศิลปกรรมแห่งชาติ</h3><p class="meta">2568 · หอศิลป์ มศก.</p></div></a>
-      <a class="card" href="ebooks.html"><div class="thumb ph-6 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>คลังสะสมผลงานศิลปกรรม</h3><p class="meta">2567 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-      <a class="card" href="ebooks.html"><div class="thumb ph-4 ph-art" style="aspect-ratio:3/4"><span class="badge b-gold">E-Book</span></div>
-        <div class="body"><h3>ศิลป์ พีระศรี กับศิลปากร</h3><p class="meta">2566 · สำนักศิลปวัฒนธรรมฯ</p></div></a>
-    </div>
+    <div class="eb-grid" id="ebGridReading"></div>
+  </div>
+</section>
+
+<!-- Quote banner -->
+<section class="rc-quote">
+  <div class="rc-quote-inner">
+    <p class="rc-quote-text">"A room without books is like a body without a soul"</p>
+    <p class="rc-quote-author">— Cicero</p>
   </div>
 </section>
 
@@ -43,20 +77,55 @@
   <div class="wrap">
     <div class="shead">
       <div><p class="eyebrow">Blog</p><h2 class="mb0">บทความน่าอ่าน</h2></div>
-      <a class="btn link" href="blog.html">ดูทั้งหมด →</a>
+      <a class="btn-outline-dark" href="blog.html">ดูทั้งหมด →</a>
     </div>
-    <div class="grid g3">
-      <a class="card" href="blog.html"><div class="thumb ph-2 ph-art"><span class="badge b-pink">ศิลปะ</span></div>
-        <div class="body"><h3>จิตรกรรมกับดอกไม้ในงานสะสม</h3><p class="meta">10 มิ.ย. 2569</p></div></a>
-      <a class="card" href="blog.html"><div class="thumb ph-5 ph-art"><span class="badge b-pink">วัฒนธรรม</span></div>
-        <div class="body"><h3>มนุษย์และสัตว์ในงานปั้น</h3><p class="meta">2 มิ.ย. 2569</p></div></a>
-      <a class="card" href="blog.html"><div class="thumb ph-3 ph-art"><span class="badge b-pink">บทสัมภาษณ์</span></div>
-        <div class="body"><h3>คุยกับศิลปินรุ่นเยาว์</h3><p class="meta">25 พ.ค. 2569</p></div></a>
+    <div class="grid g3" id="blogStoryGrid"></div>
+  </div>
+</section>
+
+<!-- Quote banner 2 -->
+<section class="rc-quote" style="background-image:url('img/rc-banner2.jpg')">
+  <div class="rc-quote-inner">
+    <p class="rc-quote-text">"I really lucky to have parents who encouraged me to read"</p>
+    <p class="rc-quote-author">— Bill Gates</p>
+  </div>
+</section>
+
+<!-- Stories (bento: 1 ใหญ่ซ้าย + 4 เล็กขวา) -->
+<section class="pad">
+  <div class="wrap">
+    <div class="rc-stories-head">
+      <div><p class="eyebrow">Stories</p><h2 class="mb0">เรื่องเล่าจากคลังสะสม · Stories</h2></div>
+      <a class="btn-outline-dark" href="stories.html">ดูทั้งหมด &rarr;</a>
     </div>
+    <div class="rc-bento" id="rcBento"></div>
   </div>
 </section>
 
 <div id="site-footer"></div>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@2.0.12/dist/lottie-player.js"></script>
+<script src="whatson-data.js"></script>
+<script src="collection-data.js"></script>
+<script>
+  /* Stories — เนื้อหา+การ์ดเหมือนหน้า Collection · จัด bento layout */
+  (function(){
+    var g=document.getElementById('rcBento'); if(!g || !window.COLL_STORIES) return;
+    var s = COLL_STORIES.slice(0,5);
+    var big = s[0] ? collStoryCardHTML(s[0]) : '';
+    var right = s.slice(1,5).map(function(x){ return collStoryCardHTML(x); }).join('');
+    g.innerHTML = big + '<div class="rc-bento-right">' + right + '</div>';
+  })();
+  /* E-Books — render จาก EBOOKS (ข้อมูลชุดเดียว ใช้ร่วม index/reading/ebooks) */
+  (function(){
+    var g=document.getElementById('ebGridReading'); if(!g || !window.EBOOKS) return;
+    g.innerHTML = EBOOKS.slice(0,5).map(function(e){ return ebookCardHTML(e, 'ebook-reader.html?id='+e.id); }).join('');
+  })();
+  /* บทความ — ดีไซน์ Stories overlay (จาก BLOG) */
+  (function(){
+    var g=document.getElementById('blogStoryGrid'); if(!g || !window.BLOG) return;
+    g.innerHTML = BLOG.slice(0,3).map(function(b){ return blogListCardHTML(b); }).join('');
+  })();
+</script>
 <script src="site.js"></script>
 </body>
 </html>

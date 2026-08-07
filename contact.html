@@ -3,74 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Contact · SUACC</title>
+<title>Contact Us · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  /* Banner */
+  /* gradient เหมือน section welcome หน้าแรก */
+  .ct-banner{background:linear-gradient(120deg,#0f3d36,#03bf9e 70%,#62d9c3);color:#fff;padding:52px 0}
+  .ct-banner h1{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;color:#fff;font-size:clamp(28px,3.2vw,40px);margin:0}
+
+  /* Contact block */
+  .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:52px 0;border-bottom:1px solid #e3e7e5}
+  .ct-row:last-of-type{border-bottom:none}
+  .ct-row h3{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:clamp(24px,2.4vw,30px);color:#0d0d0d;line-height:1.3;margin:0 0 16px}
+  .ct-addr{color:#555;line-height:1.7;font-size:15px;margin:0 0 22px}
+
+  .ct-line{display:flex;gap:14px;margin-bottom:10px;font-size:15px;color:#333;align-items:baseline}
+  .ct-line.sm{align-items:center}
+  .ct-line .lb{min-width:92px;flex-shrink:0;color:#333}
+  .ct-line .vl a{color:#333;text-decoration:none}
+  .ct-line .vl a:hover{color:#0a7256;text-decoration:underline}
+
+  /* Social pills */
+  .ct-sm{display:flex;flex-wrap:wrap;gap:10px}
+  .ct-line .ct-sm a{background:#e8f7f0;color:#0a7256;padding:5px 15px;border-radius:20px;font-size:13px;text-decoration:none;transition:.15s}
+  .ct-line .ct-sm a:hover{background:#0a7256;color:#fff;text-decoration:none}
+
+  /* Map */
+  .ct-map{position:relative;width:100%;aspect-ratio:16/11;border-radius:14px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.10)}
+  .ct-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  /* เนื้อหาพื้นขาว + padding ซ้าย/ขวา 240px (เฉพาะเนื้อหา) */
+  .ct-content{background:#fff}
+  .ct-content>.wrap{padding-left:240px;padding-right:240px}
+
+  @media(max-width:1280px){
+    .ct-content>.wrap{padding-left:clamp(20px,6vw,120px);padding-right:clamp(20px,6vw,120px)}
+  }
+  @media(max-width:860px){
+    .ct-row{grid-template-columns:1fr;gap:24px;padding:40px 0}
+    .ct-map{aspect-ratio:16/10}
+  }
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
 
-<!-- 6. Contact Us — 3 หน่วยงาน -->
-<section class="pad">
+<!-- Banner -->
+<section class="ct-banner">
+  <div class="wrap"><h1>Contact Us</h1></div>
+</section>
+
+<section class="pad-s ct-content">
   <div class="wrap">
-    <div class="shead">
-      <div>
-        <p class="eyebrow">Contact Us</p>
-        <h1 class="mb0">ติดต่อสำนักฯ</h1>
-        <p class="lead" style="margin-top:12px">มีคำถาม อยากเยี่ยมชม หรือร่วมงานกับเรา? แวะทักทายได้ที่ 3 หน่วยงานของสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ ด้านล่างนี้</p>
-      </div>
-    </div>
 
-    <!-- 1. หน่วยงานหลัก (MAIN) -->
-    <div class="org main">
-      <div class="map ph-3 ph-art"><span class="pin">📍</span></div>
+    <!-- 1. SUACC -->
+    <div class="ct-row">
       <div class="info">
-        <h3>สำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ</h3>
-        <div class="line"><span>📍</span><div>31 ถ.หน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร กรุงเทพฯ 10200</div></div>
-        <div class="line"><span>☎</span><div><a href="tel:022213841">02 221 3841</a></div></div>
-        <div class="line"><span>✉</span><div><a href="mailto:suacc@su.ac.th">suacc@su.ac.th</a></div></div>
-        <div class="line"><span>🔗</span><div class="flex" style="gap:10px;margin:0">
-          <a class="tag" href="#">Facebook</a>
-          <a class="tag" href="#">Instagram</a>
-          <a class="tag" href="#">YouTube</a>
-          <a class="tag" href="#">Line</a>
-        </div></div>
+        <h3>สำนักศิลปวัฒนธรรมและการสร้างสรรค์<br>แห่งมหาวิทยาลัยศิลปากร (SUACC)</h3>
+        <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพฯ 10200</p>
+        <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
+        <div class="ct-line"><span class="lb">Email :</span><span class="vl"><a href="mailto:suacc@su.ac.th">suacc@su.ac.th</a></span></div>
+        <div class="ct-line sm"><span class="lb">Social Media :</span><span class="vl ct-sm">
+          <a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Youtube</a><a href="#">Line</a>
+        </span></div>
+      </div>
+      <div class="ct-map">
+        <iframe src="https://www.google.com/maps?q=13.751656,100.491531&z=16&hl=th&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ SUACC วังท่าพระ"></iframe>
       </div>
     </div>
 
-    <!-- 2 & 3 -->
-    <div class="grid g2" style="margin-top:24px">
-
-      <!-- 2. หอศิลป์ มหาวิทยาลัยศิลปากร -->
-      <div class="org">
-        <div class="map ph-1 ph-art"><span class="pin">📍</span></div>
-        <div class="info">
-          <h3>หอศิลป์ มหาวิทยาลัยศิลปากร</h3>
-          <div class="line"><span>📍</span><div>31 ถ.หน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร กรุงเทพฯ 10200</div></div>
-          <div class="line"><span>☎</span><div><a href="tel:022213841">02 221 3841 ต่อ 0202</a></div></div>
-          <div class="line"><span>✉</span><div><a href="mailto:artcentre@su.ac.th">artcentre@su.ac.th</a></div></div>
-          <div class="line"><span>🔗</span><div class="flex" style="gap:10px;margin:0">
-            <a class="tag" href="#">Facebook</a>
-            <a class="tag" href="#">Instagram</a>
-          </div></div>
-        </div>
+    <!-- 2. หอศิลป์ วังท่าพระ -->
+    <div class="ct-row">
+      <div class="info">
+        <h3>หอศิลป์มหาวิทยาลัยศิลปากร<br>(วังท่าพระ - สำนักงานใหญ่)</h3>
+        <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพมหานคร 10200</p>
+        <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
+        <div class="ct-line"><span class="lb">Email :</span><span class="vl"><a href="mailto:suacc@su.ac.th">suacc@su.ac.th</a></span></div>
+        <div class="ct-line"><span class="lb">Website :</span><span class="vl"><a href="https://www.art-centre.su.ac.th" target="_blank" rel="noopener">www.art-centre.su.ac.th</a></span></div>
+        <div class="ct-line sm"><span class="lb">Social Media :</span><span class="vl ct-sm">
+          <a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Youtube</a><a href="#">Line</a>
+        </span></div>
       </div>
-
-      <!-- 3. สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ -->
-      <div class="org">
-        <div class="map ph-2 ph-art"><span class="pin">📍</span></div>
-        <div class="info">
-          <h3>สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ</h3>
-          <div class="line"><span>📍</span><div>อ.ชะอำ จ.เพชรบุรี 76120</div></div>
-          <div class="line"><span>☎</span><div><a href="tel:032594043">032 594 043</a></div></div>
-          <div class="line"><span>✉</span><div><a href="mailto:thaiarch@su.ac.th">thaiarch@su.ac.th</a></div></div>
-          <div class="line"><span>🔗</span><div class="flex" style="gap:10px;margin:0">
-            <a class="tag" href="#">Facebook</a>
-            <a class="tag" href="#">YouTube</a>
-          </div></div>
-        </div>
+      <div class="ct-map">
+        <iframe src="https://www.google.com/maps?q=13.751656,100.491531&z=16&hl=th&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ หอศิลป์ วังท่าพระ"></iframe>
       </div>
-
     </div>
+
+    <!-- 3. หอศิลป์ สนามจันทร์ -->
+    <div class="ct-row">
+      <div class="info">
+        <h3>หอศิลป์สนามจันทร์</h3>
+        <p class="ct-addr">มหาวิทยาลัยศิลปากร วิทยาเขตพระราชวังสนามจันทร์ อำเภอเมือง<br>นครปฐม จังหวัดนครปฐม 73000</p>
+        <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
+        <div class="ct-line"><span class="lb">Email :</span><span class="vl"><a href="mailto:suacc@su.ac.th">suacc@su.ac.th</a></span></div>
+        <div class="ct-line"><span class="lb">Website :</span><span class="vl"><a href="https://www.art-centre.su.ac.th" target="_blank" rel="noopener">www.art-centre.su.ac.th</a></span></div>
+        <div class="ct-line sm"><span class="lb">Social Media :</span><span class="vl ct-sm">
+          <a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Youtube</a><a href="#">Line</a>
+        </span></div>
+      </div>
+      <div class="ct-map">
+        <iframe src="https://www.google.com/maps?q=13.819533,100.040695&z=16&hl=th&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ หอศิลป์ สนามจันทร์"></iframe>
+      </div>
+    </div>
+
+    <!-- 4. สถาบันศิลปสถาปัตยกรรมไทยฯ -->
+    <div class="ct-row">
+      <div class="info">
+        <h3>สถาบันศิลปสถาปัตยกรรมไทย<br>เฉลิมพระเกียรติ</h3>
+        <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพฯ 10200</p>
+        <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
+        <div class="ct-line"><span class="lb">Email :</span><span class="vl"><a href="mailto:suacc@su.ac.th">suacc@su.ac.th</a></span></div>
+        <div class="ct-line"><span class="lb">Website :</span><span class="vl"><a href="https://www.art-centre.su.ac.th" target="_blank" rel="noopener">www.art-centre.su.ac.th</a></span></div>
+        <div class="ct-line sm"><span class="lb">Social Media :</span><span class="vl ct-sm">
+          <a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Youtube</a><a href="#">Line</a>
+        </span></div>
+      </div>
+      <div class="ct-map">
+        <iframe src="https://www.google.com/maps?q=13.751656,100.491531&z=16&hl=th&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ สถาบันศิลปสถาปัตยกรรมไทยฯ"></iframe>
+      </div>
+    </div>
+
   </div>
 </section>
 
