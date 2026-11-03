@@ -691,7 +691,7 @@ html.i18n-pending main,html.i18n-pending section,html.i18n-pending header:not(.t
 .in-tab.on{color:var(--gd);border-bottom-color:var(--g)}
 .in-panel{display:none}.in-panel.on{display:block}
 .in-mapwrap{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:78vh;min-height:500px;overflow:hidden;border-top:1px solid #d5ddda;background:#e8edec}
-#leafmap{position:absolute;inset:0;z-index:1}
+#leafmap{position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .leaflet-container{font-family:'IBM Plex Sans Thai',sans-serif;background:#eef2f1}
 .leaflet-tile{filter:grayscale(.55) saturate(.85) brightness(1.04)}
 .in-pin{width:30px;height:30px}
