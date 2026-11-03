@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What we do — Component Source · SUACC</title>
+<!--
+  SUACC · What we do (ผลงานของสำนักฯ) — source code ของคอมโพเนนต์ (ไฟล์เดียว เปิดดูได้เลย)
+  ต้นฉบับจริงในโปรเจกต์:
+    • CSS การ์ด + แถบเลื่อน  → design/styles.css   (.work-grid / .work-card / .work-marquee)
+    • หัว section            → design/about.html    (.ab-work / .ab-work-head)
+    • ข้อมูล + render การ์ด    → design/whatson-data.js (WON_CAT_COLOR, WORKS, workItems, workCardHTML)
+    • แถบเลื่อนหน้า About      → design/about.html    (script ท้ายไฟล์)
+    • Grid + ตัวกรองหน้า What we do → design/about-portfolio.html
+  ข้อมูลตัวอย่าง = What's On 3 งาน (demo website/what_s on) · รูปอ้างจาก design/img/
+-->
+<style>
+  body{margin:0;font-family:'IBM Plex Sans Thai',sans-serif;background:#F8FFFE;color:#0d0d0d}
+  .wrap{max-width:1126px;margin:0 auto;padding:0 20px}
+  .pad{padding:80px 0}
+  .lead{font-size:18px;line-height:1.7;color:#444}
+  .ab-eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:24px;color:#03bf9e;margin:0 0 12px}
+  .ab-h{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;line-height:1.18;margin:0}
+  .ab-pill{display:inline-flex;align-items:center;border-radius:30px;padding:11px 26px;font-weight:600;font-size:16px;text-decoration:none}
+  .ab-pill.dark{background:#0d0d0d;color:#fff}
+  .ab-pill.dark:hover{background:#0a7256}
+
+  /* WHAT WE DO — ผลงานล่าสุด แถวละ 4 (การ์ดสี่เหลี่ยมจัตุรัสเหมือนหน้า Portfolio) */
+  .ab-work{background:#F8FFFE}
+  .ab-work-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;margin-bottom:40px}
+  .ab-work-head h2{font-size:clamp(26px,3vw,40px);color:#0d0d0d}
+  .ab-work-head .lead{max-width:640px;margin:14px auto 0}
+
+/* ===== จาก styles.css ===== */
+/* ===== Work card — การ์ดผลงาน (About › What we do + หน้า What we do/Portfolio) ===== */
+/* การ์ดผลงาน — ปกติ: ภาพ cover 1:1 + ป้ายประเภท (pill สีหมวด ตัวดำ) ซ้ายล่าง
+   hover/focus: ไล่ดำจากล่าง + แถวป้าย/ปีเลื่อนขึ้น + ชื่อผลงานขาวด้านล่าง */
+.work-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.work-card{position:relative;display:block;aspect-ratio:1/1;border-radius:22px;overflow:hidden;text-decoration:none;color:#fff;background:#0B2E25;isolation:isolate}
+.work-card .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:-2}
+.work-card::after{content:'';position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .35s ease;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 34%,rgba(0,0,0,.82) 58%,#0d0d0d 100%)}
+.work-card .txt{position:absolute;left:24px;right:24px;bottom:22px}
+.work-card h3{margin:0;max-height:0;font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:clamp(17px,1.45vw,21px);line-height:1.4;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.55),0 0 2px rgba(0,0,0,.4);
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+  opacity:0;transform:translateY(10px);transition:opacity .35s ease,transform .35s ease,max-height .35s ease,margin .35s ease}
+.work-card .wf{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.work-card .wtag{background:var(--cat,#62d9c3);color:#0d0d0d;border-radius:30px;padding:6px 22px;font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:16px;line-height:1.3;white-space:nowrap}
+.work-card .yr{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:18px;text-shadow:0 1px 8px rgba(0,0,0,.55);opacity:0;transition:opacity .35s ease}
+.work-card:hover::after,.work-card:focus-visible::after,
+.work-card:hover .yr,.work-card:focus-visible .yr{opacity:1;transform:none}
+.work-card:hover h3,.work-card:focus-visible h3{opacity:1;transform:none;max-height:5em;margin-top:16px}
+.work-card:focus-visible{outline:3px solid #03bf9e;outline-offset:3px}
+/* จอสัมผัส (ไม่มี hover) — แสดงชื่อผลงานตลอด */
+@media(hover:none){.work-card::after,.work-card h3,.work-card .yr{opacity:1;transform:none}.work-card h3{max-height:5em;margin-top:14px}}
+@media(prefers-reduced-motion:reduce){.work-card::after,.work-card h3,.work-card .yr{transition:none}}
+@media(max-width:1100px){.work-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.work-grid{grid-template-columns:1fr}}
+.work-card[hidden]{display:none}
+
+/* Work marquee — แถบการ์ดผลงานเลื่อนอัตโนมัติเต็มขอบจอ (About › What we do)
+   การ์ดกว้าง clamp(240px,20vw,320px) + gap 24 → จอ 1920 เห็น ~6 ใบ · ข้อมูล ≥ 7 ใบถึงต่อเนื่องไม่มีช่องว่าง (ตอนนี้ 12)
+   hover / focus = หยุด · prefers-reduced-motion = ไม่เลื่อน เลื่อนด้วยมือแทน */
+.work-marquee{position:relative;overflow:hidden;padding:4px 0}
+.work-track{display:flex;gap:24px;width:max-content;animation:work-scroll var(--dur,60s) linear infinite}
+.work-track .work-card{flex:0 0 clamp(240px,20vw,320px)}
+.work-marquee:hover .work-track,.work-marquee:focus-within .work-track,.work-marquee.paused .work-track{animation-play-state:paused}
+@keyframes work-scroll{to{transform:translateX(calc(-50% - 12px))}}
+@media(prefers-reduced-motion:reduce){.work-track{animation:none}.work-marquee{overflow-x:auto}@media(max-width:560px){.work-track .work-card{flex-basis:72vw}}
+
+</style>
+</head>
+<body>
+
+<!-- WHAT WE DO (About) — หัว section จัดกลาง + แถบเลื่อนอัตโนมัติเต็มจอ -->
+<section class="pad ab-work" id="whatwedo">
+  <div class="wrap">
+    <div class="ab-work-head">
+      <div>
+        <p class="ab-eyebrow">What we do</p>
+        <h2 class="ab-h">ผลงานของสำนักฯ</h2>
+        <p class="lead">รวมโครงการและผลงานด้านนิทรรศการ การวิจัย การอบรม และการเผยแพร่ศิลปวัฒนธรรม ที่สำนักฯ ดำเนินงานตลอดมา</p>
+      </div>
+      <a class="ab-pill dark" href="about-portfolio.html">ดูผลงานทั้งหมด</a>
+    </div>
+  </div>
+  <div class="work-marquee" id="abWorkMarquee" role="region" aria-label="ผลงานของสำนักฯ (เลื่อนอัตโนมัติ)">
+    <div class="work-track" id="abWorkGrid"></div>
+  </div>
+</section>
+
+<!-- GRID (หน้า What we do) — การ์ดเดียวกัน แถวละ 4 -->
+<section class="pad" style="background:#fff">
+  <div class="wrap"><div class="work-grid" id="pfGrid"></div></div>
+</section>
+
+<script>
+/* ===== ข้อมูลตัวอย่าง (ย่อจาก whatson-data.js) ===== */
+window.WHATSON = [
+  { id:12, seq:16, img:'img/won-cosmology.jpg', tag:'นิทรรศการ', title:'นิทรรศการ “โลกของแบบ (Cosmology in Drawings)”', date:'6 พ.ค. – 4 ก.ค. 2569' },
+  { id:16, seq:15, img:'img/won-saksi.jpg', tag:'นิทรรศการ', title:'นิทรรศการ “SAKSI: A Passing Thing จักษุพยาน”', date:'8 พ.ค. – 18 ก.ค. 2569' },
+  { id:17, seq:14, img:'img/won-saksi-talk.jpg', tag:'เสวนา', title:'SAKSI Talk “From something playful came something real…”', date:'4 ก.ค. 2569' }
+];
+window.wonNewestFirst = function(){ return window.WHATSON.slice().sort(function(a,b){ return (b.seq||b.id)-(a.seq||a.id); }); };
+
+/* ===== จาก whatson-data.js ===== */
+window.WON_CAT_COLOR = {
+  'Workshop': '#d8b269',   /* ทอง */
+  'ประกวด':   '#e9a6a0',   /* ชมพู */
+  'นิทรรศการ': '#62d9c3',   /* เขียว */
+  'การแสดง':  '#c5a3dd',   /* ม่วง */
+  'เทศกาล':   '#ec9a5e',   /* ส้ม */
+  'เสวนา':    '#6fb1e0'    /* น้ำเงิน */
+};
+
+window.WORKS = [
+  /* ผลงานที่ลงเอง (mockup ยังไม่มี — ข้อมูลตัวอย่างใช้จาก What's On เท่านั้น)
+     { id:1, seq:1, img:'img/…jpg', banner:'img/…jpg', tag:'นิทรรศการ', title:'…', date:'…', time:'…',
+       fee:'…', free:true, place:'…', desc:['…'], body:[{type:'p',text:'…'}] } */
+];
+window.workItems = function(){
+  var won = window.wonNewestFirst().filter(function(ev){ return ev.work!==false; })
+    .map(function(ev){ return {ev:ev, href:'whatson-detail.html?id='+ev.id+'&from=work'}; });
+  var own = window.WORKS.slice().sort(function(a,b){ return (b.seq||b.id) - (a.seq||a.id); })
+    .map(function(ev){ return {ev:ev, href:'whatson-detail.html?work='+ev.id+'&from=work'}; });
+  return won.concat(own);
+};
+window.workCardHTML = function(it, hidden){
+  var ev=it.ev, y=(ev.date.match(/25\d\d/g)||['']).pop();
+  var c=window.WON_CAT_COLOR[ev.tag]||'#62d9c3';
+  return '<a class="work-card" data-cat="'+ev.tag+'" href="'+it.href+'" style="--cat:'+c+'"'+(hidden?' tabindex="-1" aria-hidden="true"':'')+'>' +
+    '<span class="bg" style="background-image:url(\''+ev.img+'\')"></span>' +
+    '<div class="txt"><div class="wf"><span class="wtag">'+ev.tag+'</span>'+(y?'<span class="yr">'+y+'</span>':'')+'</div><h3>'+ev.title+'</h3></div></a>';
+};
+
+</script>
+<script>
+/* ===== จาก about.html ===== */
+/* What we do = แถบผลงานเลื่อนอัตโนมัติ (What's On + ลงเอง — window.workItems) — hover/focus หยุด */
+(function(){
+  var track=document.getElementById('abWorkGrid'), box=document.getElementById('abWorkMarquee');
+  if(!track||!window.workItems) return;
+  var items=window.workItems();
+  if(!items.length) return;
+  /* เติมให้เต็มจอ: การ์ดแคบสุด 240+24px → ต้องมีอย่างน้อย ceil(กว้างจอ/264)+1 ใบต่อชุด
+     ข้อมูลไม่พอ (mockup มี 3) → วนซ้ำรายการเดิม (สำเนา aria-hidden) · ข้อมูลจริงพอแล้วไม่ซ้ำ */
+  var need=Math.ceil(Math.max(window.innerWidth,1920)/264)+1, set=items.slice();
+  while(set.length<need) set=set.concat(items);
+  var one=set.map(function(it,i){ return window.workCardHTML(it, i>=items.length); }).join('');
+  var copy='<div style="display:contents" aria-hidden="true">'+set.map(function(it){ return window.workCardHTML(it,true); }).join('')+'</div>';
+  track.innerHTML=one+copy;
+  track.style.setProperty('--dur',(set.length*5)+'s');   /* ~5 วินาที/ใบ */
+})();
+
+/* ===== grid (ย่อจาก about-portfolio.html) ===== */
+document.getElementById('pfGrid').innerHTML = window.workItems().map(function(it){ return window.workCardHTML(it); }).join('');
+</script>
+</body>
+</html>

@@ -70,8 +70,17 @@
 <!-- รายการการ์ด -->
 <section class="aru-cards">
   <div class="wrap">
-    <p class="aru-count" id="aruCount"></p>
-    <div class="grid g4" id="aruList"></div>
+    <!-- แบ่งอัตโนมัติตามวันสิ้นสุด (eventStatus ใน whatson-data.js) -->
+    <div class="ev-block">
+      <div class="ev-head"><span class="ev-dot" aria-hidden="true"></span><h2>กิจกรรมที่กำลังจัด</h2><span class="ev-n" id="aruNowN"></span></div>
+      <div class="grid g4" id="aruNow" style="row-gap:34px"></div>
+      <p class="ev-empty" id="aruNowEmpty" hidden>ยังไม่มีกิจกรรมที่กำลังจัดตามเงื่อนไขนี้ — ติดตามกิจกรรมใหม่เร็วๆ นี้</p>
+    </div>
+    <div class="ev-block past">
+      <div class="ev-head"><h2>กิจกรรมที่ผ่านมา</h2><span class="ev-n" id="aruPastN"></span></div>
+      <div class="grid g4" id="aruList"></div>
+      <p class="ev-empty" id="aruPastEmpty" hidden>ยังไม่มีกิจกรรมที่ผ่านมาตามเงื่อนไขนี้</p>
+    </div>
   </div>
 </section>
 
@@ -91,7 +100,6 @@
 
   (function(){
     var list  = document.getElementById('aruList');
-    var count = document.getElementById('aruCount');
     var facSel = document.getElementById('facSel');
     var catSel = document.getElementById('catSel');
     var PAGE = 8, shown = 0, current = [];
@@ -110,11 +118,18 @@
 
     function applyFilter(){
       var fac = facSel.value, cat = catSel.value;
-      current = aroundNewestFirst().filter(function(e){
+      var base = AROUND.filter(function(e){
         return (fac==='all' || e.faculty===fac) && (cat==='all' || e.tag===cat);
       });
+      /* แบ่ง กำลังจัด / ผ่านมา ตามวันสิ้นสุด — กำลังจัดแสดงครบ, ผ่านมาโหลดเพิ่มทีละ 8 */
+      var parts = splitByStatus(base);
+      document.getElementById('aruNow').innerHTML = parts.current.map(aroundCard2HTML).join('');
+      document.getElementById('aruNowN').textContent = parts.current.length;
+      document.getElementById('aruNowEmpty').hidden = parts.current.length>0;
+      document.getElementById('aruPastN').textContent = parts.past.length;
+      document.getElementById('aruPastEmpty').hidden = parts.past.length>0;
+      current = parts.past;
       shown = 0; list.innerHTML = '';
-      count.textContent = current.length + ' กิจกรรม';
       loadMore();
     }
     function loadMore(){

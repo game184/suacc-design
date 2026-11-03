@@ -41,7 +41,7 @@
 
   /* ===== การ์ด · bg #F7F7F7 ===== */
   .won-cards{background:#F7F7F7;padding:48px 0 80px}
-  #wonList{row-gap:34px}
+  #wonList,#wonNow{row-gap:34px}
 </style>
 </head>
 <body>
@@ -86,7 +86,17 @@
 <!-- การ์ด · bg #F7F7F7 -->
 <section class="won-cards">
   <div class="wrap">
-    <div class="grid g3" id="wonList"></div>
+    <!-- แบ่งอัตโนมัติตามวันสิ้นสุด (eventStatus ใน whatson-data.js) -->
+    <div class="ev-block" id="wonNowBlock">
+      <div class="ev-head"><span class="ev-dot" aria-hidden="true"></span><h2>กิจกรรมที่กำลังจัด</h2><span class="ev-n" id="wonNowN"></span></div>
+      <div class="grid g3" id="wonNow"></div>
+      <p class="ev-empty" id="wonNowEmpty" hidden>ยังไม่มีกิจกรรมที่กำลังจัดในหมวดนี้ — ติดตามกิจกรรมใหม่เร็วๆ นี้</p>
+    </div>
+    <div class="ev-block past">
+      <div class="ev-head"><h2>กิจกรรมที่ผ่านมา</h2><span class="ev-n" id="wonPastN"></span></div>
+      <div class="grid g3" id="wonList"></div>
+      <p class="ev-empty" id="wonPastEmpty" hidden>ยังไม่มีกิจกรรมที่ผ่านมาในหมวดนี้</p>
+    </div>
   </div>
 </section>
 
@@ -103,9 +113,16 @@
       var n = (f==='all') ? WHATSON.length : WHATSON.filter(function(e){return e.tag===f;}).length;
       c.insertAdjacentHTML('beforeend', ' <span class="chip-n">'+n+'</span>');
     });
+    /* กรองหมวด แล้วแบ่ง กำลังจัด / ผ่านมา ตามวันสิ้นสุด — กำลังจัดแสดงครบ, ผ่านมาโหลดเพิ่มทีละ 9 */
     function setFilter(filter){
-      var base = wonNewestFirst();
-      current = (filter && filter!=='all') ? base.filter(function(e){return e.tag===filter;}) : base;
+      var base = (filter && filter!=='all') ? WHATSON.filter(function(e){return e.tag===filter;}) : WHATSON.slice();
+      var parts = splitByStatus(base);
+      document.getElementById('wonNow').innerHTML = parts.current.map(wonCard2HTML).join('');
+      document.getElementById('wonNowN').textContent = parts.current.length;
+      document.getElementById('wonNowEmpty').hidden = parts.current.length>0;
+      document.getElementById('wonPastN').textContent = parts.past.length;
+      document.getElementById('wonPastEmpty').hidden = parts.past.length>0;
+      current = parts.past;
       shown = 0; list.innerHTML = '';
       loadMore();
     }

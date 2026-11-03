@@ -240,6 +240,110 @@
     </table>
   </div>
 
+  <div class="sec">
+    <h2><span class="no">12</span> Contact Us (ติดต่อ) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">4 บล็อกหน่วยงาน · ดู <b>contact.html</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Banner</td><td class="v">gradient เขียว (#0f3d36 → #03bf9e → #62d9c3) · H1 "Contact Us" Silpakorn72 ขาว</td></tr>
+      <tr><td>หน่วยงาน (4 บล็อก)</td><td class="v">สำนักฯ (SUACC) · หอศิลป์ วังท่าพระ · หอศิลป์สนามจันทร์ · สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ</td></tr>
+      <tr><td>Layout</td><td class="v">2 คอลัมน์ (ข้อมูลซ้าย / แผนที่ขวา) gap 64px · เส้นคั่น #e3e7e5 · มือถือ (≤860px) เรียง 1 คอลัมน์</td></tr>
+      <tr><td>โลโก้หน่วยงาน</td><td class="v">อยู่เหนือชื่อหน่วยงาน · สูง <b>96px</b> (มือถือ 80px) · โลโก้แนวนอน SUACC สูง <b>72px</b> (มือถือ 60px) · เว้นล่าง 20px · ไฟล์ <b>img/logo-suacc.png</b>, <b>logo-artcentre.png</b> (วังท่าพระ), <b>logo-collection.png</b> (สนามจันทร์ = คลังสะสม/Visible Storage Gallery, ครอปขอบแล้ว), <b>logo-institute.png</b> · มี alt ทุกรูป</td></tr>
+      <tr><td>ข้อมูลติดต่อ</td><td class="v">ที่อยู่ 15px #555 · บรรทัด โทร/Email/Website (label กว้าง 92px) · Social เป็น pill พื้น #e8f7f0 ตัวอักษร #0a7256</td></tr>
+      <tr><td>แผนที่</td><td class="v">Google Maps embed · สัดส่วน 16:11 (มือถือ 16:10) · radius 14px · เงาอ่อน</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">13</span> Hero Video Banner (หน้าแรก) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">วิดีโอเปิดหน้าแรก (YouTube embed) · ดู <b>index.html</b> · เปลี่ยนคลิปที่ตัวแปร <code>VIDEO_ID</code></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>การแสดงผล</td><td class="v"><b>เต็มจอ 100vh</b> (อัปเดต 1 ต.ค. 2569) · วิดีโอ 16:9 ขยายแบบ <b>cover</b> — ครอปขอบที่เกินจอ (จอแนวตั้ง/มือถือ เห็นช่วงกลางภาพ)</td></tr>
+      <tr><td>แถบเมนูบนวิดีโอ</td><td class="v">ลอยทับวิดีโอ · พื้น <b>rgba(8,24,20,.28) + blur 14px</b> · โลโก้ขาว (img/logo-white.png) · ตัวอักษรเมนู/ Search ขาว · hover/active มิ้นต์ #62d9c3 · <b>เลื่อนลง &gt; 40px หรือเปิดเมนูมือถือ → แถบขาวปกติ</b> (โลโก้สี ตัวดำ เงาจาง)</td></tr>
+      <tr><td>การเล่น</td><td class="v">autoplay + ปิดเสียง + loop · ไม่แสดง controls ของ YouTube · พื้นหลังดำ</td></tr>
+      <tr><td>ชั้นทับ (mask)</td><td class="v">gradient ดำโปร่ง บน 42% → ใส ที่ 26% (ให้เมนูขาวอ่านชัด) · ล่าง 38% → ใส ที่ 40% (ปุ่มวิดีโอ)</td></tr>
+      <tr><td>ปุ่มควบคุม (WCAG)</td><td class="v">หยุด · เล่น · เปิดบน YouTube — วงกลม 48px ขอบขาว พื้นดำโปร่ง · hover เขียว #03bf9e · มุมขวาล่าง 32px (มือถือ 18px) · มี aria-label</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">14</span> บุคลากร (Our People) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">การ์ดบุคลากร 3 กลุ่ม (ผู้บริหาร / วิชาการ / บริหาร) · ดู <b>about-people.html</b></p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>Grid</td><td class="v">4 คอลัมน์ (.grid.g4) ต่อกลุ่ม · section สลับพื้นขาว / เทา</td></tr>
+      <tr><td>รูปบุคลากร</td><td class="v">สัดส่วน <b>4:5</b> · radius 18px · object-fit cover (โฟกัสบน 15%) · พื้นรอง #efefef · ไฟล์ <b>img/team/team-XX.jpg</b> (กว้าง 900px) · alt = ชื่อบุคคล</td></tr>
+      <tr><td>Mood &amp; tone รูป</td><td class="v">สตูดิโอพื้นเทาอ่อน <b>#efefef</b> · แสง high-key นุ่มทั่วภาพ · เสื้อผ้าโทนอ่อน/สดใส · ครึ่งตัว มองกล้อง ยิ้มเป็นธรรมชาติ (ต้นฉบับ: Photo example/team/bright/)</td></tr>
+      <tr><td>ชื่อ</td><td class="v">h4 <b>21px</b> · line-height 1.35 · กึ่งกลาง</td></tr>
+      <tr><td>ตำแหน่ง</td><td class="v"><b>16px</b> · สี var(--muted) · เว้นบน 4px</td></tr>
+      <tr><td>ท้ายหน้า</td><td class="v">ไม่มี CTA "ติดต่อทีมงาน" — ต่อ footer ทันที</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">15</span> Who we are (หน้า About) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">การ์ด hero SUACC + 2 การ์ดหน่วยงาน (ตาม XD) · ดู <b>about.html</b> #whoweare · CSS: <b>.ww-*</b> / <b>#whoweare</b> ใน styles.css</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>หัวข้อ</td><td class="v">eyebrow "Who we are" (เขียว #03bf9e) + h2 กึ่งกลาง · จัดชิดบน</td></tr>
+      <tr><td>ความกว้าง</td><td class="v">การ์ดชิดขอบเท่า nav (<b>.wrap</b> max-width 1680 · padding 120 / 48 / 20) — ซ้ายตรงโลโก้ nav ขวาตรงเมนู Contact</td></tr>
+      <tr><td>การ์ด hero (SUACC)</td><td class="v">รูปเต็มการ์ด radius <b>24px</b> · min-height 660 · gradient มืดฝั่งซ้าย (90deg) · เนื้อหาชิดซ้าย-ล่าง · รูป <b>img/ww-gallery.jpg</b></td></tr>
+      <tr><td>หัวข้อ hero</td><td class="v">Silpakorn72 bold clamp(24–33px) · <b>2 บรรทัด</b> (บรรทัด 2 = "แห่งมหาวิทยาลัยศิลปากร (SUACC)") · กล่องข้อความ max-width 840</td></tr>
+      <tr><td>ปุ่ม hero</td><td class="v">2 ปุ่ม pill: "Vision &amp; Mission" (เขียว #0a7256) + "Team" (ขาว ตัวอักษรดำ) · radius 30</td></tr>
+      <tr><td>การ์ดหน่วยงาน (2 ใบ)</td><td class="v">grid 2 คอลัมน์ gap 24 · radius 20 · min-height 560 · gradient มืดด้านล่าง · เนื้อหา+ปุ่ม Learn More (เขียว) <b>ชิดซ้าย-ล่าง</b> · รูป <b>ww-artcentre.jpg</b> / <b>ww-institute.jpg</b></td></tr>
+      <tr><td>โลโก้บนการ์ด</td><td class="v"><b>ขาว 100%</b> มุมบนซ้าย · hero สูง 98px · การ์ด 84px (มือถือ 76/66) · ไฟล์ <b>logo-suacc-white.png</b>, <b>logo-artcentre-white.png</b>, <b>logo-institute-white.png</b></td></tr>
+      <tr><td>Responsive</td><td class="v">≤860px: grid 1 คอลัมน์ · hero gradient เปลี่ยนเป็นแนวตั้ง · โลโก้/ระยะย่อ</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">16</span> ข่าวสาร &amp; ข่าวจัดซื้อจัดจ้าง (หน้า About) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">2 บล็อกเรียงบน-ล่าง · ดู <b>about.html</b> (ส่วนล่าง) · CSS: <b>.ab-news / .ab-ncard / .ab-prow</b> ใน styles.css</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>หัวหัวข้อ (ทั้ง 2 บล็อก)</td><td class="v">ชื่อซ้าย (Silpakorn72 clamp 26–40px) + ปุ่ม <b>ดูทั้งหมด</b> (pill ดำ) ขวา + เส้นคั่นใต้หัวข้อ #d9d9d9</td></tr>
+      <tr><td>ระยะห่าง 2 บล็อก</td><td class="v"><b>96px</b> (.ab-nblock + .ab-nblock)</td></tr>
+      <tr><td>ข่าวสาร</td><td class="v"><b>grid 2 คอลัมน์</b> (gap 40×50) · การ์ด = รูป 4:3 ซ้าย (กว้าง 220px radius 16 + เงา) + <b>วันที่</b> (เทา) + <b>หัวข้อ</b> (หนา 19px) ขวา · hover หัวข้อเขียว</td></tr>
+      <tr><td>ข่าวจัดซื้อจัดจ้าง</td><td class="v"><b>list แถว</b> พื้น #f6f6f6 radius 16 · <b>tag</b> (pill พื้นมิ้นต์ #e3f4ec ตัวเขียว #0a7256) + หัวข้อ + วันที่ · <b>ลูกศรวงกลม</b> ขวา (ขอบเขียว, hover ทึบเขียวลูกศรขาว)</td></tr>
+      <tr><td>หมวด tag (4)</td><td class="v">ประกาศประกวดราคา / TOR · ประกาศผู้ชนะการเสนอราคา / ข้อมูลสาระสำคัญสัญญา · แผนการจัดซื้อจัดจ้าง · ราคากลาง</td></tr>
+      <tr><td>Responsive</td><td class="v">≤900px: ข่าวสารเป็น 1 คอลัมน์ · ≤560px: รูป/ลูกศรย่อ</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">17</span> วิสัยทัศน์ พันธกิจ (Vision &amp; Mission) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">หน้าเดียวจบ: หัวหน้า + การ์ด 3 ใบ (ความเป็นมา / พันธกิจ / วิสัยทัศน์) · ไม่มี section หน่วยงานภายใต้สำนักฯ · ดู <b>about-who.html</b> · CSS: <b>.who / .who-*</b> ใน styles.css</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>พื้นหลัง section</td><td class="v">ไล่สีทอง CI แนวตั้ง (แบบ Collection hero) <b>#f8efdc 0% → #fcf8ee 30% → #ffffff 52%</b></td></tr>
+      <tr><td>หัวหน้า</td><td class="v">breadcrumb → eyebrow "Who we are" → h1 <b>"วิสัยทัศน์ พันธกิจ"</b> (บรรทัดเดียว) → ปุ่ม primary "ติดต่อเรา" (→ contact.html) · ชิดซ้าย · ไม่มีข้อความ lead</td></tr>
+      <tr><td>Grid การ์ด</td><td class="v">2 คอลัมน์ <b>1.15fr / 1fr</b> gap 28 · ซ้าย = การ์ดความเป็นมา สูง 2 แถว (min-height 620) · ขวาบน = พันธกิจ · ขวาล่าง = วิสัยทัศน์</td></tr>
+      <tr><td>การ์ด (ทั่วไป)</td><td class="v">radius <b>24px</b> · padding 40/44 · เนื้อหาชิดล่าง · h2 clamp(24–32px) · ข้อความ 17px line-height 1.75</td></tr>
+      <tr><td>ความเป็นมา</td><td class="v">รูปเต็มการ์ด <b>img/ab-whoweare.jpg</b> · gradient มืดด้านล่าง (rgba(6,20,16) 0 → .6 → .92) · ตัวอักษรขาว · eyebrow #62d9c3</td></tr>
+      <tr><td>พันธกิจ</td><td class="v">พื้นมิ้นต์ <b>#d9f7ee</b> · ตัวอักษร #0d0d0d / #33403c · list 6 ข้อ 16px</td></tr>
+      <tr><td>วิสัยทัศน์</td><td class="v">พื้นเขียวเข้ม <b>#0a7256</b> (ขาวผ่าน AA) · eyebrow #bff0e4 · min-height 260</td></tr>
+      <tr><td>ท้ายหน้า</td><td class="v">CTA "รู้จักคนทำงานของเรา" พื้นเทา #f2f2f2 (ปุ่ม ดูทีมบุคลากร / ผลงานของสำนักฯ)</td></tr>
+      <tr><td>Responsive</td><td class="v">≤900px: 1 คอลัมน์ · การ์ดความเป็นมา รูปด้านบน 200px แล้ว gradient เข้มเต็มใต้ข้อความ · ≤560px: padding 28/24</td></tr>
+    </table>
+  </div>
+
+  <div class="sec">
+    <h2><span class="no">18</span> หน้าสถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">หน้าผลงานของสถาบัน (คลิกจากการ์ด Who we are หน้า About) · ดู <b>institute.html</b> · CSS: <b>.in-* / .in-drawer / .dgallery / .lightbox</b> ใน styles.css · แผนที่ใช้ <b>Leaflet + OpenStreetMap</b> (เปลี่ยนเป็น Google Maps ได้หากมี API key)</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>1 · Hero</td><td class="v">ภาพเต็มจอ (min-height 86vh) + overlay มืดฝั่งซ้าย · ข้อความ<b>ชิดซ้ายเท่าโลโก้ nav</b> (กึ่งกลางแนวตั้ง) · h1 Silpakorn72 clamp(30–58px) · ปุ่ม "ดูผลงาน" (เขียว #03bf9e) + "ติดต่อสถาบัน" (เส้นขอบขาว)</td></tr>
+      <tr><td>2 · บทบาท + สถิติ</td><td class="v">2 คอลัมน์ (ข้อความ + ภาพ 4:3) · <b>3 สถิติ count-up</b> พื้น #f4fbf9 ตัวเลขเขียวเข้ม #0a7256 (โครงการ/จังหวัด/ปี)</td></tr>
+      <tr><td>3 · ผลงาน (2 แท็บ)</td><td class="v">หัวข้อ + แท็บ<b>อยู่กึ่งกลาง</b> · แท็บ 1 = แผนที่ผลงาน · แท็บ 2 = ผลงานอื่น ๆ (grid การ์ด 3 คอลัมน์)</td></tr>
+      <tr><td>แผนที่</td><td class="v">Leaflet เต็มกว้างจอ (โทนนุ่ม grayscale) · หมุดเขียวเข้ม #0a7256 · <b>คลิกหมุด → เป็นสีทอง #d8b269 (CI)</b> + เปิดแถบขวา</td></tr>
+      <tr><td>แถบข้อมูล (drawer)</td><td class="v">เลื่อนเข้าจากขวา <b>อยู่ในกรอบแผนที่</b> (ไม่เต็มจอ) กว้าง min(420px,90%) · ลำดับ: <b>ภาพ cover → หมวด/ชื่อ/สถานที่/ผู้ออกแบบ → เนื้อหา → "ภาพผลงาน" + แกลเลอรี</b> · ปิด ✕/Esc</td></tr>
+      <tr><td>แกลเลอรี + Lightbox</td><td class="v">thumbnail 1:1 <b>4 คอลัมน์</b> · คลิก → lightbox (ภาพกว้างสุด <b>720px</b> ไม่เต็มจอ) · มี<b>ลูกศร ‹ › เลื่อนซ้าย/ขวา</b> + คีย์บอร์ด ← → · ปิด ✕/Esc/คลิกนอกภาพ</td></tr>
+      <tr><td>ข้อมูลผลงาน (array PROJECTS)</td><td class="v">ผลงานจริง 2 โครงการ: <b>พระธาตุอริยสัจ 4</b> (วัดป่าคอวัง น่าน, 4 รูป) · <b>พิพิธภัณฑ์ธรรมเจดีย์พระธรรมวิสุทธิมงคล</b> (วัดป่าบ้านตาด อุดรธานี, 6 รูป) · เพิ่มได้ที่ array <b>PROJECTS</b></td></tr>
+      <tr><td>หมายเหตุ</td><td class="v"><b>.topnav{z-index:1100}</b> เก็บ inline ในหน้านี้ (กันเมนูถูก drawer ทับ) · โหลด Leaflet CSS/JS จาก unpkg CDN</td></tr>
+    </table>
+  </div>
+
   <div class="note" style="margin-top:8px">
     📐 <b>วิธีตรวจค่าเองเพิ่มเติม:</b> คลิกขวาที่หน้าเว็บ → Inspect (DevTools) → เลือก element → ดูที่แท็บ <b>Computed</b> จะเห็น font-size, padding, color ฯลฯ ของจริงทุกตัว
   </div>

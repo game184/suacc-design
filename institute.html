@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  /* หน้าสถาบัน ✓ ยืนยันแล้ว: CSS ย้ายไป styles.css (.in-* / .in-drawer / .dgallery / .lightbox ฯลฯ) */
+  .topnav{z-index:1100}  /* ให้เมนูอยู่เหนือ drawer ของแผนที่ (page-specific) */
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ========== SECTION 1 · HERO ========== -->
+<header class="in-hero">
+  <div class="wrap">
+    <h1>สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ</h1>
+    <p class="kmsg">อนุรักษ์ บูรณะ และสืบสานงานศิลปสถาปัตยกรรมไทย เพื่อธำรงรักษามรดกทางวัฒนธรรมของชาติให้คงอยู่สืบไป <span style="opacity:.7">(ข้อความ Key Message — รอยืนยันจากสถาบัน)</span></p>
+    <div class="btns">
+      <a class="in-btn p" href="#works">ดูผลงานของสถาบัน</a>
+      <a class="in-btn o" href="contact.html">ติดต่อสถาบัน</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== SECTION 2 · ROLE + STATS ========== -->
+<section class="in-about">
+  <div class="wrap">
+    <div class="row">
+      <div>
+        <p class="in-eyebrow">About the Institute</p>
+        <h2 class="in-h" style="font-size:clamp(26px,3vw,40px)">บทบาทและหน้าที่ของสถาบัน</h2>
+        <p class="body">สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ มหาวิทยาลัยศิลปากร ทำหน้าที่ศึกษา ค้นคว้า อนุรักษ์ และบูรณะงานศิลปสถาปัตยกรรมไทย ทั้งงานสถาปัตยกรรม งานช่างฝีมือ และงานประณีตศิลป์ ตลอดจนถ่ายทอดองค์ความรู้สู่สังคม เพื่อสืบสานและธำรงรักษามรดกทางวัฒนธรรมของชาติ</p>
+        <p class="body" style="opacity:.7;font-style:italic">* เนื้อหาบทบาท/พันธกิจเป็นข้อความตัวอย่าง — รอข้อมูลจริงจากสถาบัน</p>
+      </div>
+      <div class="pic" style="background-image:url('img/inst-about.jpg')"></div>
+    </div>
+
+    <div class="in-stats">
+      <div class="in-stat"><div class="num" data-to="120">0</div><div class="cap">โครงการทั้งหมด</div></div>
+      <div class="in-stat"><div class="num" data-to="45">0</div><div class="cap">จังหวัดที่เข้าไปทำงาน</div></div>
+      <div class="in-stat"><div class="num" data-to="20">0</div><div class="cap">ปีที่ดำเนินงาน</div></div>
+    </div>
+    <p style="text-align:center;color:#8a938f;font-style:italic;margin-top:14px;font-size:14px">* ตัวเลขสถิติเป็นตัวอย่าง — รอข้อมูลจริงจากสถาบัน</p>
+  </div>
+</section>
+
+<!-- ========== SECTION 3 · WORKS ========== -->
+<section class="in-works" id="works">
+  <div class="wrap">
+    <p class="in-eyebrow">Our Works</p>
+    <h2 class="in-h" style="font-size:clamp(26px,3vw,40px)">ผลงานของสถาบัน</h2>
+    <div class="in-tabs">
+      <button class="in-tab on" data-t="map">แผนที่ผลงาน</button>
+      <button class="in-tab" data-t="other">ผลงานอื่น ๆ</button>
+    </div>
+  </div>
+
+  <!-- TAB 1 : MAP -->
+  <div class="in-panel on" id="p-map">
+    <div class="in-mapwrap">
+      <div id="leafmap"></div>
+      <aside class="in-drawer" id="drawer">
+        <button class="in-dclose" id="dclose" aria-label="ปิด">✕</button>
+        <div class="dcover" id="d-cover"></div>
+        <div class="dbody">
+          <span class="dcat" id="d-cat">หมวดงาน</span>
+          <h3 id="d-title">หัวข้องาน</h3>
+          <p class="dmeta" id="d-meta">จังหวัด · ปีที่ดำเนินงาน</p>
+          <p class="dby" id="d-by"></p>
+          <div class="dtext" id="d-text">รายละเอียดโครงการ</div>
+          <p class="dgal-h" id="d-gal-h">ภาพผลงาน</p>
+          <div class="dgallery" id="d-gallery"></div>
+        </div>
+      </aside>
+    </div>
+    <div class="wrap"><p style="color:#8a938f;font-style:italic;margin-top:14px;font-size:14px">* ตำแหน่งหมุดและข้อมูลโครงการเป็นตัวอย่าง — รอข้อมูลจริง (จังหวัด/พิกัด/รูป/รายละเอียด) จากสถาบัน · แผนที่ใช้ Leaflet (เปลี่ยนเป็น Google Maps ได้หากมี API key)</p></div>
+  </div>
+
+  <!-- TAB 2 : OTHER WORKS -->
+  <div class="in-panel" id="p-other">
+    <div class="wrap">
+      <div class="in-grid" id="otherGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox ดูภาพเต็ม -->
+<div class="lightbox" id="lightbox">
+  <button class="lbclose" id="lbclose" aria-label="ปิด">✕</button>
+  <button class="lbnav lbprev" id="lbprev" aria-label="ภาพก่อนหน้า">‹</button>
+  <button class="lbnav lbnext" id="lbnext" aria-label="ภาพถัดไป">›</button>
+  <img src="" alt="ภาพผลงาน">
+</div>
+
+<div id="site-footer"></div>
+<script src="site.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ---------- ข้อมูลผลงาน (ตัวอย่าง — รอข้อมูลจริงจากสถาบัน) ---------- */
+var PROJECTS=[
+  {n:1, lat:18.7700, lng:100.7730, cat:'งานออกแบบสถาปัตยกรรม', title:'พระธาตุอริยสัจ 4', meta:'วัดป่าคอวัง อ.เมือง จ.น่าน',
+   by:'อาจารย์วนิดา พึ่งสุนทร (ศิลปินแห่งชาติ) และ อาจารย์ตะวัน วีระกุล',
+   img:'img/inst-prathat-1.jpg', imgs:['img/inst-prathat-1.jpg','img/inst-prathat-2.jpg','img/inst-prathat-3.jpg','img/inst-prathat-4.jpg'],
+   text:'พระธาตุเจดีย์รูปแบบสถาปัตยกรรมแบบล้านนาประยุกต์ เขียนแบบร่างและออกแบบโดยอาจารย์วนิดา พึ่งสุนทร มีแนวคิดการออกแบบที่สะท้อนการรับเอาพระพุทธศาสนาแบบลังกาวงศ์จากอาณาจักรสุโขทัย ผสมผสานสถาปัตยกรรมล้านนาเข้าไว้ในอาคารหลังเดียว\n\nตัวอาคารเป็นทรงมณฑปจตุรมุขยอดเจดีย์ ฐานอาคารทรงสี่เหลี่ยมปาดมุม ซ้อนด้วยชั้นหลังคา 2 ชั้น ประดับลายพระอรหันตสาวกเวียนทักษิณาวัตรพระบรมสารีริกธาตุซึ่งประดิษฐานอยู่ภายในห้องพระธาตุ ส่วนองค์ระฆังด้านบนประดับด้วยฐานบัวถลา 3 ชั้น คาดด้วยประจำยามรัดอก และยอดประดิษฐานฉัตร 8 เหลี่ยมประดับลายเทวดาประจำทิศ\n\nภายในกึ่งกลางอาคารเป็นที่ตั้งของกู่สำหรับประดิษฐานพระประธาน 4 องค์ เพื่อแสดงแนวคิดข้อธรรมอริยสัจ 4 เป็นพื้นที่สำหรับสักการะบูชาและปฏิบัติธรรมตามคำสอนในพระพุทธศาสนาและคำสอนของหลวงปู่ชา สุภัทโท วัดหนองป่าพง ส่วนภายนอกออกแบบให้มีลานประทักษิณเพื่อรองรับกิจกรรมในวันสำคัญทางพระพุทธศาสนา'},
+  {n:2, lat:17.2470, lng:102.8360, cat:'งานออกแบบสถาปัตยกรรมและศิลปกรรม', title:'พิพิธภัณฑ์ธรรมเจดีย์พระธรรมวิสุทธิมงคล', meta:'วัดเกษรศีลคุณ (วัดป่าบ้านตาด) อ.เมืองอุดรธานี จ.อุดรธานี',
+   by:'อาจารย์วนิดา พึ่งสุนทร (ศิลปินแห่งชาติ) และคณาจารย์ · ร่วมกับภาควิชาศิลปสถาปัตยกรรม คณะสถาปัตยกรรมศาสตร์ ม.ศิลปากร',
+   img:'img/inst-wpbt-2.jpg', imgs:['img/inst-wpbt-1.jpg','img/inst-wpbt-2.jpg','img/inst-wpbt-3.jpg','img/inst-wpbt-4.jpg','img/inst-wpbt-5.jpg','img/inst-wpbt-6.jpg'],
+   text:'สำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ ชวนทุกท่านมารู้จักองค์ประกอบสำคัญของศาสนสถานไทย ผ่านผลงานการออกแบบสถาปัตยกรรมและศิลปกรรมโครงการ “พิพิธภัณฑ์ธรรมเจดีย์พระธรรมวิสุทธิมงคล” (หลวงตาพระมหาบัว ญาณสัมปันโน) วัดเกษรศีลคุณ (วัดป่าบ้านตาด) จ.อุดรธานี ดำเนินการโดยสถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ มหาวิทยาลัยศิลปากร ร่วมกับภาควิชาศิลปสถาปัตยกรรม คณะสถาปัตยกรรมศาสตร์ มหาวิทยาลัยศิลปากร ภายใต้การกำกับดูแลของอาจารย์วนิดา พึ่งสุนทร (ศิลปินแห่งชาติ) และคณาจารย์\n\nวิหารและเจดีย์เป็นองค์ประกอบสำคัญทั้งด้านการใช้งานและเชิงสัญลักษณ์ในพระพุทธศาสนามายาวนาน โดย “วิหาร” เป็นอาคารประกอบพิธีกรรมทางศาสนาและประดิษฐานพระพุทธรูป ส่วน “เจดีย์” เป็นที่บรรจุพระบรมสารีริกธาตุหรือวัตถุอันศักดิ์สิทธิ์ สะท้อนศรัทธาที่ดำรงอยู่ในพื้นที่ โครงการนี้มีแนวคิดการออกแบบ 2 ส่วน ได้แก่ (1) พระวิหาร และ (2) พระเจดีย์\n\nแนวคิดการออกแบบพระวิหาร สอดคล้องกับศิลปกรรมพื้นถิ่นของชนชาติไทอีสาน ได้รับแรงบันดาลใจจากศิลปะพื้นถิ่นลาวลุ่มแม่น้ำโขง คือ “สิม” วัดเชียงทอง หลวงพระบาง ประเทศลาว ซึ่ง “สิมอีสาน” เป็นเอกลักษณ์ของอาคารที่ได้รับอิทธิพลจากศิลปกรรมแบบล้านช้าง โดดเด่นที่สัดส่วนอาคาร หลังคาลาดต่ำ และองค์ประกอบประดับตกแต่ง เช่น รวงผึ้งหรือโก่งคิ้ว และคันทวยที่เป็นเอกลักษณ์เฉพาะตัว'}
+];
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.in-tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.in-tab').forEach(function(x){x.classList.remove('on');});
+    document.querySelectorAll('.in-panel').forEach(function(x){x.classList.remove('on');});
+    t.classList.add('on');
+    document.getElementById('p-'+t.dataset.t).classList.add('on');
+    if(t.dataset.t==='map' && window._leaf){ setTimeout(function(){window._leaf.invalidateSize();},60); }
+  });
+});
+
+/* ---------- Other-works grid ---------- */
+document.getElementById('otherGrid').innerHTML = PROJECTS.map(function(p){
+  return '<a class="in-card" href="#"><div class="ci" style="background-image:url(\''+p.img+'\')"></div>'+
+    '<div class="cb"><span class="ct-tag">'+p.cat+'</span><h3>'+p.title+'</h3><p>'+p.meta+'</p></div></a>';
+}).join('');
+
+/* ---------- Leaflet map ---------- */
+var map = L.map('leafmap',{scrollWheelZoom:false}).setView([15.2,101.0],6);
+window._leaf = map;
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{
+  attribution:'&copy; OpenStreetMap contributors', maxZoom:19
+}).addTo(map);
+
+var drawer=document.getElementById('drawer');
+var lightbox=document.getElementById('lightbox');
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function openDrawer(p){
+  document.getElementById('d-cat').textContent=p.cat;
+  document.getElementById('d-title').textContent=p.title;
+  document.getElementById('d-meta').textContent=p.meta;
+  var byEl=document.getElementById('d-by');
+  if(p.by){ byEl.textContent='ออกแบบโดย '+p.by; byEl.style.display=''; } else { byEl.style.display='none'; }
+  document.getElementById('d-text').innerHTML = (p.text||'').split('\n\n').map(function(s){return '<p>'+esc(s)+'</p>';}).join('');
+  var imgs=p.imgs||(p.img?[p.img]:[]);
+  var cover=document.getElementById('d-cover'), coverSrc=p.img||imgs[0];
+  if(coverSrc){ cover.style.backgroundImage="url('"+coverSrc+"')"; cover.style.display=''; } else { cover.style.display='none'; }
+  document.getElementById('d-gallery').innerHTML = imgs.map(function(src){
+    return '<div class="dthumb" style="background-image:url(\''+src+'\')" data-full="'+src+'" role="button" tabindex="0" aria-label="ดูภาพเต็ม"></div>';
+  }).join('');
+  document.getElementById('d-gal-h').style.display = imgs.length ? '' : 'none';
+  drawer.scrollTop=0;
+  drawer.classList.add('show');
+}
+document.getElementById('dclose').addEventListener('click',function(){drawer.classList.remove('show');});
+
+/* gallery thumb -> lightbox (เลื่อนซ้าย/ขวาได้) */
+var LB={imgs:[], idx:0};
+var lbImg=lightbox.querySelector('img');
+var lbPrev=document.getElementById('lbprev'), lbNext=document.getElementById('lbnext');
+function lbShow(i){
+  var n=LB.imgs.length; if(!n)return;
+  LB.idx=(i+n)%n;
+  lbImg.src=LB.imgs[LB.idx];
+  var multi=n>1;
+  lbPrev.style.display=multi?'':'none';
+  lbNext.style.display=multi?'':'none';
+  lightbox.classList.add('show');
+}
+document.getElementById('d-gallery').addEventListener('click',function(e){
+  var t=e.target.closest('.dthumb'); if(!t)return;
+  LB.imgs=[].map.call(document.querySelectorAll('#d-gallery .dthumb'),function(x){return x.getAttribute('data-full');});
+  lbShow([].indexOf.call(document.querySelectorAll('#d-gallery .dthumb'),t));
+});
+lbPrev.addEventListener('click',function(e){e.stopPropagation();lbShow(LB.idx-1);});
+lbNext.addEventListener('click',function(e){e.stopPropagation();lbShow(LB.idx+1);});
+document.getElementById('lbclose').addEventListener('click',function(){lightbox.classList.remove('show');});
+lightbox.addEventListener('click',function(e){ if(e.target===lightbox) lightbox.classList.remove('show'); });
+document.addEventListener('keydown',function(e){
+  if(lightbox.classList.contains('show')){
+    if(e.key==='Escape') lightbox.classList.remove('show');
+    else if(e.key==='ArrowLeft') lbShow(LB.idx-1);
+    else if(e.key==='ArrowRight') lbShow(LB.idx+1);
+    return;
+  }
+  if(e.key==='Escape') drawer.classList.remove('show');
+});
+
+PROJECTS.forEach(function(p){
+  var icon=L.divIcon({className:'',html:'<div class="in-pin"><i></i><b>'+p.n+'</b></div>',iconSize:[30,30],iconAnchor:[15,30]});
+  L.marker([p.lat,p.lng],{icon:icon}).addTo(map).on('click',function(e){
+    document.querySelectorAll('.in-pin').forEach(function(x){x.classList.remove('active');});
+    var el=e.target._icon && e.target._icon.querySelector('.in-pin'); if(el) el.classList.add('active');
+    openDrawer(p);
+  });
+});
+
+/* ---------- Stats count-up ---------- */
+(function(){
+  var nums=[].slice.call(document.querySelectorAll('.in-stat .num'));
+  function run(el){
+    var to=parseInt(el.dataset.to,10)||0, t0=null, dur=1400;
+    function step(ts){ if(!t0)t0=ts; var k=Math.min((ts-t0)/dur,1); el.textContent=Math.round(k*to)+(k>=1?'+':''); if(k<1)requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){run(e.target);io.unobserve(e.target);}});},{threshold:.5});
+    nums.forEach(function(n){io.observe(n);});
+  } else { nums.forEach(run); }
+})();
+</script>
+</body>
+</html>

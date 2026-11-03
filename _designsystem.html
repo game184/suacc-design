@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{background:#fff;width:1200px;padding:44px 48px;font-family:'IBM Plex Sans Thai',sans-serif;color:#0d0d0d}
+  .ds-h{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:30px;margin:0 0 20px;color:#0d0d0d;border-bottom:2px solid #0d0d0d;padding-bottom:8px}
+  .ds-sec{margin-bottom:44px}
+  .logos{display:flex;align-items:center;gap:40px}
+  .logos img{height:96px}
+  .sw-row{display:flex;flex-wrap:wrap;gap:18px}
+  .sw{width:150px}
+  .sw .chip{height:90px;border-radius:10px;border:1px solid #e2e2e2}
+  .sw .nm{font-weight:700;font-size:16px;margin-top:8px}
+  .sw .hex{font-size:14px;color:#666;font-family:monospace}
+  .type-row{display:flex;flex-direction:column;gap:18px}
+  .type-card{border:1px solid #e6e6e6;border-radius:12px;padding:20px 24px}
+  .type-card .lbl{font-size:14px;color:#0a7256;font-weight:700;letter-spacing:.05em}
+  .silp{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif}
+  .ibm{font-family:'IBM Plex Sans Thai',sans-serif}
+</style></head>
+<body>
+  <div class="ds-sec">
+    <h2 class="ds-h">ตราสัญลักษณ์ (Logo)</h2>
+    <div class="logos">
+      <img src="img/logo.png" alt="SUACC logo">
+    </div>
+  </div>
+
+  <div class="ds-sec">
+    <h2 class="ds-h">ชุดสี (Color Palette)</h2>
+    <div class="sw-row">
+      <div class="sw"><div class="chip" style="background:#0A7256"></div><div class="nm">เขียวหลัก</div><div class="hex">#0A7256</div></div>
+      <div class="sw"><div class="chip" style="background:#03BF9E"></div><div class="nm">มิ้นต์</div><div class="hex">#03BF9E</div></div>
+      <div class="sw"><div class="chip" style="background:#62D9C3"></div><div class="nm">มิ้นต์อ่อน</div><div class="hex">#62D9C3</div></div>
+      <div class="sw"><div class="chip" style="background:#0B2E25"></div><div class="nm">เขียวเข้ม</div><div class="hex">#0B2E25</div></div>
+      <div class="sw"><div class="chip" style="background:#D99C48"></div><div class="nm">ทอง</div><div class="hex">#D99C48</div></div>
+      <div class="sw"><div class="chip" style="background:#F9ED6C"></div><div class="nm">เหลือง</div><div class="hex">#F9ED6C</div></div>
+      <div class="sw"><div class="chip" style="background:#0D0D0D"></div><div class="nm">ตัวอักษร</div><div class="hex">#0D0D0D</div></div>
+      <div class="sw"><div class="chip" style="background:#F2F2F2"></div><div class="nm">พื้นหลัง</div><div class="hex">#F2F2F2</div></div>
+    </div>
+  </div>
+
+  <div class="ds-sec">
+    <h2 class="ds-h">ตัวอักษร (Typography)</h2>
+    <div class="type-row">
+      <div class="type-card">
+        <div class="lbl">HEADING — Silpakorn</div>
+        <div class="silp" style="font-size:40px;font-weight:700">สำนักศิลปวัฒนธรรมและการสร้างสรรค์</div>
+        <div class="silp" style="font-size:24px">Office of Art Culture and Creativity — ABCDEFG abcdefg 0123456789</div>
+      </div>
+      <div class="type-card">
+        <div class="lbl">BODY — IBM Plex Sans Thai</div>
+        <div class="ibm" style="font-size:20px">พื้นที่ศิลปะ วัฒนธรรม และการสร้างสรรค์ เผยแพร่สู่สาธารณชน</div>
+        <div class="ibm" style="font-size:16px;color:#555">The quick brown fox jumps over the lazy dog — กขคง จฉชซ 0123456789</div>
+      </div>
+    </div>
+  </div>
+</body></html>

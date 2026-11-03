@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ค้นหา · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- Header + ช่องค้นหา -->
+<section class="sr-head">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <b>ค้นหา</b></p>
+    <p class="eyebrow">Search</p>
+    <h1 class="mb0" id="srTitle">ค้นหาทั้งเว็บไซต์</h1>
+    <form class="sr-form" role="search" id="srForm" action="search.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <label for="srInput" class="sr-only">คำค้นหา</label>
+      <input id="srInput" type="search" name="q" autocomplete="off" placeholder="ค้นหานิทรรศการ กิจกรรม ผลงาน บทความ…">
+      <button type="submit">ค้นหา</button>
+    </form>
+    <p class="sr-count" id="srCount" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ผลลัพธ์ — กรองตามประเภท -->
+<section class="pad" style="padding-top:36px;background:#fff">
+  <div class="wrap">
+    <div class="chips" id="srChips" role="group" aria-label="กรองตามประเภท"></div>
+    <div class="sr-list" id="srList"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="whatson-data.js"></script>
+<script src="collection-data.js"></script>
+<script src="search-index.js"></script>
+<script>
+/* หน้าผลค้นหา — ?q=คำค้น&type=ประเภท (แชร์ลิงก์/กดย้อนกลับได้)
+   ระบบจริง: GET /api/v1/search?q=&type=&lang=th */
+(function(){
+  var S=window.SUACCSearch;
+  var input=document.getElementById('srInput'), list=document.getElementById('srList'),
+      chips=document.getElementById('srChips'), count=document.getElementById('srCount'), title=document.getElementById('srTitle');
+  var ICON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>';
+  var p=new URLSearchParams(location.search), type=p.get('type')||'';
+  input.value=p.get('q')||'';
+
+  function sync(){
+    var q=input.value.trim(), u=new URLSearchParams();
+    if(q) u.set('q',q); if(type) u.set('type',type);
+    history.replaceState(null,'','search.html'+(u.toString()?'?'+u:''));
+  }
+  function render(){
+    var q=input.value.trim();
+    if(!q){
+      title.textContent='ค้นหาทั้งเว็บไซต์'; document.title='ค้นหา · SUACC';
+      count.textContent=''; chips.innerHTML='';
+      list.innerHTML='<p class="sr-empty">พิมพ์คำที่ต้องการค้นหา เช่น ชื่อนิทรรศการ ชื่อศิลปิน ประเภทกิจกรรม หรือชื่อหนังสือ</p>';
+      return;
+    }
+    var all=S.search(q), shown=type?all.filter(function(it){return it.type===type;}):all;
+    title.textContent='ผลการค้นหา “'+q+'”'; document.title='ค้นหา: '+q+' · SUACC';
+
+    /* ปุ่มกรอง: แสดงเฉพาะประเภทที่มีผล + จำนวน */
+    var n={}; all.forEach(function(it){ n[it.type]=(n[it.type]||0)+1; });
+    chips.innerHTML = all.length ? [{k:'',label:'ทั้งหมด'}].concat(S.TYPES.filter(function(t){return n[t.k];})).map(function(t){
+      var on=(t.k===type);
+      return '<button type="button" class="chip'+(on?' on':'')+'" data-type="'+t.k+'" aria-pressed="'+on+'">'+t.label+' <span class="chip-n">'+(t.k?n[t.k]:all.length)+'</span></button>';
+    }).join('') : '';
+
+    count.textContent = all.length ? 'พบ '+all.length+' รายการ'+(type?' · แสดง '+S.typeLabel(type)+' '+shown.length+' รายการ':'') : 'ไม่พบผลลัพธ์';
+    list.innerHTML = shown.length ? shown.map(function(it){
+      var th = it.img ? '<span class="sx-thumb" style="background-image:url(\''+it.img+'\')"></span>' : '<span class="sx-thumb">'+ICON+'</span>';
+      return '<a class="sr-res" href="'+it.href+'">'+th+'<div><span class="sr-type">'+S.typeLabel(it.type)+'</span>'+
+        '<h2>'+S.mark(it.title,q)+'</h2><p>'+S.esc(it.sub||'')+'</p></div></a>';
+    }).join('') : '<p class="sr-empty">ไม่พบผลลัพธ์สำหรับ “'+S.esc(q)+'”<br>ลองตรวจตัวสะกด ใช้คำที่สั้นลง หรือค้นด้วยชื่อศิลปิน / ประเภทกิจกรรม</p>';
+  }
+
+  chips.addEventListener('click',function(e){
+    var c=e.target.closest('.chip'); if(!c) return;
+    type=c.dataset.type; sync(); render();
+  });
+  var t; input.addEventListener('input',function(){ clearTimeout(t); t=setTimeout(function(){ type=''; sync(); render(); },200); });
+  document.getElementById('srForm').addEventListener('submit',function(e){ e.preventDefault(); type=''; sync(); render(); });
+  render();
+  document.addEventListener('suacc:lang',function(){ S.reset(); render(); });   /* EN: ผลค้นหาด้วยดัชนีอังกฤษ */
+  if(!input.value) input.focus();
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>

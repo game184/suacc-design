@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>What we do — Portfolio · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+/* การ์ดผลงาน = .work-grid/.work-card ใน styles.css (ดีไซน์เดียวกับ About › What we do) */
+/* ปุ่มกรอง = สีหมวดเดียวกับหน้า What's On (ขอบสีหมวด · เลือกแล้วพื้นสีหมวด ตัวหนังสือเข้มโทนเดียวกัน) */
+#pfChips .chip[style*="--cat"]{border-color:var(--cat)}
+#pfChips .chip[style*="--cat"].on{background:var(--cat);color:var(--ink);border-color:var(--cat)}
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
@@ -22,34 +28,9 @@
 <!-- Portfolio -->
 <section class="pad alt">
   <div class="wrap">
-    <p class="note-strip">หมายเหตุ: หน้าย่อยของแต่ละโปรเจกต์สามารถเพิ่มได้เรื่อยๆ ตามผลงานใหม่ของสำนักฯ</p>
-    <div class="chips">
-      <span class="chip on">ทั้งหมด</span>
-      <span class="chip">นิทรรศการ</span>
-      <span class="chip">วิจัย</span>
-      <span class="chip">อบรม</span>
-      <span class="chip">เผยแพร่</span>
-    </div>
-    <div class="grid g3">
-      <a class="card" href="#"><div class="thumb ph-1 ph-art"><span class="badge b-green">นิทรรศการ</span></div>
-        <div class="body"><h3>ศิลปกรรมแห่งชาติ ครั้งที่ 69</h3><p class="meta">นิทรรศการ · 2569</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-2 ph-art"><span class="badge b-green">นิทรรศการ</span></div>
-        <div class="body"><h3>ศิลปะร่วมสมัยศิลปากร</h3><p class="meta">นิทรรศการ · 2568</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-4 ph-art"><span class="badge b-purple">วิจัย</span></div>
-        <div class="body"><h3>โครงการวิจัยจิตรกรรมฝาผนัง</h3><p class="meta">วิจัย · 2568</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-6 ph-art"><span class="badge b-gold">อบรม</span></div>
-        <div class="body"><h3>เวิร์กช็อปภาพพิมพ์เบื้องต้น</h3><p class="meta">อบรม · 2569</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-3 ph-art"><span class="badge b-purple">วิจัย</span></div>
-        <div class="body"><h3>การอนุรักษ์ศิลปสถาปัตยกรรมไทย</h3><p class="meta">วิจัย · 2567</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-5 ph-art"><span class="badge b-pink">เผยแพร่</span></div>
-        <div class="body"><h3>วารสารศิลปวัฒนธรรมศิลปากร</h3><p class="meta">เผยแพร่ · รายปี</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-1 ph-art"><span class="badge b-gold">อบรม</span></div>
-        <div class="body"><h3>ค่ายศิลปะเยาวชนสร้างสรรค์</h3><p class="meta">อบรม · 2568</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-2 ph-art"><span class="badge b-green">นิทรรศการ</span></div>
-        <div class="body"><h3>นิทรรศการคลังสะสมผลงานศิลปกรรม</h3><p class="meta">นิทรรศการ · 2567</p></div></a>
-      <a class="card" href="#"><div class="thumb ph-4 ph-art"><span class="badge b-pink">เผยแพร่</span></div>
-        <div class="body"><h3>สื่อความรู้ศิลปะออนไลน์</h3><p class="meta">เผยแพร่ · ต่อเนื่อง</p></div></a>
-    </div>
+    <!-- ข้อมูลจาก What's On (whatson-data.js) — ปุ่มกรองสร้างจากประเภทที่มีจริง -->
+    <div class="chips" id="pfChips" role="group" aria-label="กรองตามประเภทผลงาน"></div>
+    <div class="work-grid" id="pfGrid"></div>
   </div>
 </section>
 
@@ -66,6 +47,31 @@
 </section>
 
 <div id="site-footer"></div>
+<script src="whatson-data.js"></script>
 <script src="site.js"></script>
+<script>
+/* ผลงานของสำนักฯ = window.workItems() (What's On + ลงข้อมูลเอง) · cover = ev.img · ลิงก์ไปหน้ารายละเอียด
+   ระบบจริง: query What's On จาก CMS — เพิ่มกิจกรรมใน What's On แล้วขึ้นหน้านี้เอง */
+(function(){
+  var grid=document.getElementById('pfGrid'), chipBox=document.getElementById('pfChips');
+  var list=window.workItems(), cats=[];
+  /* สีตัวหนังสือบนปุ่มที่เลือก — ชุดเดียวกับ whatson.html */
+  var CAT_INK={'นิทรรศการ':'#0c2e29','เสวนา':'#0c2233','Workshop':'#3a2c0e','ประกวด':'#5e211c','การแสดง':'#2e1a45','เทศกาล':'#4a2607'};
+  grid.innerHTML=list.map(function(it){
+    if(cats.indexOf(it.ev.tag)<0) cats.push(it.ev.tag);
+    return window.workCardHTML(it);
+  }).join('');
+  chipBox.innerHTML=[''].concat(cats).map(function(c,i){
+    var st=c?' style="--cat:'+(window.WON_CAT_COLOR[c]||'#62d9c3')+';--ink:'+(CAT_INK[c]||'#0c2e29')+'"':'';
+    return '<button type="button" class="chip'+(i?'':' on')+'" data-f="'+c+'" aria-pressed="'+(!i)+'"'+st+'>'+(c||'ทั้งหมด')+'</button>';
+  }).join('');
+  var chips=chipBox.querySelectorAll('.chip');
+  chips.forEach(function(c){ c.addEventListener('click',function(){
+    var f=c.dataset.f;
+    chips.forEach(function(x){ var on=x===c; x.classList.toggle('on',on); x.setAttribute('aria-pressed',on); });
+    grid.querySelectorAll('.work-card').forEach(function(card){ card.hidden = !!f && card.dataset.cat!==f; });
+  }); });
+})();
+</script>
 </body>
 </html>

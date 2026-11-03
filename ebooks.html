@@ -7,10 +7,15 @@
 <link rel="stylesheet" href="styles.css">
 <style>
   .eb-hero .eyebrow{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-size:24px;text-transform:none;letter-spacing:0;color:#0a7256;margin:0 0 10px}
-  .eb-searchbar{display:flex;align-items:center;gap:10px;max-width:460px;margin:0 0 30px;
+  .eb-filters{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 30px}
+  .eb-searchbar{display:flex;align-items:center;gap:10px;flex:1;min-width:240px;max-width:420px;margin:0;
     border:1.5px solid var(--line);border-radius:30px;padding:11px 20px;background:#fff}
   .eb-searchbar svg{width:20px;height:20px;color:#8a8f96;flex-shrink:0}
   .eb-searchbar input{border:none;outline:none;flex:1;font:inherit;font-size:15px;color:#0d0d0d;background:transparent}
+  .eb-select{appearance:none;-webkit-appearance:none;-moz-appearance:none;
+    border:1.5px solid var(--line);border-radius:30px;padding:11px 46px 11px 20px;background:#fff;font:inherit;font-size:15px;color:#0d0d0d;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238a8f96' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 18px center}
   .eb-empty{color:var(--muted);padding:30px 0}
 </style>
 </head>
@@ -30,12 +35,16 @@
 <!-- grid + search -->
 <section class="pad alt">
   <div class="wrap">
-    <div class="eb-searchbar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input type="search" id="ebSearch" placeholder="ค้นหาหนังสือ / ผู้แต่ง…" aria-label="ค้นหา E-Books">
+    <div class="eb-filters">
+      <div class="eb-searchbar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="ebSearch" placeholder="ค้นหาหนังสือ / ผู้แต่ง…" aria-label="ค้นหา E-Books">
+      </div>
+      <select id="ebYear" class="eb-select" aria-label="กรองตามปีที่พิมพ์"><option value="">ทุกปีที่พิมพ์</option></select>
+      <select id="ebAuthor" class="eb-select" aria-label="กรองตามผู้แต่ง"><option value="">ผู้แต่งทั้งหมด</option></select>
     </div>
     <div class="eb-grid" id="ebGridAll"></div>
-    <p class="eb-empty" id="ebEmpty" style="display:none">ไม่พบหนังสือที่ตรงกับคำค้น</p>
+    <p class="eb-empty" id="ebEmpty" style="display:none">ไม่พบหนังสือที่ตรงกับเงื่อนไข</p>
   </div>
 </section>
 
@@ -46,18 +55,32 @@
   (function(){
     var g=document.getElementById('ebGridAll'),
         input=document.getElementById('ebSearch'),
+        yearSel=document.getElementById('ebYear'),
+        authorSel=document.getElementById('ebAuthor'),
         empty=document.getElementById('ebEmpty');
     if(!g || !window.EBOOKS) return;
-    function render(q){
-      q=(q||'').trim().toLowerCase();
+    /* เติมตัวเลือก filter */
+    var years=[...new Set(EBOOKS.map(function(e){return e.year;}).filter(Boolean))].sort(function(a,b){return b-a;});
+    years.forEach(function(y){ yearSel.insertAdjacentHTML('beforeend','<option value="'+y+'">พ.ศ. '+y+'</option>'); });
+    var authors=[...new Set(EBOOKS.map(function(e){return e.by;}).filter(Boolean))].sort();
+    authors.forEach(function(a){ authorSel.insertAdjacentHTML('beforeend','<option value="'+a+'">'+a+'</option>'); });
+    function render(){
+      var q=(input.value||'').trim().toLowerCase(), yr=yearSel.value, au=authorSel.value;
       var list=EBOOKS.filter(function(e){
-        return !q || e.title.toLowerCase().indexOf(q)>=0 || (e.by||'').toLowerCase().indexOf(q)>=0;
+        if(q && e.title.toLowerCase().indexOf(q)<0 && (e.by||'').toLowerCase().indexOf(q)<0) return false;
+        if(yr && String(e.year)!==yr) return false;
+        if(au && e.by!==au) return false;
+        return true;
       });
+      /* ปีล่าสุดแสดงก่อน · เล่มปีเดียวกันเรียงต่อกัน (sort เสถียร) */
+      list.sort(function(a,b){ return (b.year||0)-(a.year||0); });
       g.innerHTML = list.map(function(e){ return ebookCardHTML(e, 'ebook-reader.html?id='+e.id); }).join('');
       empty.style.display = list.length ? 'none' : '';
     }
-    render('');
-    input.addEventListener('input', function(){ render(input.value); });
+    render();
+    input.addEventListener('input', render);
+    yearSel.addEventListener('change', render);
+    authorSel.addEventListener('change', render);
   })();
 </script>
 <script src="site.js"></script>

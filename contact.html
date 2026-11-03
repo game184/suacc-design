@@ -15,6 +15,9 @@
   .ct-row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:52px 0;border-bottom:1px solid #e3e7e5}
   .ct-row:last-of-type{border-bottom:none}
   .ct-row h3{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:clamp(24px,2.4vw,30px);color:#0d0d0d;line-height:1.3;margin:0 0 16px}
+  /* Logo หน่วยงาน */
+  .ct-logo{display:block;height:96px;width:auto;max-width:260px;object-fit:contain;margin:0 0 20px}
+  .ct-logo.wide{height:72px;max-width:300px}
   .ct-addr{color:#555;line-height:1.7;font-size:15px;margin:0 0 22px}
 
   .ct-line{display:flex;gap:14px;margin-bottom:10px;font-size:15px;color:#333;align-items:baseline}
@@ -40,6 +43,8 @@
     .ct-content>.wrap{padding-left:clamp(20px,6vw,120px);padding-right:clamp(20px,6vw,120px)}
   }
   @media(max-width:860px){
+    .ct-logo{height:80px}
+    .ct-logo.wide{height:60px}
     .ct-row{grid-template-columns:1fr;gap:24px;padding:40px 0}
     .ct-map{aspect-ratio:16/10}
   }
@@ -59,6 +64,7 @@
     <!-- 1. SUACC -->
     <div class="ct-row">
       <div class="info">
+        <img class="ct-logo wide" src="img/logo-suacc.png" alt="โลโก้ สำนักศิลปวัฒนธรรมและการสร้างสรรค์ มหาวิทยาลัยศิลปากร">
         <h3>สำนักศิลปวัฒนธรรมและการสร้างสรรค์<br>แห่งมหาวิทยาลัยศิลปากร (SUACC)</h3>
         <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพฯ 10200</p>
         <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
@@ -75,6 +81,7 @@
     <!-- 2. หอศิลป์ วังท่าพระ -->
     <div class="ct-row">
       <div class="info">
+        <img class="ct-logo" src="img/logo-artcentre.png" alt="โลโก้ หอศิลป์ มหาวิทยาลัยศิลปากร">
         <h3>หอศิลป์มหาวิทยาลัยศิลปากร<br>(วังท่าพระ - สำนักงานใหญ่)</h3>
         <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพมหานคร 10200</p>
         <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
@@ -92,6 +99,7 @@
     <!-- 3. หอศิลป์ สนามจันทร์ -->
     <div class="ct-row">
       <div class="info">
+        <img class="ct-logo" src="img/logo-collection.png" alt="โลโก้ คลังสะสมศิลปกรรม (Visible Storage Gallery) หอศิลป์ มหาวิทยาลัยศิลปากร" style="max-width:none">
         <h3>หอศิลป์สนามจันทร์</h3>
         <p class="ct-addr">มหาวิทยาลัยศิลปากร วิทยาเขตพระราชวังสนามจันทร์ อำเภอเมือง<br>นครปฐม จังหวัดนครปฐม 73000</p>
         <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>
@@ -109,6 +117,7 @@
     <!-- 4. สถาบันศิลปสถาปัตยกรรมไทยฯ -->
     <div class="ct-row">
       <div class="info">
+        <img class="ct-logo" src="img/logo-institute.png" alt="โลโก้ สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ">
         <h3>สถาบันศิลปสถาปัตยกรรมไทย<br>เฉลิมพระเกียรติ</h3>
         <p class="ct-addr">31 ถนนหน้าพระลาน แขวงพระบรมมหาราชวัง เขตพระนคร<br>กรุงเทพฯ 10200</p>
         <div class="ct-line"><span class="lb">โทร :</span><span class="vl"><a href="tel:022213841">02 221 3841</a></span></div>

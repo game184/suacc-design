@@ -44,41 +44,17 @@
   .ab-stat .lbl{color:rgba(255,255,255,.9);margin-top:10px;font-size:18px}
   @media(max-width:820px){.ab-success .wrap{grid-template-columns:1fr;gap:16px}.ab-statrow{grid-template-columns:1fr;gap:24px}}
 
-  /* WHO WE ARE */
-  .ab-who{background:#F8FFFE;min-height:640px;display:grid;align-content:center}   /* XD: bg + section height 640 */
-  .ab-who .ab-eyebrow{color:#03BF9E}                            /* XD: eyebrow มิ้นต์ (กัน .ab-who p ทับ) */
-  .ab-who .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-  .ab-who h2{font-size:clamp(26px,3vw,40px);color:#0d0d0d;margin:0 0 16px}
-  .ab-who p{color:#333;line-height:1.85;font-size:17.5px;margin:0 0 22px}
-  /* XD dropShadow: dx0 dy3 blur4 rgba(0,0,0,.24) */
-  .ab-who .img{aspect-ratio:1/1;background:url('img/ab-whoweare.jpg') center/cover;border-radius:16px;width:100%;max-width:440px;margin-left:auto;box-shadow:0 3px 12px rgba(0,0,0,.24)}
-  @media(max-width:820px){.ab-who .wrap{grid-template-columns:1fr;gap:28px}.ab-who .img{max-width:none;aspect-ratio:1/1}}
-
-  /* TESTIMONIAL — เต็มขอบจอ */
-  /* Message CEO — height 35vw (=478px ที่จอ 1366) สเกลตามกว้างไม่ให้รูปโดน crop */
-  .ab-quote{display:grid;grid-template-columns:1fr 1.05fr;align-items:stretch;height:clamp(420px,35vw,700px)}
-  .ab-quote .photo{background:url('img/ceo-pic.jpg') center/cover}
-  /* XD gradient: linear แนวนอน ซ้ายเข้ม #0A7256 → ขวาสว่าง #03BF9E */
-  .ab-quote .panel{background:linear-gradient(to left,#03BF9E 0%,#0A7256 100%);color:#fff;padding:48px 70px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-  .ab-quote .mark{font-size:44px;line-height:.6;color:var(--mint2);opacity:.7}
-  .ab-quote blockquote{font-family:'IBM Plex Sans Thai',sans-serif;font-weight:500;font-size:clamp(18px,1.9vw,22px);line-height:1.65;margin:12px 0 24px}
-  .ab-quote .nm{font-weight:600;font-size:18px}
-  .ab-quote .role{color:rgba(255,255,255,.82);font-size:15px;margin:4px 0 22px}
-  .ab-quote .ab-pill{align-self:center}
-  @media(max-width:820px){.ab-quote{grid-template-columns:1fr;height:auto}.ab-quote .photo{min-height:300px}.ab-quote .panel{padding:38px 28px}}
-
   /* WHAT WE DO */
   .ab-do-head{text-align:center;margin-bottom:44px}
   .ab-do-head .ab-eyebrow{color:var(--mint)}
   .ab-do-head h2{font-size:clamp(26px,3vw,40px);color:#0d0d0d}
   /* XD: header+SUACC = ขาว, หอศิลป์ = มิ้นต์, สถาบันฯ = ขาว */
-  #whatwedo{background:#fff}
+  #whoweare{background:#fff}
   /* แต่ละหน่วยงาน height 553px (จัดเนื้อหากึ่งกลางแนวตั้ง) */
   .ab-doband{min-height:553px;display:flex;align-items:center;padding:24px 0}
   .ab-doband>.wrap{width:100%}
-  /* เฉพาะ What we do: padding ซ้าย/ขวา 240px */
-  #whatwedo>.wrap,.ab-doband>.wrap{padding-left:240px;padding-right:240px}
-  @media(max-width:1280px){#whatwedo>.wrap,.ab-doband>.wrap{padding-left:clamp(20px,6vw,120px);padding-right:clamp(20px,6vw,120px)}}
+  /* (band layout เดิม เลิกใช้ — Who we are ย้ายเป็นการ์ดใน styles.css แล้ว) */
+  .ab-doband>.wrap{padding-left:clamp(20px,6vw,120px);padding-right:clamp(20px,6vw,120px)}
   .band-w{background:#fff}
   .band-m{background:#EDFFFC}
   /* คอลัมน์รูป 522px, ระยะห่างรูป↔text = 62px */
@@ -91,6 +67,13 @@
   .ab-row p{color:#444;line-height:1.8;font-size:17px;margin:0 0 20px}
   /* row1,3 = รูปซ้าย/ข้อความขวา · row2(.rev) = ข้อความซ้าย/รูปขวา */
   @media(max-width:920px){.ab-row,.ab-row.rev{grid-template-columns:1fr;gap:28px}.ab-doband{min-height:0;padding:44px 0}}
+
+  /* WHAT WE DO — ผลงานล่าสุด แถวละ 4 (การ์ดสี่เหลี่ยมจัตุรัสเหมือนหน้า Portfolio) */
+  .ab-work{background:#F8FFFE}
+  .ab-work-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;margin-bottom:40px}
+  .ab-work-head h2{font-size:clamp(26px,3vw,40px);color:#0d0d0d}
+  .ab-work-head .lead{max-width:640px;margin:14px auto 0}
+  /* การ์ดผลงาน (.work-grid/.work-card) อยู่ใน styles.css — ใช้ร่วมกับ about-portfolio.html */
 
   /* OUR SERVICE */
   .ab-service{background:#0B2E25;color:#fff;padding:74px 0}
@@ -108,22 +91,9 @@
   .ab-svc p{margin:0;color:rgba(255,255,255,.9);line-height:1.65;font-size:16.5px}
   @media(max-width:820px){.ab-svc-grid{grid-template-columns:1fr}.ab-service .shead{align-items:flex-start}}
 
-  /* NEWS — ซ้าย(ข่าวสาร) พื้นมิ้นต์ / ขวา(จัดซื้อฯ) พื้นขาว แบ่งครึ่ง, การ์ดขาวมีขอบ+เงา */
-  .ab-news{background:linear-gradient(to right,#EDFFFC 0 50%,#ffffff 50% 100%)}
-  .ab-news .cols{display:grid;grid-template-columns:1fr 1fr;gap:56px}
-  /* เส้นคั่นใต้หัวข้อ */
-  .ab-news .chead{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;padding-bottom:16px;border-bottom:1px solid #cdd9d3}
-  .ab-news .chead h3{font-family:'Silpakorn72','IBM Plex Sans Thai',sans-serif;font-weight:700;margin:0;font-size:26px;color:#0d0d0d}
-  .ab-nrow{display:grid;grid-template-columns:1fr auto;column-gap:18px;align-items:center;background:#fff;border:1px solid #e6ece9;border-radius:16px;padding:22px 26px;margin-bottom:18px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.05);transition:.18s}
-  .ab-nrow:hover{box-shadow:0 8px 22px rgba(0,0,0,.09);border-color:#cfe6dc;transform:translateY(-1px)}
-  .ab-nrow .date{grid-column:1;grid-row:1;color:#3aab84;font-weight:500;font-size:14px}
-  .ab-nrow .t{grid-column:1;grid-row:2;color:#1a1a1a;font-size:16px;line-height:1.5;margin-top:6px}
-  /* วงกลมลูกศรพื้นมิ้นต์อ่อน ลูกศรเขียวเข้ม */
-  .ab-nrow .arw{grid-column:2;grid-row:1 / span 2;width:44px;height:44px;border-radius:50%;background:#c9efe1;display:flex;align-items:center;justify-content:center;color:#1f7d5b;flex-shrink:0;transition:.18s}
-  .ab-nrow .arw svg{width:18px;height:18px}
-  /* hover: วงกลมเขียวเข้ม ลูกศรขาว */
-  .ab-nrow:hover .arw{background:#0a7256;color:#fff}
-  @media(max-width:820px){.ab-news{background:#EDFFFC}.ab-news .cols{grid-template-columns:1fr;gap:34px}}
+  /* ข่าวสาร + ข่าวจัดซื้อจัดจ้าง — ✓ ยืนยันแล้ว: ย้ายไป styles.css (.ab-news / .ab-ncard / .ab-prow) */
+
+  /* Who we are (section การ์ด) — ✓ ยืนยันแล้ว: ย้ายไป styles.css (.ww-* / #whoweare) */
 </style>
 </head>
 <body>
@@ -153,83 +123,68 @@
   </div>
 </section>
 
-<!-- WHO WE ARE -->
-<section class="pad ab-who">
-  <div class="wrap">
-    <div>
-      <p class="ab-eyebrow">Who we are</p>
-      <h2 class="ab-h">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h2>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-      <a class="ab-pill green" href="about-who.html">Learn More</a>
-    </div>
-    <div class="img"></div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL (เต็มขอบจอ) -->
-<section class="ab-quote">
-  <div class="photo"></div>
-  <div class="panel">
-    <div class="mark">&ldquo;</div>
-    <blockquote>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966</blockquote>
-    <div class="mark" style="margin-bottom:14px">&rdquo;</div>
-    <div class="nm">ผู้ช่วยศาสตราจารย์ ดร.สิงหนาท แสงสีหนาท</div>
-    <div class="role">ผู้อำนวยการสำนักศิลปวัฒนธรรมและการสร้างสรรค์ฯ (SUACC)</div>
-    <a class="ab-pill line" href="about-people.html">Our Team</a>
-  </div>
-</section>
-
-<!-- WHAT WE DO -->
-<section class="pad" id="whatwedo" style="padding-bottom:30px">
+<!-- WHO WE ARE (3 หน่วยงาน) -->
+<section class="pad" id="whoweare">
   <div class="wrap">
     <div class="ab-do-head">
-      <p class="ab-eyebrow">What we do</p>
+      <p class="ab-eyebrow">Who we are</p>
       <h2 class="ab-h">Lorem Ipsum is simply dummy</h2>
+    </div>
+
+    <!-- hero card: SUACC -->
+    <article class="ww-hero" style="background-image:url('img/ww-gallery.jpg')">
+      <img class="ww-logo" src="img/logo-suacc-white.png" alt="SUACC">
+      <div class="ww-hero-body">
+        <h3>สำนักศิลปวัฒนธรรมและการสร้างสรรค์<br>แห่งมหาวิทยาลัยศิลปากร (SUACC)</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+        <div class="ww-btns">
+          <a class="ww-pill green" href="about-who.html">Vision &amp; Mission</a>
+          <a class="ww-pill white" href="about-people.html">Team</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- two sub-unit cards -->
+    <div class="ww-grid">
+      <article class="ww-card" style="background-image:url('img/ww-artcentre.jpg')">
+        <a class="ww-cardlink" href="http://www.art-centre.su.ac.th/visit.html" target="_blank" rel="noopener" aria-label="หอศิลป์ มหาวิทยาลัยศิลปากร"></a>
+        <img class="ww-logo" src="img/logo-artcentre-white.png" alt="Art Centre, Silpakorn University">
+        <div class="ww-card-body">
+          <h3>หอศิลป์ มหาวิทยาลัยศิลปากร</h3>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+          <a class="ww-pill green" href="http://www.art-centre.su.ac.th/visit.html" target="_blank" rel="noopener">Learn More</a>
+        </div>
+      </article>
+      <article class="ww-card" style="background-image:url('img/ww-institute.jpg')">
+        <a class="ww-cardlink" href="institute.html" aria-label="สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ"></a>
+        <img class="ww-logo" src="img/logo-institute-white.png" alt="สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ">
+        <div class="ww-card-body">
+          <h3>สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ</h3>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
+          <a class="ww-pill green" href="institute.html">Learn More</a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
 
-<div class="ab-doband band-w">
+<!-- WHAT WE DO (ผลงาน — ข้อมูลเดียวกับหน้า about-portfolio.html / What's On) -->
+<section class="pad ab-work" id="whatwedo">
   <div class="wrap">
-    <div class="ab-row">
-      <div class="img" style="background-image:url('img/ab-suacc.jpg')"></div>
-      <div class="txt">
-        <img class="logo" src="img/logo-suacc.png" alt="SUACC">
-        <h3>สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-        <a class="ab-pill green" href="about-who.html">Learn More</a>
+    <div class="ab-work-head">
+      <div>
+        <p class="ab-eyebrow">What we do</p>
+        <h2 class="ab-h">ผลงานของสำนักฯ</h2>
+        <p class="lead">รวมโครงการและผลงานด้านนิทรรศการ การวิจัย การอบรม และการเผยแพร่ศิลปวัฒนธรรม ที่สำนักฯ ดำเนินงานตลอดมา</p>
       </div>
+      <a class="ab-pill dark" href="about-portfolio.html">ดูผลงานทั้งหมด</a>
     </div>
   </div>
-</div>
-
-<div class="ab-doband band-m">
-  <div class="wrap">
-    <div class="ab-row rev">
-      <div class="txt">
-        <img class="logo" src="img/logo-artcentre.png" alt="Art Centre Silpakorn">
-        <h3>หอศิลป์ มหาวิทยาลัยศิลปากร</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-        <a class="ab-pill green" href="collection.html">Learn More</a>
-      </div>
-      <div class="img" style="background-image:url('img/ab-artcentre.jpg')"></div>
-    </div>
+  <!-- แถบเลื่อนอัตโนมัติ เต็มขอบจอ — ชุดที่ 2 คือสำเนาเพื่อวนต่อเนื่อง (aria-hidden) -->
+  <div class="work-marquee" id="abWorkMarquee" role="region" aria-label="ผลงานของสำนักฯ (เลื่อนอัตโนมัติ)">
+    <div class="work-track" id="abWorkGrid"></div>
   </div>
-</div>
-
-<div class="ab-doband band-w">
-  <div class="wrap">
-    <div class="ab-row">
-      <div class="img" style="background-image:url('img/ab-institute.jpg')"></div>
-      <div class="txt">
-        <img class="logo" src="img/logo-institute.png" alt="สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ">
-        <h3>สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ</h3>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy</p>
-        <a class="ab-pill green" href="whatson.html">Learn More</a>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 <!-- OUR SERVICE -->
 <section class="ab-service">
@@ -264,20 +219,25 @@
 <!-- NEWS -->
 <section class="pad ab-news">
   <div class="wrap">
-    <div class="cols">
-      <div>
-        <div class="chead"><h3>ข่าวสาร</h3><a class="ab-pill dark" href="about-news.html" style="padding:9px 20px;font-size:13px">ดูทั้งหมด</a></div>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <!-- ข่าวสาร -->
+    <div class="ab-nblock">
+      <div class="chead"><h2>ข่าวสาร</h2><a class="ab-pill dark" href="about-news.html" style="padding:11px 26px">ดูทั้งหมด</a></div>
+      <div class="ab-ngrid">
+        <a class="ab-ncard" href="about-news.html"><span class="thumb" style="background-image:url('img/cosmology-02.jpg')"></span><span class="txt"><span class="date">12 พ.ค. 2569</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span></span></a>
+        <a class="ab-ncard" href="about-news.html"><span class="thumb" style="background-image:url('img/coll-14.jpg')"></span><span class="txt"><span class="date">12 พ.ค. 2569</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span></span></a>
+        <a class="ab-ncard" href="about-news.html"><span class="thumb" style="background-image:url('img/coll-22.jpg')"></span><span class="txt"><span class="date">12 พ.ค. 2569</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span></span></a>
+        <a class="ab-ncard" href="about-news.html"><span class="thumb" style="background-image:url('img/coll-30.jpg')"></span><span class="txt"><span class="date">12 พ.ค. 2569</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span></span></a>
       </div>
-      <div>
-        <div class="chead"><h3>ข่าวจัดซื้อจัดจ้าง</h3><a class="ab-pill dark" href="about-news.html" style="padding:9px 20px;font-size:13px">ดูทั้งหมด</a></div>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ab-nrow" href="about-news.html"><span class="date">12 พ.ค. 2569</span><span class="t">สำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร (SUACC)</span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+
+    <!-- ข่าวจัดซื้อจัดจ้าง -->
+    <div class="ab-nblock">
+      <div class="chead"><h2>ข่าวจัดซื้อจัดจ้าง</h2><a class="ab-pill dark" href="about-news.html" style="padding:11px 26px">ดูทั้งหมด</a></div>
+      <div class="ab-plist">
+        <a class="ab-prow" href="about-news.html"><span class="info"><span class="ab-ptag">ประกาศประกวดราคา / TOR</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</span><span class="date">12 พ.ค. 2569</span></span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ab-prow" href="about-news.html"><span class="info"><span class="ab-ptag">ประกาศผู้ชนะการเสนอราคา / ข้อมูลสาระสำคัญสัญญา</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</span><span class="date">12 พ.ค. 2569</span></span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ab-prow" href="about-news.html"><span class="info"><span class="ab-ptag">แผนการจัดซื้อจัดจ้าง</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</span><span class="date">12 พ.ค. 2569</span></span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ab-prow" href="about-news.html"><span class="info"><span class="ab-ptag">ราคากลาง</span><span class="t">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</span><span class="date">12 พ.ค. 2569</span></span><span class="arw"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </div>
     </div>
   </div>
@@ -305,6 +265,24 @@
     },{threshold:.6});
     nums.forEach(function(n){ io.observe(n); });
   } else { nums.forEach(run); }
+})();
+</script>
+<script src="whatson-data.js"></script>
+<script>
+/* What we do = แถบผลงานเลื่อนอัตโนมัติ (What's On + ลงเอง — window.workItems) — hover/focus หยุด */
+(function(){
+  var track=document.getElementById('abWorkGrid'), box=document.getElementById('abWorkMarquee');
+  if(!track||!window.workItems) return;
+  var items=window.workItems();
+  if(!items.length) return;
+  /* เติมให้เต็มจอ: การ์ดแคบสุด 240+24px → ต้องมีอย่างน้อย ceil(กว้างจอ/264)+1 ใบต่อชุด
+     ข้อมูลไม่พอ (mockup มี 3) → วนซ้ำรายการเดิม (สำเนา aria-hidden) · ข้อมูลจริงพอแล้วไม่ซ้ำ */
+  var need=Math.ceil(Math.max(window.innerWidth,1920)/264)+1, set=items.slice();
+  while(set.length<need) set=set.concat(items);
+  var one=set.map(function(it,i){ return window.workCardHTML(it, i>=items.length); }).join('');
+  var copy='<div style="display:contents" aria-hidden="true">'+set.map(function(it){ return window.workCardHTML(it,true); }).join('')+'</div>';
+  track.innerHTML=one+copy;
+  track.style.setProperty('--dur',(set.length*5)+'s');   /* ~5 วินาที/ใบ */
 })();
 </script>
 <script src="site.js"></script>

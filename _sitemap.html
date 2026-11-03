@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="UTF-8">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'IBM Plex Sans Thai','Silpakorn72',sans-serif}
+  body{background:#eceff1;padding:48px 40px;width:1600px}
+  .map{display:flex;flex-direction:column;align-items:center}
+  .node{border-radius:8px;padding:16px 10px;text-align:center;font-weight:700;color:#12303a;box-shadow:0 2px 6px rgba(0,0,0,.12);font-size:20px}
+  .home{background:#8ecae6;width:210px;color:#0b2e3a}
+  .trunk{width:3px;height:34px;background:#9aa4a8}
+  .mains{display:flex;justify-content:center;gap:34px;position:relative}
+  .mains::before{content:'';position:absolute;top:-17px;left:9%;right:9%;height:3px;background:#9aa4a8}
+  .col{display:flex;flex-direction:column;align-items:center;width:230px}
+  .stem{width:3px;height:17px;background:#9aa4a8}
+  .main{background:#7fd6c2;width:100%}
+  .subwrap{display:flex;flex-direction:column;gap:16px;margin-top:20px;position:relative}
+  .subwrap::before{content:'';position:absolute;top:-20px;left:50%;width:3px;height:20px;background:#9aa4a8;transform:translateX(-50%)}
+  .sub{width:100%;padding:14px 8px;border-radius:8px;text-align:center;font-size:17px;font-weight:600;color:#333;box-shadow:0 2px 5px rgba(0,0,0,.08);position:relative}
+  .sub::before{content:'';position:absolute;top:-16px;left:50%;width:3px;height:16px;background:#c2cacd;transform:translateX(-50%)}
+  .sub:first-child::before{display:none}
+  .c-about .sub{background:#c9b98f}
+  .c-won .sub{background:#f6d67a}
+  .c-around .sub{background:#f4b0a0}
+  .c-coll .sub{background:#c9a6e0}
+  .c-read .sub{background:#a9d6a0}
+  .c-contact .sub{background:#bcd0d6}
+</style></head>
+<body>
+  <div class="map">
+    <div class="node home">หน้าหลัก<br>(Home)</div>
+    <div class="trunk"></div>
+    <div class="mains">
+      <div class="col c-about">
+        <div class="stem"></div><div class="node main">เกี่ยวกับสำนักฯ<br>(About Us)</div>
+        <div class="subwrap">
+          <div class="sub">วิสัยทัศน์ &amp; พันธกิจ</div>
+          <div class="sub">บุคลากร (Team)</div>
+          <div class="sub">บริการของสำนักฯ</div>
+          <div class="sub">ข่าวสาร &amp; ประกาศ</div>
+        </div>
+      </div>
+      <div class="col c-won">
+        <div class="stem"></div><div class="node main">กิจกรรมของสำนักฯ<br>(What's On)</div>
+        <div class="subwrap"><div class="sub">รายละเอียดกิจกรรม</div></div>
+      </div>
+      <div class="col c-around">
+        <div class="stem"></div><div class="node main">กิจกรรมรอบ ม.<br>(What's Around SU)</div>
+        <div class="subwrap"><div class="sub">รายละเอียดกิจกรรม</div></div>
+      </div>
+      <div class="col c-coll">
+        <div class="stem"></div><div class="node main">คลังสะสมศิลปกรรม<br>(Collection / Data)</div>
+        <div class="subwrap">
+          <div class="sub">คลังสะสมทั้งหมด</div>
+          <div class="sub">รายละเอียดผลงาน</div>
+          <div class="sub">เรื่องเล่า (Story)</div>
+        </div>
+      </div>
+      <div class="col c-read">
+        <div class="stem"></div><div class="node main">Reading Corner</div>
+        <div class="subwrap">
+          <div class="sub">E-Books</div>
+          <div class="sub">บทความ (Blog)</div>
+          <div class="sub">Stories</div>
+        </div>
+      </div>
+      <div class="col c-contact">
+        <div class="stem"></div><div class="node main">ติดต่อเรา<br>(Contact Us)</div>
+        <div class="subwrap"><div class="sub">ข้อมูลติดต่อ &amp; แผนที่</div></div>
+      </div>
+    </div>
+  </div>
+</body></html>
