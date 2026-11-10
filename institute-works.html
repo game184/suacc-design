@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ผลงานทั้งหมดของสถาบัน · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== Institute — all works listing ===== */
+  .iw-filter{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 30px}
+  .iw-chip{border:1.5px solid var(--line);background:#fff;color:#4a5550;font-family:inherit;font-weight:700;font-size:14.5px;
+    padding:9px 20px;border-radius:999px;cursor:pointer;transition:.15s}
+  .iw-chip:hover{border-color:var(--green)}
+  .iw-chip.on{background:var(--green-d);border-color:var(--green-d);color:#fff}
+  .iw-count{color:var(--muted);font-size:15px;margin:0 0 20px}
+  .iw-count b{color:var(--green-d)}
+  .iw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;padding-bottom:30px}
+  @media(max-width:900px){.iw-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.iw-grid{grid-template-columns:1fr}}
+  .iw-card{background:#fff;border:1px solid #e2e8e6;border-radius:18px;overflow:hidden;text-decoration:none;color:inherit;transition:.16s;display:block}
+  .iw-card:hover{box-shadow:0 14px 34px rgba(3,191,158,.12);transform:translateY(-3px);border-color:#bfe6da}
+  .iw-card .ci{aspect-ratio:4/3;background-size:cover;background-position:center}
+  .iw-card .cb{padding:20px}
+  .iw-card .ct-tag{display:inline-block;background:#eafaf6;color:var(--green-d);font-size:12px;font-weight:700;padding:5px 13px;border-radius:999px;margin-bottom:10px}
+  .iw-card h3{font-family:var(--head);font-weight:700;font-size:19px;color:var(--ink);margin:0 0 8px;line-height:1.35}
+  .iw-card p{color:#5a6560;font-size:14.5px;line-height:1.6;margin:0}
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- Banner -->
+<section class="pad tint">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <a href="institute.html">สถาบันศิลปสถาปัตยกรรมไทยฯ</a> / <b>ผลงานทั้งหมด</b></p>
+    <p class="eyebrow">Institute Works</p>
+    <h1 class="mb0">ผลงานทั้งหมดของสถาบัน</h1>
+  </div>
+</section>
+
+<section class="pad alt">
+  <div class="wrap">
+    <div class="iw-filter" id="iwFilter"></div>
+    <p class="iw-count" id="iwCount"></p>
+    <div class="iw-grid" id="iwGrid"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="site.js"></script>
+<script>
+/* ผลงานของสถาบัน — 2 โครงการจริง + ตัวอย่าง (รอข้อมูลจริงจากสถาบัน) */
+var WORKS = [
+  {cat:'งานออกแบบสถาปัตยกรรม', title:'พระธาตุอริยสัจ 4', meta:'วัดป่าคอวัง อ.เมือง จ.น่าน', img:'img/inst-prathat-1.jpg', real:true},
+  {cat:'งานออกแบบสถาปัตยกรรมและศิลปกรรม', title:'พิพิธภัณฑ์ธรรมเจดีย์พระธรรมวิสุทธิมงคล', meta:'วัดป่าบ้านตาด จ.อุดรธานี', img:'img/inst-wpbt-2.jpg', real:true},
+  {cat:'งานออกแบบสถาปัตยกรรม', title:'อุโบสถร่วมสมัย (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-prathat-2.jpg'},
+  {cat:'งานศิลปกรรม', title:'จิตรกรรมฝาผนังร่วมสมัย (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-wpbt-4.jpg'},
+  {cat:'งานออกแบบสถาปัตยกรรม', title:'หอระฆังประยุกต์ (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-prathat-3.jpg'},
+  {cat:'งานอนุรักษ์', title:'งานอนุรักษ์เจดีย์โบราณ (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-wpbt-1.jpg'},
+  {cat:'งานศิลปกรรม', title:'งานประติมากรรมประดับอาคาร (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-wpbt-5.jpg'},
+  {cat:'งานออกแบบสถาปัตยกรรมและศิลปกรรม', title:'ศาลาการเปรียญ (ตัวอย่าง)', meta:'รอข้อมูลจริงจากสถาบัน', img:'img/inst-wpbt-6.jpg'}
+];
+
+(function(){
+  var grid=document.getElementById('iwGrid'), filterBox=document.getElementById('iwFilter'), countEl=document.getElementById('iwCount');
+  var cats=['ทั้งหมด']; WORKS.forEach(function(w){ if(cats.indexOf(w.cat)<0) cats.push(w.cat); });
+  var active='ทั้งหมด';
+
+  filterBox.innerHTML = cats.map(function(c){
+    return '<button type="button" class="iw-chip'+(c==='ทั้งหมด'?' on':'')+'" data-c="'+c+'">'+c+'</button>';
+  }).join('');
+
+  function render(){
+    var list = WORKS.filter(function(w){ return active==='ทั้งหมด' || w.cat===active; });
+    countEl.innerHTML = 'แสดง <b>'+list.length+'</b> ผลงาน';
+    grid.innerHTML = list.map(function(w){
+      return '<a class="iw-card" href="#"><div class="ci" style="background-image:url(\''+w.img+'\')"></div>'+
+        '<div class="cb"><span class="ct-tag">'+w.cat+'</span><h3>'+w.title+'</h3><p>'+w.meta+'</p></div></a>';
+    }).join('');
+  }
+
+  filterBox.addEventListener('click', function(e){
+    var b=e.target.closest('.iw-chip'); if(!b) return;
+    active=b.getAttribute('data-c');
+    filterBox.querySelectorAll('.iw-chip').forEach(function(x){ x.classList.toggle('on', x===b); });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
