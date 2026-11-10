@@ -361,6 +361,21 @@
     </table>
   </div>
 
+  <div class="sec">
+    <h2><span class="no">20</span> ข่าวสาร — หน้ารายละเอียด (News Detail) <span class="st ok">✓ ยืนยันแล้ว</span></h2>
+    <p class="sub">หน้าอ่านข่าว (คลิกจากการ์ดในหน้า <b>about-news.html</b>) · ดู <b>news-detail.html?id=N</b> · CSS inline (<b>.nd-*</b> / .rel-item) · ข้อมูลข่าว array <b>window.NEWS</b> (10 รายการตรงกับการ์ด) · <b>ไม่ใช้</b>เลย์เอาต์ blog-detail</p>
+    <table class="spec-t">
+      <tr><th>รายการ</th><th>ค่า</th></tr>
+      <tr><td>กรอบเนื้อหา</td><td class="v">ขอบซ้าย-ขวา<b>ตรงกับโลโก้</b> (ใช้ระยะ .wrap: max 1680px · padding 120px) · ชิดซ้ายทั้งหมด (ไม่กึ่งกลาง)</td></tr>
+      <tr><td>หัวเรื่อง</td><td class="v">breadcrumb (หน้าแรก / ข่าวสารและประกาศ) · <b>h1</b> Silpakorn72 clamp(28–42px) · เมตา = <b>วันที่เผยแพร่</b> (ไอคอนปฏิทิน) เท่านั้น — ไม่มีชื่อผู้เขียน</td></tr>
+      <tr><td>เลย์เอาต์ 2 คอลัมน์</td><td class="v">grid <b>1fr + 340px</b> gap 60 · ซ้าย = บทความ · ขวา = sidebar sticky</td></tr>
+      <tr><td>บทความ (ซ้าย)</td><td class="v">รูป hero (radius 14, สูงสุด 560px) + เนื้อหา (lead 20px + ย่อหน้า 18px) · <b>แถบล่างสุด</b>: หมวดหมู่ (pill ซ้าย) + แชร์ FB/X/Line/คัดลอกลิงก์ (ขวา) · ปุ่ม "← กลับไปหน้าข่าวสาร"</td></tr>
+      <tr><td>sidebar (ขวา)</td><td class="v">การ์ด <b>“ข่าวที่เกี่ยวข้อง”</b> อย่างเดียว (4 รายการ: รูป 70px + หัวข้อ 2 บรรทัด + วันที่) — <b>ไม่มี</b>กล่องข้อมูลบทความ</td></tr>
+      <tr><td>Responsive</td><td class="v">≤900px: รวมเป็น 1 คอลัมน์ (sidebar ลงล่าง)</td></tr>
+      <tr><td>หมายเหตุ</td><td class="v">เนื้อหาเป็น <b>mock</b> · ระบบจริงดึงเนื้อหาเต็มจาก CMS ตาม id</td></tr>
+    </table>
+  </div>
+
   <div class="note" style="margin-top:8px">
     📐 <b>วิธีตรวจค่าเองเพิ่มเติม:</b> คลิกขวาที่หน้าเว็บ → Inspect (DevTools) → เลือก element → ดูที่แท็บ <b>Computed</b> จะเห็น font-size, padding, color ฯลฯ ของจริงทุกตัว
   </div>
