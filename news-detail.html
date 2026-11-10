@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ข่าวสาร · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* ===== News detail — editorial layout (ชุดเดียวกับ blog-detail) ===== */
+  body{background:#fff}
+  .post{max-width:860px;margin:0 auto;padding:40px 24px 40px}
+  .post-top{max-width:720px;margin:0 auto;text-align:center}
+  .post-bc{font-size:14px;color:#7a7f87;margin:0 0 20px}
+  .post-bc a{color:#0a7256}
+  .post-cat{display:inline-block;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--green-d);background:#eafaf6;border:1px solid rgba(3,191,158,.22);border-radius:999px;padding:7px 18px;margin:0 0 18px}
+  .post-title{font-family:var(--head);font-size:clamp(28px,4vw,42px);line-height:1.22;font-weight:700;color:#0d0d0d;margin:0 auto 24px;max-width:760px}
+  .post-byline{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:34px}
+  .post-author{display:flex;align-items:center;gap:13px}
+  .post-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#0a7256,#03bf9e);display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+  .post-avatar svg{width:25px;height:25px}
+  .post-author-name{display:block;font-weight:700;font-size:15.5px;color:#0d0d0d;text-align:left}
+  .post-date{display:block;font-size:14px;color:#7a7f87;margin-top:2px;text-align:left}
+  .post-share{display:flex;align-items:center;gap:14px;font-size:14px;color:#7a7f87}
+  .post-share a{color:#0d0d0d;display:flex;transition:.15s}
+  .post-share a:hover{color:#03bf9e}
+  .post-share svg{width:21px;height:21px}
+  .post-hero{margin:0 0 44px}
+  .post-hero img{width:100%;height:auto;max-height:520px;object-fit:cover;display:block;border-radius:14px}
+  .post-body{max-width:720px;margin:0 auto;text-align:left}
+  .post-body p{margin:0 0 22px;font-size:18px;line-height:1.9;color:#2a2d31}
+  .post-body p.lead{font-size:20px;line-height:1.8;color:#0d0d0d;font-weight:600}
+  .post-body h3{font-family:var(--head);font-size:24px;line-height:1.4;margin:40px 0 14px;color:#0d0d0d}
+  .post-foot{max-width:720px;margin:48px auto 0;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  /* related */
+  .post-more{background:#f6f8f7;border-top:1px solid var(--line)}
+  .post-more .wrap{padding:56px 24px}
+  .post-more h2{font-family:var(--head);font-size:26px;color:#0d0d0d;margin:0 0 26px}
+  @media(max-width:640px){.post{padding:28px 20px 30px}.post-body p{font-size:17px}.post-body p.lead{font-size:18.5px}}
+</style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<article class="post" id="maincontent" tabindex="-1">
+  <div class="post-top">
+    <p class="post-bc"><a href="index.html">หน้าแรก</a> / <a href="about-news.html">ข่าวสารและประกาศ</a></p>
+    <p class="post-cat" id="dCat"></p>
+    <h1 class="post-title" id="dTitle"></h1>
+    <div class="post-byline">
+      <div class="post-author">
+        <div class="post-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></div>
+        <div>
+          <span class="post-author-name">สำนักศิลปวัฒนธรรมและการสร้างสรรค์</span>
+          <span class="post-date" id="dDate"></span>
+        </div>
+      </div>
+      <div class="post-share">แชร์ :
+        <a href="#" aria-label="แชร์ Facebook" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.86.3-1.45 1.55-1.45H16.2V5.1C15.83 5.05 14.9 5 13.86 5 11.66 5 10.13 6.34 10.13 8.8V11H7.5v3h2.63v8H13z"/></svg></a>
+        <a href="#" aria-label="แชร์ X" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3h3.2l-6.99 7.99L22 21h-6.43l-5.03-6.58L4.78 21H1.58l7.48-8.55L2 3h6.6l4.55 6.01L17.53 3zm-1.12 16h1.77L7.67 4.9H5.77L16.41 19z"/></svg></a>
+        <a href="#" aria-label="คัดลอกลิงก์" onclick="navigator.clipboard&&navigator.clipboard.writeText(location.href);return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9.5 14.5l5-5"/><path d="M11 6.5l1-1a4 4 0 0 1 5.7 5.7l-2 2"/><path d="M13 17.5l-1 1a4 4 0 0 1-5.7-5.7l2-2"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <figure class="post-hero"><img id="dHero" alt=""></figure>
+  <div class="post-body" id="dBody"></div>
+
+  <div class="post-foot">
+    <a class="btn ghost" href="about-news.html">← กลับไปหน้าข่าวสาร</a>
+  </div>
+</article>
+
+<!-- ข่าวอื่น ๆ -->
+<section class="post-more">
+  <div class="wrap">
+    <h2>ข่าวอื่น ๆ</h2>
+    <div class="ab-ngrid" id="dMore"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script>
+/* ข้อมูลข่าว (mock) — ให้ตรงกับการ์ดในหน้า about-news.html
+   ระบบจริง: ดึงข่าวจาก CMS ตาม id */
+window.NEWS = [
+  {id:1,  tag:'กิจกรรม', date:'18 ก.ย. 2569', img:'img/cosmology-02.jpg',
+    title:'เปิดนิทรรศการศิลปกรรมแห่งชาติ ครั้งที่ 69 ณ หอศิลป์ มหาวิทยาลัยศิลปากร',
+    lead:'สำนักศิลปวัฒนธรรมและการสร้างสรรค์ มหาวิทยาลัยศิลปากร จัดพิธีเปิดนิทรรศการศิลปกรรมแห่งชาติ ครั้งที่ 69 อย่างเป็นทางการ ณ หอศิลป์ มหาวิทยาลัยศิลปากร'},
+  {id:2,  tag:'รับสมัคร', date:'16 ก.ย. 2569', img:'img/coll-14.jpg',
+    title:'ประกาศรับสมัครเจ้าหน้าที่ภัณฑารักษ์ประจำหอศิลป์ มหาวิทยาลัยศิลปากร',
+    lead:'สำนักฯ เปิดรับสมัครบุคคลเพื่อคัดเลือกเป็นเจ้าหน้าที่ภัณฑารักษ์ (Curator) ประจำหอศิลป์ มหาวิทยาลัยศิลปากร จำนวน 1 อัตรา'},
+  {id:3,  tag:'ประกาศ', date:'12 ก.ย. 2569', img:'img/coll-22.jpg',
+    title:'ประกาศวันหยุดทำการหอศิลป์ มหาวิทยาลัยศิลปากร ช่วงเทศกาล ประจำปี 2569',
+    lead:'หอศิลป์ มหาวิทยาลัยศิลปากร แจ้งกำหนดวันหยุดทำการในช่วงเทศกาล ประจำปี 2569 เพื่อให้ผู้เข้าชมวางแผนการเดินทางล่วงหน้า'},
+  {id:4,  tag:'กิจกรรม', date:'5 ก.ย. 2569', img:'img/coll-30.jpg',
+    title:'สำนักฯ ร่วมจัดเทศกาลศิลปะร่วมสมัยเมืองเก่า 2569',
+    lead:'สำนักศิลปวัฒนธรรมและการสร้างสรรค์ ร่วมเป็นเจ้าภาพจัดเทศกาลศิลปะร่วมสมัยในย่านเมืองเก่า เชื่อมโยงศิลปิน ชุมชน และพื้นที่ทางวัฒนธรรม'},
+  {id:5,  tag:'ประกาศ', date:'1 ก.ย. 2569', img:'img/coll-griffin.jpg',
+    title:'ประกาศเชิญชวนส่งผลงานเข้าประกวดศิลปกรรมร่วมสมัย ประจำปี 2569',
+    lead:'สำนักฯ ขอเชิญชวนศิลปินและผู้สนใจส่งผลงานเข้าร่วมการประกวดศิลปกรรมร่วมสมัย ประจำปี 2569 ชิงเงินรางวัลและเกียรติบัตร'},
+  {id:6,  tag:'กิจกรรม', date:'22 ส.ค. 2569', img:'img/coll-25.jpg',
+    title:'เปิดตัวคลังสะสมศิลปกรรมออนไลน์ เชื่อมระบบหอสมุดกลาง',
+    lead:'สำนักฯ เปิดตัวระบบคลังสะสมศิลปกรรมออนไลน์ (Digital Collection) ให้ผู้สนใจสืบค้นและเข้าถึงผลงานสะสมได้จากทุกที่'},
+  {id:7,  tag:'ประกาศ', date:'20 ส.ค. 2569', img:'img/coll-28.jpg',
+    title:'ประกาศนโยบายการคุ้มครองข้อมูลส่วนบุคคล (PDPA) ของสำนักฯ',
+    lead:'สำนักฯ ประกาศนโยบายและแนวปฏิบัติในการคุ้มครองข้อมูลส่วนบุคคล ตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562'},
+  {id:8,  tag:'กิจกรรม', date:'10 ส.ค. 2569', img:'img/cosmology-03.jpg',
+    title:'ขอเชิญร่วมเวิร์กช็อปภาพพิมพ์สำหรับบุคคลทั่วไป ณ หอศิลป์',
+    lead:'สำนักฯ จัดกิจกรรมเวิร์กช็อปภาพพิมพ์ (Printmaking Workshop) สำหรับบุคคลทั่วไป โดยไม่มีค่าใช้จ่าย รับจำนวนจำกัด'},
+  {id:9,  tag:'บุคลากร', date:'20 ต.ค. 2568', img:'img/coll-19.jpg',
+    title:'เผยแพร่แผนการบริหารและพัฒนาทรัพยากรบุคคล ประจำปี 2569',
+    lead:'สำนักฯ เผยแพร่แผนการบริหารและพัฒนาทรัพยากรบุคคล ประจำปีงบประมาณ พ.ศ. 2569 เพื่อความโปร่งใสและการมีส่วนร่วม'},
+  {id:10, tag:'บุคลากร', date:'20 ต.ค. 2568', img:'img/coll-21.jpg',
+    title:'ประกาศหลักเกณฑ์การบริหารและพัฒนาทรัพยากรบุคคลของสำนักฯ',
+    lead:'สำนักฯ ประกาศหลักเกณฑ์และแนวทางการบริหารและพัฒนาทรัพยากรบุคคล เพื่อใช้เป็นกรอบในการดำเนินงานด้านบุคลากร'}
+];
+
+(function(){
+  var NEWS = window.NEWS;
+  var id = parseInt((new URLSearchParams(location.search)).get('id'), 10);
+  var ev = NEWS.filter(function(e){return e.id===id;})[0] || NEWS[0];
+
+  document.title = ev.title + ' · SUACC';
+  document.getElementById('dCat').textContent = ev.tag;
+  document.getElementById('dTitle').textContent = ev.title;
+  document.getElementById('dDate').textContent = 'เผยแพร่เมื่อ ' + ev.date;
+  var hero = document.getElementById('dHero');
+  hero.src = ev.img; hero.alt = ev.title;
+
+  // เนื้อหา (lead + ย่อหน้าบริบท) — ระบบจริงดึงเนื้อหาเต็มจาก CMS
+  var body =
+    '<p class="lead">' + ev.lead + '</p>' +
+    '<p>สำนักศิลปวัฒนธรรมและการสร้างสรรค์ มหาวิทยาลัยศิลปากร มุ่งส่งเสริม อนุรักษ์ และเผยแพร่งานศิลปวัฒนธรรม ควบคู่กับการสร้างสรรค์ผลงานใหม่ เพื่อเป็นแหล่งเรียนรู้แก่นักศึกษา บุคลากร และประชาชนทั่วไป</p>' +
+    '<h3>รายละเอียดเพิ่มเติม</h3>' +
+    '<p>ผู้สนใจสามารถติดตามข้อมูลข่าวสาร กำหนดการ และรายละเอียดเพิ่มเติมได้ทางเว็บไซต์และช่องทางประชาสัมพันธ์ของสำนักฯ หรือสอบถามโดยตรงที่สำนักงานสำนักศิลปวัฒนธรรมและการสร้างสรรค์ ในวันและเวลาราชการ</p>' +
+    '<p>ทั้งนี้ สำนักฯ ขอขอบคุณทุกภาคส่วนที่ร่วมสนับสนุนการดำเนินงานด้านศิลปวัฒนธรรมและการสร้างสรรค์ของมหาวิทยาลัยศิลปากรด้วยดีเสมอมา</p>';
+  document.getElementById('dBody').innerHTML = body;
+
+  // ข่าวอื่น ๆ (3 รายการ ที่ไม่ใช่ข่าวปัจจุบัน)
+  var more = NEWS.filter(function(e){return e.id!==ev.id;}).slice(0,3);
+  document.getElementById('dMore').innerHTML = more.map(function(e){
+    return '<a class="ab-ncard" href="news-detail.html?id='+e.id+'">'+
+      '<span class="thumb" style="background-image:url(\''+e.img+'\')"></span>'+
+      '<span class="txt"><span class="date">'+e.date+'</span><span class="t">'+e.title+'</span></span></a>';
+  }).join('');
+})();
+</script>
+<script src="site.js"></script>
+</body>
+</html>
