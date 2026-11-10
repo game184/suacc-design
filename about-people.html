@@ -15,7 +15,6 @@
     <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <a href="about.html">เกี่ยวกับเรา</a> / <b>บุคลากร</b></p>
     <p class="eyebrow">Our People</p>
     <h1 class="mb0">บุคลากรของสำนักฯ</h1>
-    <p class="lead" style="margin-top:16px">ทีมงานผู้ขับเคลื่อนพันธกิจด้านศิลปวัฒนธรรมและการสร้างสรรค์ ของมหาวิทยาลัยศิลปากร</p>
   </div>
 </section>
 
@@ -28,12 +27,14 @@
 /* โครงสร้างบุคลากรสำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร
    จำนวนตามเอกสารของสำนักฯ — รายชื่อ/ตำแหน่ง/ภาพ รอข้อมูลจริง */
 var GROUPS = [
-  { en:'Leadership',   th:'ผู้บริหาร',                              count:4  },
-  { en:'Office',       th:'สำนักงานสำนักศิลปวัฒนธรรมฯ',             count:13 },
-  { en:'Art Centre',   th:'หอศิลป์ มหาวิทยาลัยศิลปากร',             count:11 },
-  { en:'Institute',    th:'สถาบันศิลปสถาปัตยกรรมเฉลิมพระเกียรติ',   count:2  }
+  { en:'Leadership',   th:'ผู้บริหาร',                                       count:4  },
+  { en:'Office',       th:'สำนักงานสำนักศิลปวัฒนธรรมและการสร้างสรรค์',        count:13 },
+  { en:'Art Centre',   th:'หอศิลป์ มหาวิทยาลัยศิลปากร',                       count:11 },
+  { en:'Institute',    th:'สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ',          count:2  }
 ];
 
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+var faceIdx = 0;               // วนใช้ภาพ portrait สมมุติ team-01..12
 var root = document.getElementById('people');
 GROUPS.forEach(function(g, gi){
   var sec = document.createElement('section');
@@ -42,9 +43,11 @@ GROUPS.forEach(function(g, gi){
 
   var cards = '';
   for (var i = 0; i < g.count; i++){
+    var face = 'img/team/team-' + pad2((faceIdx % 12) + 1) + '.jpg';
+    faceIdx++;
     cards +=
       '<div class="person">' +
-        '<div class="pic"><img src="img/team/placeholder.svg" alt="บุคลากร ' + g.th + '" loading="lazy"></div>' +
+        '<div class="pic"><img src="' + face + '" alt="บุคลากร ' + g.th + '" loading="lazy"></div>' +
         '<h4>ชื่อ–นามสกุล</h4>' +
         '<p class="role">ตำแหน่ง</p>' +
       '</div>';
