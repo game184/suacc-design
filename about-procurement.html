@@ -6,6 +6,15 @@
 <title>จัดซื้อจัดจ้าง (ระบบ e-GP) · SUACC</title>
 <link rel="stylesheet" href="styles.css">
 <style>
+  /* ===== แท็บด้านบน (ชุดเดียวกับหน้าข่าวสาร) ===== */
+  .nt-tabs{display:flex;gap:36px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  .nt-tab{padding:0 2px 16px;font-family:var(--head);font-weight:700;font-size:20px;color:var(--muted);
+    text-decoration:none;position:relative;transition:.15s;white-space:nowrap}
+  .nt-tab:hover{color:var(--ink)}
+  .nt-tab.on{color:var(--green-d)}
+  .nt-tab.on::after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--green);border-radius:3px}
+  @media(max-width:640px){.nt-tabs{gap:24px}.nt-tab{font-size:17px}}
+
   /* ===== จัดซื้อจัดจ้าง — หน้าค้นหาแบบ e-GP ===== */
   .eg-search{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;
     box-shadow:0 10px 30px rgba(13,13,13,.04);margin-bottom:26px}
@@ -74,15 +83,21 @@
 <!-- Banner (ดีไซน์เดียวกับ What we do / ข่าวสาร) -->
 <section class="pad tint">
   <div class="wrap">
-    <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <a href="about.html">เกี่ยวกับเรา</a> / <b>จัดซื้อจัดจ้าง</b></p>
-    <p class="eyebrow">Procurement · e-GP</p>
-    <h1 class="mb0">ประกาศจัดซื้อจัดจ้าง</h1>
+    <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <a href="about.html">เกี่ยวกับเรา</a> / <b>ข่าวสารและประกาศ</b></p>
+    <p class="eyebrow">News &amp; Announcements</p>
+    <h1 class="mb0">ข่าวสารและประกาศ</h1>
   </div>
 </section>
 
 <!-- Search + results -->
 <section class="pad alt">
   <div class="wrap">
+
+    <!-- แท็บด้านบน: ข่าวสาร (ลิงก์กลับ) · ประกาศจัดซื้อจัดจ้าง (หน้านี้) -->
+    <nav class="nt-tabs">
+      <a class="nt-tab" href="about-news.html">ข่าวสาร</a>
+      <a class="nt-tab on" href="about-procurement.html" aria-current="page">ประกาศจัดซื้อจัดจ้าง</a>
+    </nav>
 
     <!-- แบบฟอร์มค้นหา -->
     <form class="eg-search" id="egForm">
