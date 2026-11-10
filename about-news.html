@@ -23,6 +23,11 @@
   .na-sub a{padding:9px 14px 9px 22px;font-size:13.5px;font-weight:500;color:var(--muted);border-left:2px solid var(--line);border-radius:0 10px 10px 0}
   .na-sub a:hover{background:#f3f7f5;color:var(--ink)}
   .na-sub a.on{background:#eafaf6;color:var(--green-d);border-left-color:var(--green);font-weight:600}
+  /* cross-link to procurement page */
+  .na-ext{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding:12px 16px;border-radius:12px;
+    font-weight:600;font-size:15px;text-decoration:none;color:var(--green-d);background:#eafaf6;border:1px solid var(--green2);transition:.15s}
+  .na-ext:hover{background:var(--green);color:#fff;border-color:var(--green)}
+  .na-ext svg{width:16px;height:16px;flex-shrink:0}
   /* ---- content ---- */
   .na-panel{display:none;animation:naIn .25s ease}
   .na-panel.show{display:block}
@@ -93,17 +98,11 @@
         <nav class="na-nav" id="naNav">
           <a data-target="news" class="on">ข่าวสาร</a>
           <a data-target="general">ประกาศทั่วไป</a>
-          <a data-target="proc" class="na-parent">จัดซื้อจัดจ้าง
-            <svg class="cx" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </a>
-          <div class="na-sub" id="naSub">
-            <a data-target="proc-bid">ประกาศประกวดราคา / TOR</a>
-            <a data-target="proc-win">ประกาศผู้ชนะการเสนอราคา / ข้อมูลสาระสำคัญสัญญา</a>
-            <a data-target="proc-plan">แผนการจัดซื้อจัดจ้าง</a>
-            <a data-target="proc-price">ราคากลาง</a>
-          </div>
           <a data-target="hr">ข่าวบุคลากร</a>
         </nav>
+        <a class="na-ext" href="about-procurement.html">จัดซื้อจัดจ้าง
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </aside>
 
       <!-- RIGHT content -->
@@ -138,88 +137,6 @@
           </table>
         </div>
 
-        <!-- 3. จัดซื้อจัดจ้าง (overview) -->
-        <div class="na-panel" id="p-proc">
-          <div class="na-head"><h2>จัดซื้อจัดจ้าง</h2></div>
-          <p class="na-desc">ข้อมูลการจัดซื้อจัดจ้างของสำนักฯ ตามพระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ เลือกหมวดที่ต้องการด้านล่างหรือจากเมนูด้านซ้าย</p>
-          <div class="na-grid4">
-            <a class="na-cat" data-target="proc-bid" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-              <h4>ประกาศประกวดราคา / TOR</h4><p>ประกาศเชิญชวน ร่างขอบเขตงาน (TOR) และเอกสารประกวดราคา</p></a>
-            <a class="na-cat" data-target="proc-win" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
-              <h4>ประกาศผู้ชนะ / สาระสำคัญสัญญา</h4><p>ประกาศผู้ชนะการเสนอราคา และข้อมูลสาระสำคัญในสัญญา</p></a>
-            <a class="na-cat" data-target="proc-plan" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
-              <h4>แผนการจัดซื้อจัดจ้าง</h4><p>แผนการจัดซื้อจัดจ้างประจำปีงบประมาณ</p></a>
-            <a class="na-cat" data-target="proc-price" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-              <h4>ราคากลาง</h4><p>ตารางแสดงวงเงินงบประมาณและราคากลาง</p></a>
-          </div>
-        </div>
-
-        <!-- 3.1 ประกวดราคา / TOR -->
-        <div class="na-panel" id="p-proc-bid">
-          <div class="na-head"><h2>ประกาศประกวดราคา / TOR</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ประกาศเชิญชวน ร่างขอบเขตของงาน (TOR) และเอกสารประกวดราคา</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ประกวดราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ ด้วยวิธี e-bidding</div><div class="dt">เผยแพร่ 15 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ร่างขอบเขตของงาน (TOR) จ้างปรับปรุงห้องนิทรรศการถาวร</div><div class="dt">เผยแพร่ 8 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกวดราคาจ้างพัฒนาแพลตฟอร์มออนไลน์ ด้วยวิธี e-bidding</div><div class="dt">เผยแพร่ 25 ส.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 3.2 ผู้ชนะ / สาระสำคัญสัญญา -->
-        <div class="na-panel" id="p-proc-win">
-          <div class="na-head"><h2>ประกาศผู้ชนะการเสนอราคา / ข้อมูลสาระสำคัญสัญญา</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ประกาศผู้ชนะการเสนอราคา และข้อมูลสาระสำคัญในสัญญา (แบบ สขร.)</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ประกาศผู้ชนะการเสนอราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ</div><div class="dt">เผยแพร่ 20 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ข้อมูลสาระสำคัญในสัญญา จ้างพัฒนาแพลตฟอร์มออนไลน์</div><div class="dt">เผยแพร่ 12 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกาศผู้ชนะการเสนอราคาจ้างปรับปรุงห้องนิทรรศการ</div><div class="dt">เผยแพร่ 2 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 3.3 แผนการจัดซื้อจัดจ้าง -->
-        <div class="na-panel" id="p-proc-plan">
-          <div class="na-head"><h2>แผนการจัดซื้อจัดจ้าง</h2><span class="na-count">ทั้งหมด 2 รายการ</span></div>
-          <p class="na-desc">แผนการจัดซื้อจัดจ้างประจำปีงบประมาณ</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">แผนการจัดซื้อจัดจ้าง ประจำปีงบประมาณ พ.ศ. 2569</div><div class="dt">เผยแพร่ 15 ต.ค. 2568</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกาศเปลี่ยนแปลงแผนการจัดซื้อจัดจ้าง ประจำปี 2569</div><div class="dt">เผยแพร่ 5 ม.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- 3.4 ราคากลาง -->
-        <div class="na-panel" id="p-proc-price">
-          <div class="na-head"><h2>ราคากลาง</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ตารางแสดงวงเงินงบประมาณที่ได้รับจัดสรรและราคากลาง (ราคาอ้างอิง)</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ราคากลางซื้อครุภัณฑ์จัดแสดงนิทรรศการ</div><div class="dt">เผยแพร่ 14 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ราคากลางจ้างพัฒนาแพลตฟอร์มออนไลน์ (แบบ บก.06)</div><div class="dt">เผยแพร่ 24 ส.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ราคากลางจ้างปรับปรุงห้องนิทรรศการถาวร (แบบ บก.01)</div><div class="dt">เผยแพร่ 30 ก.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
         <!-- 4. ข่าวบุคลากร -->
         <div class="na-panel" id="p-hr">
           <div class="na-head"><h2>ข่าวบุคลากร</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
@@ -247,24 +164,13 @@
 <script>
 (function(){
   var nav=document.getElementById('naNav');
-  var sub=document.getElementById('naSub');
   var links=nav.querySelectorAll('a[data-target]');
-  var catLinks=document.querySelectorAll('.na-cat[data-target]');
   function show(target){
-    // panels
     document.querySelectorAll('.na-panel').forEach(function(p){ p.classList.toggle('show', p.id==='p-'+target); });
-    // sidebar active state
     links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-target')===target); });
-    // keep procurement group open + parent highlighted when a sub (or overview) is active
-    var inProc = target==='proc' || target.indexOf('proc-')===0;
-    sub.classList.toggle('show', inProc);
-    var parent=nav.querySelector('.na-parent');
-    parent.classList.toggle('open', inProc);
-    if(inProc) parent.classList.add('on');
     window.scrollTo({top:0,behavior:'smooth'});
   }
   links.forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); show(a.getAttribute('data-target')); }); });
-  catLinks.forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); show(a.getAttribute('data-target')); }); });
 })();
 </script>
 </body>

@@ -16,7 +16,7 @@ window.SUACC_LANG = (function(){
   const CARET = '<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true"><path d="M5 8.5 L12 15.5 L19 8.5"/></svg>';
   /* What we do detail ใช้ template whatson-detail.html?from=work → ไฮไลต์เมนู About Us แทน What's On */
   const fromWork = page==='whatson-detail.html' && new URLSearchParams(location.search).get('from')==='work';
-  const aAbout = fromWork ? 'active' : isOn('about.html','about-who.html','about-people.html','about-portfolio.html','about-news.html');
+  const aAbout = fromWork ? 'active' : isOn('about.html','about-who.html','about-people.html','about-portfolio.html','about-news.html','about-procurement.html');
   const aRead  = isOn('reading.html','ebooks.html','blog.html','stories.html');
   const aWon   = fromWork ? '' : isOn('whatson.html','whatson-detail.html');
   const aColl  = isOn('collection.html','collection-detail.html');
@@ -49,6 +49,7 @@ window.SUACC_LANG = (function(){
             <a href="about-people.html">Team</a>
             <a href="about-portfolio.html">What We Do</a>
             <a href="about-news.html">News &amp; Announcements</a>
+            <a href="about-procurement.html">จัดซื้อจัดจ้าง</a>
           </div>
         </div>
         <div class="item ${aWon}"><a href="whatson.html"${aWon?' aria-current="page"':''}>What's On</a></div>
@@ -110,6 +111,7 @@ window.SUACC_LANG = (function(){
           <a href="about-people.html">Team</a>
           <a href="about-portfolio.html">What We Do</a>
           <a href="about-news.html">News &amp; Announcements</a>
+          <a href="about-procurement.html">จัดซื้อจัดจ้าง</a>
         </div>
         <div class="col">
           <h3><a href="whatson.html">What's On</a></h3>
