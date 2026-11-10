@@ -49,7 +49,6 @@ window.SUACC_LANG = (function(){
             <a href="about-people.html">Team</a>
             <a href="about-portfolio.html">What We Do</a>
             <a href="about-news.html">News &amp; Announcements</a>
-            <a href="about-procurement.html">จัดซื้อจัดจ้าง</a>
           </div>
         </div>
         <div class="item ${aWon}"><a href="whatson.html"${aWon?' aria-current="page"':''}>What's On</a></div>
@@ -111,7 +110,6 @@ window.SUACC_LANG = (function(){
           <a href="about-people.html">Team</a>
           <a href="about-portfolio.html">What We Do</a>
           <a href="about-news.html">News &amp; Announcements</a>
-          <a href="about-procurement.html">จัดซื้อจัดจ้าง</a>
         </div>
         <div class="col">
           <h3><a href="whatson.html">What's On</a></h3>
