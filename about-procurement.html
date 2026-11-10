@@ -3,54 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>จัดซื้อจัดจ้าง · SUACC</title>
+<title>จัดซื้อจัดจ้าง (ระบบ e-GP) · SUACC</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ===== จัดซื้อจัดจ้าง (sidebar layout — โทนเดียวกับหน้าข่าวสาร) ===== */
-  .na-layout{display:grid;grid-template-columns:270px 1fr;gap:36px;align-items:start}
-  .na-side{position:sticky;top:96px}
-  .na-side h3{font-family:var(--head);font-size:20px;color:var(--green-d);margin:0 0 14px;padding-bottom:12px;border-bottom:2px solid var(--green)}
-  .na-nav{display:flex;flex-direction:column;gap:4px}
-  .na-nav a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 16px;border-radius:12px;
-    color:var(--ink);font-weight:600;font-size:15px;cursor:pointer;text-decoration:none;transition:.15s;border-left:3px solid transparent}
-  .na-nav a:hover{background:#f3f7f5}
-  .na-nav a.on{background:#eafaf6;color:var(--green-d);border-left-color:var(--green)}
-  .na-panel{display:none;animation:naIn .25s ease}
-  .na-panel.show{display:block}
-  @keyframes naIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  .na-head{margin:0 0 6px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-  .na-head h2{margin:0;font-size:28px}
-  .na-count{font-size:14px;color:var(--muted)}
-  .na-desc{color:var(--muted);margin:0 0 22px;font-size:15px;line-height:1.6}
-  /* document table */
-  .na-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-  .na-table th{background:#eafaf6;text-align:left;padding:14px 20px;font-size:14px;color:var(--green-d);font-weight:700;white-space:nowrap}
-  .na-table th.c,.na-table td.c{text-align:center}
-  .na-table td{padding:16px 20px;border-top:1px solid var(--line);vertical-align:middle}
-  .na-table .doc{font-weight:600;color:var(--ink);font-size:15.5px}
-  .na-table .dt{font-size:13px;color:var(--muted);margin-top:4px}
-  .na-file{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#c0392b}
-  .na-dl{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;
+  /* ===== จัดซื้อจัดจ้าง — หน้าค้นหาแบบ e-GP ===== */
+  .eg-search{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;
+    box-shadow:0 10px 30px rgba(13,13,13,.04);margin-bottom:26px}
+  .eg-form{display:grid;grid-template-columns:1fr 320px auto;gap:16px;align-items:end}
+  .eg-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+  .eg-field label{font-size:13.5px;font-weight:700;color:var(--green-d)}
+  .eg-field input,.eg-field select{width:100%;height:48px;border:1.5px solid var(--line);border-radius:12px;
+    padding:0 14px;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;transition:.15s}
+  .eg-field select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:40px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%230a7256' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center}
+  .eg-field input:focus,.eg-field select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(3,191,158,.15)}
+  .eg-btn{height:48px;padding:0 30px;border:none;border-radius:12px;background:var(--green-d);color:#fff;
+    font-family:inherit;font-weight:700;font-size:15.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s;white-space:nowrap}
+  .eg-btn:hover{background:var(--green);box-shadow:0 8px 20px rgba(3,191,158,.3)}
+  .eg-btn svg{width:18px;height:18px}
+
+  .eg-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+  .eg-meta .count{font-size:14.5px;color:var(--muted)}
+  .eg-meta .count b{color:var(--green-d)}
+  .eg-active{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;background:#eafaf6;color:var(--green-d);
+    font-weight:700;padding:7px 14px;border-radius:999px;border:1px solid rgba(3,191,158,.25)}
+  .eg-active a{color:var(--green-d);text-decoration:none;font-weight:800;line-height:1}
+  .eg-active a:hover{color:#c0392b}
+
+  /* results table */
+  .eg-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .eg-table th{background:#0a7256;color:#fff;text-align:left;padding:15px 20px;font-size:14px;font-weight:700;white-space:nowrap}
+  .eg-table th.c,.eg-table td.c{text-align:center}
+  .eg-table td{padding:16px 20px;border-top:1px solid var(--line);vertical-align:top}
+  .eg-table tbody tr:hover{background:#f7fbf9}
+  .eg-type{display:inline-block;font-size:12.5px;font-weight:700;color:var(--green-d);background:#eafaf6;
+    border:1px solid rgba(3,191,158,.22);border-radius:8px;padding:5px 11px;line-height:1.35;white-space:normal}
+  .eg-title{font-weight:600;color:var(--ink);font-size:15.5px;line-height:1.55;max-width:560px}
+  .eg-date{font-size:14px;color:var(--muted);white-space:nowrap}
+  .eg-view{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
     border:1.5px solid var(--green);color:var(--green-d);transition:.15s}
-  .na-dl:hover{background:var(--green);color:#fff}
-  .na-dl svg{width:18px;height:18px}
-  /* overview cards */
-  .na-grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  .na-cat{display:block;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;text-decoration:none;color:var(--ink);transition:.15s}
-  .na-cat:hover{border-color:var(--green);box-shadow:0 8px 22px rgba(3,191,158,.1);transform:translateY(-2px)}
-  .na-cat .ic{width:46px;height:46px;border-radius:12px;background:#eafaf6;display:flex;align-items:center;justify-content:center;color:var(--green-d);margin-bottom:14px}
-  .na-cat .ic svg{width:24px;height:24px}
-  .na-cat h4{margin:0 0 6px;font-size:17px}
-  .na-cat p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.5}
-  @media(max-width:900px){
-    .na-layout{grid-template-columns:1fr;gap:20px}
-    .na-side{position:static}
-    .na-grid4{grid-template-columns:1fr}
-    .na-table thead{display:none}
-    .na-table,.na-table tbody,.na-table tr,.na-table td{display:block;width:100%}
-    .na-table tr{border-top:1px solid var(--line);padding:6px 0}
-    .na-table td{border:none;padding:6px 20px}
-    .na-table td.c{text-align:left}
+  .eg-view:hover{background:var(--green);color:#fff}
+  .eg-view svg{width:19px;height:19px}
+  .eg-empty{padding:44px 20px;text-align:center;color:var(--muted);border-top:1px solid var(--line)}
+
+  /* pagination */
+  .eg-pager{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:24px;flex-wrap:wrap}
+  .eg-pager button{min-width:40px;height:40px;padding:0 12px;border:1.5px solid var(--line);background:#fff;border-radius:10px;
+    font-family:inherit;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer;transition:.15s}
+  .eg-pager button:hover:not(:disabled){border-color:var(--green);color:var(--green-d)}
+  .eg-pager button.on{background:var(--green-d);border-color:var(--green-d);color:#fff}
+  .eg-pager button:disabled{opacity:.4;cursor:not-allowed}
+  .eg-pager .dots{color:var(--muted);padding:0 4px}
+
+  @media(max-width:860px){
+    .eg-form{grid-template-columns:1fr}
+    .eg-btn{width:100%;justify-content:center}
+    .eg-table thead{display:none}
+    .eg-table,.eg-table tbody,.eg-table tr,.eg-table td{display:block;width:100%}
+    .eg-table tr{border-top:1px solid var(--line);padding:8px 0}
+    .eg-table td{border:none;padding:5px 18px}
+    .eg-table td.c{text-align:left}
+    .eg-title{max-width:none}
   }
 </style>
 </head>
@@ -61,132 +75,232 @@
 <section class="pad tint">
   <div class="wrap">
     <p class="breadcrumb"><a href="index.html">หน้าแรก</a> / <a href="about.html">เกี่ยวกับเรา</a> / <b>จัดซื้อจัดจ้าง</b></p>
-    <p class="eyebrow">Procurement</p>
-    <h1 class="mb0">จัดซื้อจัดจ้าง</h1>
+    <p class="eyebrow">Procurement · e-GP</p>
+    <h1 class="mb0">ประกาศจัดซื้อจัดจ้าง</h1>
   </div>
 </section>
 
-<!-- Two-column: sidebar + content -->
+<!-- Search + results -->
 <section class="pad alt">
   <div class="wrap">
-    <div class="na-layout">
 
-      <!-- LEFT sidebar -->
-      <aside class="na-side">
-        <h3>หมวดหมู่</h3>
-        <nav class="na-nav" id="naNav">
-          <a data-target="overview" class="on">ภาพรวม</a>
-          <a data-target="bid">ประกาศประกวดราคา / TOR</a>
-          <a data-target="win">ประกาศผู้ชนะ / สาระสำคัญสัญญา</a>
-          <a data-target="plan">แผนการจัดซื้อจัดจ้าง</a>
-          <a data-target="price">ราคากลาง</a>
-        </nav>
-      </aside>
-
-      <!-- RIGHT content -->
-      <div class="na-content">
-
-        <!-- ภาพรวม -->
-        <div class="na-panel show" id="p-overview">
-          <div class="na-head"><h2>จัดซื้อจัดจ้าง</h2></div>
-          <p class="na-desc">ข้อมูลการจัดซื้อจัดจ้างของสำนักฯ ตามพระราชบัญญัติการจัดซื้อจัดจ้างและการบริหารพัสดุภาครัฐ เลือกหมวดที่ต้องการด้านล่างหรือจากเมนูด้านซ้าย</p>
-          <div class="na-grid4">
-            <a class="na-cat" data-target="bid" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-              <h4>ประกาศประกวดราคา / TOR</h4><p>ประกาศเชิญชวน ร่างขอบเขตงาน (TOR) และเอกสารประกวดราคา</p></a>
-            <a class="na-cat" data-target="win" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
-              <h4>ประกาศผู้ชนะ / สาระสำคัญสัญญา</h4><p>ประกาศผู้ชนะการเสนอราคา และข้อมูลสาระสำคัญในสัญญา</p></a>
-            <a class="na-cat" data-target="plan" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></div>
-              <h4>แผนการจัดซื้อจัดจ้าง</h4><p>แผนการจัดซื้อจัดจ้างประจำปีงบประมาณ</p></a>
-            <a class="na-cat" data-target="price" href="#"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-              <h4>ราคากลาง</h4><p>ตารางแสดงวงเงินงบประมาณและราคากลาง</p></a>
-          </div>
+    <!-- แบบฟอร์มค้นหา -->
+    <form class="eg-search" id="egForm">
+      <div class="eg-form">
+        <div class="eg-field">
+          <label for="egQ">ค้นหาหัวข้อประกาศ</label>
+          <input type="text" id="egQ" name="q" placeholder="พิมพ์คำค้น เช่น ครุภัณฑ์ นิทรรศการ…" autocomplete="off">
         </div>
-
-        <!-- ประกวดราคา / TOR -->
-        <div class="na-panel" id="p-bid">
-          <div class="na-head"><h2>ประกาศประกวดราคา / TOR</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ประกาศเชิญชวน ร่างขอบเขตของงาน (TOR) และเอกสารประกวดราคา</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ประกวดราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ ด้วยวิธี e-bidding</div><div class="dt">เผยแพร่ 15 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ร่างขอบเขตของงาน (TOR) จ้างปรับปรุงห้องนิทรรศการถาวร</div><div class="dt">เผยแพร่ 8 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกวดราคาจ้างพัฒนาแพลตฟอร์มออนไลน์ ด้วยวิธี e-bidding</div><div class="dt">เผยแพร่ 25 ส.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
+        <div class="eg-field">
+          <label for="egType">ประเภทประกาศ</label>
+          <select id="egType" name="type">
+            <option value="">-- ทุกประเภท --</option>
+            <option value="plan">แผนการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ</option>
+            <option value="tor">ประกาศร่าง TOR / ร่างเอกสารประกวดราคา</option>
+            <option value="invite">ประกาศเชิญชวน / ประกาศจัดซื้อจัดจ้าง</option>
+            <option value="cancel">ยกเลิกประกาศจัดซื้อจัดจ้าง</option>
+            <option value="midprice">ราคากลางจัดซื้อจัดจ้าง</option>
+            <option value="winner">ประกาศผู้ชนะการเสนอราคา</option>
+            <option value="winner-q">ประกาศผู้ชนะเสนอราคา / รายไตรมาส</option>
+            <option value="progress">ความก้าวหน้าการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ</option>
+            <option value="annual">รายงานสรุปผลการจัดซื้อจัดจ้างหรือการจัดหาพัสดุประจำปี</option>
+            <option value="contract">สัญญาซื้อ / สัญญาจ้าง</option>
+            <option value="po">สำเนาใบสั่งซื้อ</option>
+            <option value="audit">รายงานการตรวจสอบพัสดุประจำปี</option>
+          </select>
         </div>
+        <button class="eg-btn" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          ค้นหา
+        </button>
+      </div>
+    </form>
 
-        <!-- ผู้ชนะ / สาระสำคัญสัญญา -->
-        <div class="na-panel" id="p-win">
-          <div class="na-head"><h2>ประกาศผู้ชนะการเสนอราคา / ข้อมูลสาระสำคัญสัญญา</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ประกาศผู้ชนะการเสนอราคา และข้อมูลสาระสำคัญในสัญญา (แบบ สขร.)</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ประกาศผู้ชนะการเสนอราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ</div><div class="dt">เผยแพร่ 20 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ข้อมูลสาระสำคัญในสัญญา จ้างพัฒนาแพลตฟอร์มออนไลน์</div><div class="dt">เผยแพร่ 12 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกาศผู้ชนะการเสนอราคาจ้างปรับปรุงห้องนิทรรศการ</div><div class="dt">เผยแพร่ 2 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- แผนการจัดซื้อจัดจ้าง -->
-        <div class="na-panel" id="p-plan">
-          <div class="na-head"><h2>แผนการจัดซื้อจัดจ้าง</h2><span class="na-count">ทั้งหมด 2 รายการ</span></div>
-          <p class="na-desc">แผนการจัดซื้อจัดจ้างประจำปีงบประมาณ</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">แผนการจัดซื้อจัดจ้าง ประจำปีงบประมาณ พ.ศ. 2569</div><div class="dt">เผยแพร่ 15 ต.ค. 2568</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ประกาศเปลี่ยนแปลงแผนการจัดซื้อจัดจ้าง ประจำปี 2569</div><div class="dt">เผยแพร่ 5 ม.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- ราคากลาง -->
-        <div class="na-panel" id="p-price">
-          <div class="na-head"><h2>ราคากลาง</h2><span class="na-count">ทั้งหมด 3 รายการ</span></div>
-          <p class="na-desc">ตารางแสดงวงเงินงบประมาณที่ได้รับจัดสรรและราคากลาง (ราคาอ้างอิง)</p>
-          <table class="na-table">
-            <thead><tr><th>เอกสาร</th><th class="c">รูปแบบไฟล์</th><th class="c">ดาวน์โหลด</th></tr></thead>
-            <tbody>
-              <tr><td><div class="doc">ราคากลางซื้อครุภัณฑ์จัดแสดงนิทรรศการ</div><div class="dt">เผยแพร่ 14 ก.ย. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ราคากลางจ้างพัฒนาแพลตฟอร์มออนไลน์ (แบบ บก.06)</div><div class="dt">เผยแพร่ 24 ส.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-              <tr><td><div class="doc">ราคากลางจ้างปรับปรุงห้องนิทรรศการถาวร (แบบ บก.01)</div><div class="dt">เผยแพร่ 30 ก.ค. 2569</div></td>
-                <td class="c"><span class="na-file">📄 PDF</span></td><td class="c"><a class="na-dl" href="#" aria-label="ดาวน์โหลด"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></a></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div><!-- /na-content -->
+    <!-- สรุปผล -->
+    <div class="eg-meta">
+      <div class="count" id="egCount"></div>
+      <div id="egActiveWrap"></div>
     </div>
+
+    <!-- ตารางผลลัพธ์ -->
+    <table class="eg-table">
+      <thead>
+        <tr>
+          <th style="width:240px">ประเภท</th>
+          <th>หัวข้อประกาศ</th>
+          <th style="width:150px">วันที่ประกาศ</th>
+          <th class="c" style="width:120px">ดูรายละเอียด</th>
+        </tr>
+      </thead>
+      <tbody id="egRows"></tbody>
+    </table>
+
+    <!-- แบ่งหน้า -->
+    <div class="eg-pager" id="egPager"></div>
+
   </div>
 </section>
 
 <div id="site-footer"></div>
 <script src="site.js"></script>
 <script>
+/* ============================================================
+   ประกาศจัดซื้อจัดจ้างจากระบบ e-GP (mockup)
+   - dropdown 12 ประเภทตามระบบ e-GP
+   - เลือกประเภท/ค้นหา => เปลี่ยน URL (?type=slug&q=) = แต่ละหัวข้อเป็นหน้าของตัวเอง
+   - ระบบจริง: ดึงประกาศจาก API e-GP ของกรมบัญชีกลางตามเลขที่หน่วยงาน
+   ============================================================ */
 (function(){
-  var nav=document.getElementById('naNav');
-  var links=nav.querySelectorAll('a[data-target]');
-  var catLinks=document.querySelectorAll('.na-cat[data-target]');
-  function show(target){
-    document.querySelectorAll('.na-panel').forEach(function(p){ p.classList.toggle('show', p.id==='p-'+target); });
-    links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('data-target')===target); });
+  var TYPES = {
+    'plan':     'แผนการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ',
+    'tor':      'ประกาศร่าง TOR / ร่างเอกสารประกวดราคา',
+    'invite':   'ประกาศเชิญชวน / ประกาศจัดซื้อจัดจ้าง',
+    'cancel':   'ยกเลิกประกาศจัดซื้อจัดจ้าง',
+    'midprice': 'ราคากลางจัดซื้อจัดจ้าง',
+    'winner':   'ประกาศผู้ชนะการเสนอราคา',
+    'winner-q': 'ประกาศผู้ชนะเสนอราคา / รายไตรมาส',
+    'progress': 'ความก้าวหน้าการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ',
+    'annual':   'รายงานสรุปผลการจัดซื้อจัดจ้างหรือการจัดหาพัสดุประจำปี',
+    'contract': 'สัญญาซื้อ / สัญญาจ้าง',
+    'po':       'สำเนาใบสั่งซื้อ',
+    'audit':    'รายงานการตรวจสอบพัสดุประจำปี'
+  };
+
+  /* ข้อมูลตัวอย่าง (mock) — เรียงใหม่ล่าสุดอยู่บน */
+  var DATA = [
+    {t:'winner',   title:'ประกาศผู้ชนะการเสนอราคา ซื้อครุภัณฑ์จัดแสดงนิทรรศการถาวร โดยวิธี e-bidding', date:'20 ก.ย. 2569'},
+    {t:'invite',   title:'ประกวดราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ ด้วยวิธีประกวดราคาอิเล็กทรอนิกส์ (e-bidding)', date:'15 ก.ย. 2569'},
+    {t:'midprice', title:'ประกาศราคากลาง ซื้อครุภัณฑ์จัดแสดงนิทรรศการถาวร', date:'14 ก.ย. 2569'},
+    {t:'winner-q', title:'สรุปผลการจัดซื้อจัดจ้าง (สขร.1) ประจำไตรมาสที่ 4 ปีงบประมาณ พ.ศ. 2569', date:'12 ก.ย. 2569'},
+    {t:'contract', title:'ข้อมูลสาระสำคัญในสัญญา จ้างพัฒนาแพลตฟอร์มออนไลน์ของสำนักฯ', date:'12 ก.ย. 2569'},
+    {t:'tor',      title:'ประกาศร่างขอบเขตของงาน (TOR) จ้างปรับปรุงห้องนิทรรศการถาวร', date:'8 ก.ย. 2569'},
+    {t:'winner',   title:'ประกาศผู้ชนะการเสนอราคา จ้างปรับปรุงห้องนิทรรศการถาวร โดยวิธีเฉพาะเจาะจง', date:'2 ก.ย. 2569'},
+    {t:'invite',   title:'ประกวดราคาจ้างพัฒนาแพลตฟอร์มออนไลน์เผยแพร่ศิลปวัฒนธรรม ด้วยวิธี e-bidding', date:'25 ส.ค. 2569'},
+    {t:'midprice', title:'ประกาศราคากลาง จ้างพัฒนาแพลตฟอร์มออนไลน์ (แบบ บก.06)', date:'24 ส.ค. 2569'},
+    {t:'cancel',   title:'ยกเลิกประกาศประกวดราคาซื้อครุภัณฑ์โสตทัศนูปกรณ์ ด้วยวิธี e-bidding', date:'18 ส.ค. 2569'},
+    {t:'tor',      title:'ประกาศร่างเอกสารประกวดราคาซื้อครุภัณฑ์โสตทัศนูปกรณ์ห้องประชุม', date:'10 ส.ค. 2569'},
+    {t:'midprice', title:'ประกาศราคากลาง จ้างปรับปรุงห้องนิทรรศการถาวร (แบบ บก.01)', date:'30 ก.ค. 2569'},
+    {t:'invite',   title:'ประกาศเชิญชวนจ้างเหมาบริการจัดนิทรรศการศิลปกรรมแห่งชาติ ครั้งที่ 69', date:'22 ก.ค. 2569'},
+    {t:'po',       title:'สำเนาใบสั่งซื้อวัสดุสำนักงาน ประจำเดือนกรกฎาคม 2569', date:'15 ก.ค. 2569'},
+    {t:'contract', title:'สัญญาจ้างเหมาบริการรักษาความปลอดภัยหอศิลป์ ประจำปี 2569', date:'1 ก.ค. 2569'},
+    {t:'progress', title:'รายงานความก้าวหน้าการจัดซื้อจัดจ้าง ไตรมาสที่ 3 ปีงบประมาณ พ.ศ. 2569', date:'30 มิ.ย. 2569'},
+    {t:'po',       title:'สำเนาใบสั่งจ้างซ่อมแซมระบบปรับอากาศหอศิลป์ มหาวิทยาลัยศิลปากร', date:'20 มิ.ย. 2569'},
+    {t:'winner-q', title:'สรุปผลการจัดซื้อจัดจ้าง (สขร.1) ประจำไตรมาสที่ 3 ปีงบประมาณ พ.ศ. 2569', date:'12 มิ.ย. 2569'},
+    {t:'plan',     title:'ประกาศเปลี่ยนแปลงแผนการจัดซื้อจัดจ้าง ประจำปีงบประมาณ พ.ศ. 2569', date:'5 ม.ค. 2569'},
+    {t:'annual',   title:'รายงานสรุปผลการจัดซื้อจัดจ้างประจำปีงบประมาณ พ.ศ. 2568', date:'28 ธ.ค. 2568'},
+    {t:'audit',    title:'รายงานผลการตรวจสอบพัสดุประจำปีงบประมาณ พ.ศ. 2568', date:'15 พ.ย. 2568'},
+    {t:'plan',     title:'ประกาศเผยแพร่แผนการจัดซื้อจัดจ้าง ประจำปีงบประมาณ พ.ศ. 2569', date:'15 ต.ค. 2568'}
+  ];
+
+  var PAGE_SIZE = 8;
+  var qEl = document.getElementById('egQ');
+  var typeEl = document.getElementById('egType');
+  var rowsEl = document.getElementById('egRows');
+  var countEl = document.getElementById('egCount');
+  var activeWrap = document.getElementById('egActiveWrap');
+  var pagerEl = document.getElementById('egPager');
+  var form = document.getElementById('egForm');
+
+  var EYE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+
+  function getParams(){
+    var p = new URLSearchParams(location.search);
+    return { type: p.get('type') || '', q: (p.get('q') || '').trim(), page: parseInt(p.get('page')||'1',10)||1 };
+  }
+
+  function render(){
+    var pr = getParams();
+    typeEl.value = TYPES[pr.type] ? pr.type : '';
+    qEl.value = pr.q;
+
+    var list = DATA.filter(function(d){
+      if (pr.type && d.t !== pr.type) return false;
+      if (pr.q && d.title.toLowerCase().indexOf(pr.q.toLowerCase()) < 0) return false;
+      return true;
+    });
+
+    var total = list.length;
+    var pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    var page = Math.min(Math.max(1, pr.page), pages);
+    var start = (page - 1) * PAGE_SIZE;
+    var slice = list.slice(start, start + PAGE_SIZE);
+
+    // นับจำนวน
+    if (total === 0){
+      countEl.innerHTML = 'ไม่พบประกาศที่ตรงกับเงื่อนไข';
+    } else {
+      countEl.innerHTML = 'แสดง <b>' + (start+1) + '</b> ถึง <b>' + (start+slice.length) + '</b> จากทั้งหมด <b>' + total + '</b> รายการ';
+    }
+
+    // ป้ายตัวกรองที่กำลังใช้
+    var chips = '';
+    if (pr.type && TYPES[pr.type]) chips += '<span class="eg-active">' + TYPES[pr.type] + ' <a href="?' + qstr({type:'',q:pr.q}) + '" aria-label="ล้างประเภท">&times;</a></span>';
+    activeWrap.innerHTML = chips;
+
+    // แถวผลลัพธ์
+    if (total === 0){
+      rowsEl.innerHTML = '<tr><td colspan="4" class="eg-empty">— ไม่พบรายการ กรุณาปรับคำค้นหรือเลือกประเภทอื่น —</td></tr>';
+    } else {
+      rowsEl.innerHTML = slice.map(function(d){
+        return '<tr>' +
+          '<td><span class="eg-type">' + TYPES[d.t] + '</span></td>' +
+          '<td><div class="eg-title">' + d.title + '</div></td>' +
+          '<td><span class="eg-date">' + d.date + '</span></td>' +
+          '<td class="c"><a class="eg-view" href="#" aria-label="ดูรายละเอียด">' + EYE + '</a></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    renderPager(page, pages, pr);
+  }
+
+  function qstr(o){
+    var p = new URLSearchParams();
+    if (o.type) p.set('type', o.type);
+    if (o.q) p.set('q', o.q);
+    if (o.page && o.page > 1) p.set('page', o.page);
+    return p.toString();
+  }
+
+  function go(o){
+    var s = qstr(o);
+    history.pushState(null, '', location.pathname + (s ? '?' + s : ''));
+    render();
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  links.forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); show(a.getAttribute('data-target')); }); });
-  catLinks.forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); show(a.getAttribute('data-target')); }); });
+
+  function renderPager(page, pages, pr){
+    if (pages <= 1){ pagerEl.innerHTML = ''; return; }
+    var html = '<button type="button" data-p="' + (page-1) + '"' + (page<=1?' disabled':'') + '>‹</button>';
+    for (var i=1; i<=pages; i++){
+      if (i===1 || i===pages || Math.abs(i-page)<=1){
+        html += '<button type="button" class="' + (i===page?'on':'') + '" data-p="' + i + '">' + i + '</button>';
+      } else if (i===page-2 || i===page+2){
+        html += '<span class="dots">…</span>';
+      }
+    }
+    html += '<button type="button" data-p="' + (page+1) + '"' + (page>=pages?' disabled':'') + '>›</button>';
+    pagerEl.innerHTML = html;
+    pagerEl.querySelectorAll('button[data-p]').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (b.disabled) return;
+        go({type:pr.type, q:pr.q, page:parseInt(b.getAttribute('data-p'),10)});
+      });
+    });
+  }
+
+  // submit ฟอร์ม => เปลี่ยน URL (หน้าของประเภทนั้น ๆ)
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    go({type:typeEl.value, q:qEl.value.trim(), page:1});
+  });
+  // เปลี่ยน dropdown แล้วค้นหาทันที
+  typeEl.addEventListener('change', function(){
+    go({type:typeEl.value, q:qEl.value.trim(), page:1});
+  });
+  window.addEventListener('popstate', render);
+
+  render();
 })();
 </script>
 </body>
