@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>บุคลากร · SUACC</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  .unit-logo{height:60px;width:auto;max-width:260px;display:block;margin-bottom:14px;object-fit:contain}
+  @media(max-width:600px){.unit-logo{height:48px}}
+</style>
 </head>
 <body>
 <div id="site-nav"></div>
@@ -27,10 +31,10 @@
 /* โครงสร้างบุคลากรสำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร
    จำนวนตามเอกสารของสำนักฯ — รายชื่อ/ตำแหน่ง/ภาพ รอข้อมูลจริง */
 var GROUPS = [
-  { en:'Leadership',   th:'ผู้บริหาร',                                       count:4  },
-  { en:'Office',       th:'สำนักงานสำนักศิลปวัฒนธรรมและการสร้างสรรค์',        count:13 },
-  { en:'Art Centre',   th:'หอศิลป์ มหาวิทยาลัยศิลปากร',                       count:11 },
-  { en:'Institute',    th:'สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ',          count:2  }
+  { th:'ผู้บริหาร',                                 count:4,  logo:'img/logo-suacc.png'     },
+  { th:'สำนักงานสำนักศิลปวัฒนธรรมและการสร้างสรรค์',  count:13, logo:'img/logo-suacc.png'     },
+  { th:'หอศิลป์ มหาวิทยาลัยศิลปากร',                 count:11, logo:'img/logo-artcentre.png' },
+  { th:'สถาบันศิลปสถาปัตยกรรมไทยเฉลิมพระเกียรติ',    count:2,  logo:'img/logo-institute.png' }
 ];
 
 function pad2(n){ return (n < 10 ? '0' : '') + n; }
@@ -56,7 +60,8 @@ GROUPS.forEach(function(g, gi){
   sec.innerHTML =
     '<div class="wrap">' +
       '<div class="shead">' +
-        '<div><h2 class="mb0">' + g.th + '</h2></div>' +
+        '<div><img class="unit-logo" src="' + g.logo + '" alt="ตราสัญลักษณ์ ' + g.th + '">' +
+        '<h2 class="mb0">' + g.th + '</h2></div>' +
       '</div>' +
       '<div class="grid g4">' + cards + '</div>' +
     '</div>';
