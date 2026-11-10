@@ -19,53 +19,47 @@
   </div>
 </section>
 
-<!-- ผู้บริหาร -->
-<section class="pad alt">
-  <div class="wrap">
-    <div class="shead">
-      <div><p class="eyebrow">Leadership</p><h2 class="mb0">ผู้บริหาร</h2></div>
-    </div>
-    <div class="grid g4">
-      <div class="person"><div class="pic"><img src="img/team/team-01.jpg" alt="ผศ. ดร. ศิลป์ ศิลปากร" loading="lazy"></div><h4>ผศ. ดร. ศิลป์ ศิลปากร</h4><p class="role">ผู้อำนวยการสำนักฯ</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-02.jpg" alt="รศ. มาลี วิจิตรศิลป์" loading="lazy"></div><h4>รศ. มาลี วิจิตรศิลป์</h4><p class="role">รองผู้อำนวยการฝ่ายวิชาการ</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-03.jpg" alt="ผศ. ธนา ภาพพิมพ์" loading="lazy"></div><h4>ผศ. ธนา ภาพพิมพ์</h4><p class="role">รองผู้อำนวยการฝ่ายบริหาร</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-04.jpg" alt="อ. กมล สร้างสรรค์" loading="lazy"></div><h4>อ. กมล สร้างสรรค์</h4><p class="role">ผู้ช่วยผู้อำนวยการฝ่ายกิจกรรม</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- กลุ่มงานวิชาการ -->
-<section class="pad">
-  <div class="wrap">
-    <div class="shead">
-      <div><p class="eyebrow">Academic</p><h2 class="mb0">กลุ่มงานวิชาการ</h2></div>
-    </div>
-    <div class="grid g4">
-      <div class="person"><div class="pic"><img src="img/team/team-05.jpg" alt="นางสาว ปวีณา จิตรกร" loading="lazy"></div><h4>นางสาว ปวีณา จิตรกร</h4><p class="role">นักวิชาการศิลปวัฒนธรรม</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-06.jpg" alt="นาย วรเดช ภาพถ่าย" loading="lazy"></div><h4>นาย วรเดช ภาพถ่าย</h4><p class="role">ภัณฑารักษ์</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-07.jpg" alt="นางสาว ชนิดา อนุรักษ์" loading="lazy"></div><h4>นางสาว ชนิดา อนุรักษ์</h4><p class="role">นักวิจัยศิลปวัฒนธรรม</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-08.jpg" alt="นาย ภูริ ประติมา" loading="lazy"></div><h4>นาย ภูริ ประติมา</h4><p class="role">นักวิชาการคลังสะสมผลงาน</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- กลุ่มงานบริหาร -->
-<section class="pad alt">
-  <div class="wrap">
-    <div class="shead">
-      <div><p class="eyebrow">Administration</p><h2 class="mb0">กลุ่มงานบริหาร</h2></div>
-    </div>
-    <div class="grid g4">
-      <div class="person"><div class="pic"><img src="img/team/team-09.jpg" alt="นางสาว อรุณี เลขานุการ" loading="lazy"></div><h4>นางสาว อรุณี เลขานุการ</h4><p class="role">เจ้าหน้าที่บริหารงานทั่วไป</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-10.jpg" alt="นาย สมชาย การเงิน" loading="lazy"></div><h4>นาย สมชาย การเงิน</h4><p class="role">เจ้าหน้าที่การเงินและพัสดุ</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-11.jpg" alt="นางสาว นภา ประชาสัมพันธ์" loading="lazy"></div><h4>นางสาว นภา ประชาสัมพันธ์</h4><p class="role">เจ้าหน้าที่ประชาสัมพันธ์ &amp; สื่อ</p></div>
-      <div class="person"><div class="pic"><img src="img/team/team-12.jpg" alt="นาย ธีรพงษ์ เทคนิค" loading="lazy"></div><h4>นาย ธีรพงษ์ เทคนิค</h4><p class="role">เจ้าหน้าที่เทคนิคและจัดแสดง</p></div>
-    </div>
-  </div>
-</section>
-
+<!-- กลุ่มบุคลากร (สร้างตามโครงสร้างสำนักฯ) -->
+<div id="people"></div>
 
 <div id="site-footer"></div>
 <script src="site.js"></script>
+<script>
+/* โครงสร้างบุคลากรสำนักศิลปวัฒนธรรมและการสร้างสรรค์ แห่งมหาวิทยาลัยศิลปากร
+   จำนวนตามเอกสารของสำนักฯ — รายชื่อ/ตำแหน่ง/ภาพ รอข้อมูลจริง */
+var GROUPS = [
+  { en:'Leadership',   th:'ผู้บริหาร',                              count:4  },
+  { en:'Office',       th:'สำนักงานสำนักศิลปวัฒนธรรมฯ',             count:13 },
+  { en:'Art Centre',   th:'หอศิลป์ มหาวิทยาลัยศิลปากร',             count:11 },
+  { en:'Institute',    th:'สถาบันศิลปสถาปัตยกรรมเฉลิมพระเกียรติ',   count:2  }
+];
+
+var root = document.getElementById('people');
+GROUPS.forEach(function(g, gi){
+  var sec = document.createElement('section');
+  // สลับพื้นหลัง: กลุ่มลำดับคู่ (0,2) = alt
+  sec.className = 'pad' + (gi % 2 === 0 ? ' alt' : '');
+
+  var cards = '';
+  for (var i = 0; i < g.count; i++){
+    cards +=
+      '<div class="person">' +
+        '<div class="pic"><img src="img/team/placeholder.svg" alt="บุคลากร ' + g.th + '" loading="lazy"></div>' +
+        '<h4>ชื่อ–นามสกุล</h4>' +
+        '<p class="role">ตำแหน่ง</p>' +
+      '</div>';
+  }
+
+  sec.innerHTML =
+    '<div class="wrap">' +
+      '<div class="shead">' +
+        '<div><p class="eyebrow">' + g.en + '</p>' +
+        '<h2 class="mb0">' + g.th + ' <span style="font-weight:400;color:var(--muted);font-size:.62em">(' + g.count + ' คน)</span></h2></div>' +
+      '</div>' +
+      '<div class="grid g4">' + cards + '</div>' +
+    '</div>';
+  root.appendChild(sec);
+});
+</script>
 </body>
 </html>
