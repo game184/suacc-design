@@ -6,55 +6,52 @@
 <title>ข่าวสาร · SUACC</title>
 <link rel="stylesheet" href="styles.css">
 <style>
-  /* ===== News detail — left-aligned + sidebar ===== */
+  /* ===== News detail — left-aligned + sidebar (ขอบตรงกับโลโก้ web) ===== */
   body{background:#fff}
-  .nd-wrap{max-width:1140px;margin:0 auto;padding:36px 24px 20px}
+  .nd-wrap{max-width:1680px;margin:0 auto;padding:36px 120px 20px}
+  @media(max-width:1100px){.nd-wrap{padding:30px 48px 16px}}
+  @media(max-width:600px){.nd-wrap{padding:26px 20px 16px}}
   /* header (ชิดซ้าย) */
-  .nd-bc{font-size:14px;color:#7a7f87;margin:0 0 18px}
+  .nd-bc{font-size:14px;color:#7a7f87;margin:0 0 16px}
   .nd-bc a{color:var(--green-d)}
-  .nd-cat{display:inline-block;font-family:var(--head);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--green-d);background:#eafaf6;border:1px solid rgba(3,191,158,.22);border-radius:999px;padding:7px 18px;margin:0 0 16px}
-  .nd-title{font-family:var(--head);font-size:clamp(27px,3.6vw,40px);line-height:1.25;font-weight:700;color:#0d0d0d;margin:0 0 16px;max-width:900px}
-  .nd-meta{display:flex;align-items:center;gap:18px;flex-wrap:wrap;color:#7a7f87;font-size:14.5px;padding-bottom:26px;border-bottom:1px solid var(--line)}
-  .nd-meta .dot{width:4px;height:4px;border-radius:50%;background:#c7ccd2}
-  .nd-meta b{color:#0d0d0d;font-weight:700}
+  .nd-title{font-family:var(--head);font-size:clamp(28px,3.6vw,42px);line-height:1.25;font-weight:700;color:#0d0d0d;margin:0 0 14px;max-width:1000px}
+  .nd-meta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;color:#7a7f87;font-size:14.5px;padding-bottom:26px;border-bottom:1px solid var(--line)}
+  .nd-meta .ic{width:18px;height:18px;color:var(--green-d)}
   /* layout */
-  .nd-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:52px;padding:34px 0 10px;align-items:start}
+  .nd-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:60px;padding:34px 0 10px;align-items:start}
   /* main column */
   .nd-hero{margin:0 0 34px}
-  .nd-hero img{width:100%;height:auto;max-height:480px;object-fit:cover;display:block;border-radius:14px}
-  .nd-body p{margin:0 0 22px;font-size:18px;line-height:1.9;color:#2a2d31}
-  .nd-body p.lead{font-size:20px;line-height:1.8;color:#0d0d0d;font-weight:600}
-  .nd-body h3{font-family:var(--head);font-size:23px;line-height:1.4;margin:38px 0 14px;color:#0d0d0d}
-  .nd-back{margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
-  /* sidebar */
-  .nd-side{position:sticky;top:92px;display:flex;flex-direction:column;gap:22px}
-  .nd-card{background:#f7faf9;border:1px solid var(--line);border-radius:16px;padding:22px}
-  .nd-card h4{font-family:var(--head);font-size:17px;color:var(--green-d);margin:0 0 16px;padding-bottom:12px;border-bottom:2px solid var(--green)}
-  .nd-info{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-  .nd-info li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:#2a2d31}
-  .nd-info .ic{width:20px;height:20px;color:var(--green-d);flex-shrink:0;margin-top:1px}
-  .nd-info .ic svg{width:20px;height:20px}
-  .nd-info .k{display:block;color:#7a7f87;font-size:12.5px}
-  .nd-info .v{display:block;font-weight:600;color:#0d0d0d;margin-top:1px}
-  .nd-share{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px dashed #d5e0db}
-  .nd-share span{font-size:13px;color:#7a7f87;margin-right:2px}
-  .nd-share a{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:#0d0d0d;background:#fff;transition:.15s}
+  .nd-hero img{width:100%;height:auto;max-height:560px;object-fit:cover;display:block;border-radius:14px}
+  .nd-body p{margin:0 0 22px;font-size:18px;line-height:1.95;color:#2a2d31}
+  .nd-body p.lead{font-size:20px;line-height:1.85;color:#0d0d0d;font-weight:600}
+  .nd-body h3{font-family:var(--head);font-size:24px;line-height:1.4;margin:40px 0 14px;color:#0d0d0d}
+  /* bottom tag + share bar (ล่างสุด) */
+  .nd-foot{margin-top:46px;padding-top:26px;border-top:1px solid var(--line);
+    display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+  .nd-foot .lbl{font-size:13.5px;color:#7a7f87;margin-right:8px}
+  .nd-tagwrap,.nd-share{display:flex;align-items:center;gap:10px}
+  .nd-cat{display:inline-block;font-family:var(--head);font-size:13.5px;font-weight:700;letter-spacing:.06em;
+    color:var(--green-d);background:#eafaf6;border:1px solid rgba(3,191,158,.22);border-radius:999px;padding:8px 20px}
+  .nd-share a{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:#0d0d0d;background:#fff;transition:.15s}
   .nd-share a:hover{background:var(--green-d);border-color:var(--green-d);color:#fff}
-  .nd-share svg{width:17px;height:17px}
-  /* related list in sidebar */
+  .nd-share svg{width:18px;height:18px}
+  .nd-back{margin-top:30px}
+  /* sidebar — ข่าวที่เกี่ยวข้อง */
+  .nd-side{position:sticky;top:92px}
+  .nd-card{background:#f7faf9;border:1px solid var(--line);border-radius:16px;padding:22px 24px}
+  .nd-card h4{font-family:var(--head);font-size:18px;color:var(--green-d);margin:0 0 14px;padding-bottom:12px;border-bottom:2px solid var(--green)}
   .rel-list{display:flex;flex-direction:column;gap:4px}
-  .rel-item{display:flex;gap:13px;align-items:center;padding:11px 0;border-bottom:1px solid #e9efec;text-decoration:none;transition:.15s}
+  .rel-item{display:flex;gap:13px;align-items:center;padding:12px 0;border-bottom:1px solid #e9efec;text-decoration:none;transition:.15s}
   .rel-item:last-child{border-bottom:none}
-  .rel-item .th{width:66px;height:66px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0}
-  .rel-item .rt{font-weight:600;font-size:14px;line-height:1.45;color:#0d0d0d;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .rel-item .th{width:70px;height:70px;border-radius:10px;background-size:cover;background-position:center;flex-shrink:0}
+  .rel-item .rt{font-weight:600;font-size:14.5px;line-height:1.45;color:#0d0d0d;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .rel-item .rd{display:block;font-size:12.5px;color:#7a7f87;margin-top:5px}
   .rel-item:hover .rt{color:var(--green-d)}
   @media(max-width:900px){
-    .nd-grid{grid-template-columns:1fr;gap:32px}
+    .nd-grid{grid-template-columns:1fr;gap:34px}
     .nd-side{position:static}
   }
-  @media(max-width:640px){.nd-wrap{padding:26px 20px 16px}.nd-body p{font-size:17px}.nd-body p.lead{font-size:18.5px}}
+  @media(max-width:640px){.nd-body p{font-size:17px}.nd-body p.lead{font-size:18.5px}.nd-foot{gap:16px}}
 </style>
 </head>
 <body>
@@ -65,11 +62,10 @@
 
   <!-- header (ชิดซ้าย) -->
   <p class="nd-bc"><a href="index.html">หน้าแรก</a> / <a href="about-news.html">ข่าวสารและประกาศ</a></p>
-  <p class="nd-cat" id="dCat"></p>
   <h1 class="nd-title" id="dTitle"></h1>
   <div class="nd-meta">
-    <span id="dDate"></span><span class="dot"></span>
-    <span>โดย <b>สำนักศิลปวัฒนธรรมและการสร้างสรรค์</b></span>
+    <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg></span>
+    <span id="dDate"></span>
   </div>
 
   <!-- 2 คอลัมน์ -->
@@ -79,20 +75,11 @@
     <article class="nd-main">
       <figure class="nd-hero"><img id="dHero" alt=""></figure>
       <div class="nd-body" id="dBody"></div>
-      <div class="nd-back"><a class="btn ghost" href="about-news.html">← กลับไปหน้าข่าวสาร</a></div>
-    </article>
 
-    <!-- sidebar -->
-    <aside class="nd-side">
-      <div class="nd-card">
-        <h4>ข้อมูลบทความ</h4>
-        <ul class="nd-info">
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg></span><span><span class="k">เผยแพร่เมื่อ</span><span class="v" id="sDate"></span></span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.3L13 20.9a2 2 0 0 1-2.8 0l-7-7a2 2 0 0 1-.6-1.4V5a2 2 0 0 1 2-2h7.5c.5 0 1 .2 1.4.6l6.6 6.6a2 2 0 0 1 0 2.9z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span><span><span class="k">หมวดหมู่</span><span class="v" id="sCat"></span></span></li>
-          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span><span><span class="k">ผู้เผยแพร่</span><span class="v">สำนักศิลปวัฒนธรรมและการสร้างสรรค์</span></span></li>
-        </ul>
-        <div class="nd-share">
-          <span>แชร์</span>
+      <!-- Tag + share (ล่างสุด) -->
+      <div class="nd-foot">
+        <div class="nd-tagwrap"><span class="lbl">หมวดหมู่</span><span class="nd-cat" id="dCat"></span></div>
+        <div class="nd-share"><span class="lbl">แชร์</span>
           <a href="#" aria-label="แชร์ Facebook" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9.2c0-.86.3-1.45 1.55-1.45H16.2V5.1C15.83 5.05 14.9 5 13.86 5 11.66 5 10.13 6.34 10.13 8.8V11H7.5v3h2.63v8H13z"/></svg></a>
           <a href="#" aria-label="แชร์ X" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.53 3h3.2l-6.99 7.99L22 21h-6.43l-5.03-6.58L4.78 21H1.58l7.48-8.55L2 3h6.6l4.55 6.01L17.53 3zm-1.12 16h1.77L7.67 4.9H5.77L16.41 19z"/></svg></a>
           <a href="#" aria-label="แชร์ Line" onclick="return false"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 3.9 3.5 7.2 8.3 7.9.3.07.76.22.87.5.1.26.07.66.03.92l-.14.85c-.04.26-.2 1 .88.55 1.08-.46 5.8-3.42 7.9-5.85C21.3 14.5 22 12.9 22 11c0-4.4-4.5-8-10-8zM8.1 13.3H6.1a.53.53 0 0 1-.53-.53V9.3a.53.53 0 0 1 1.06 0v2.94H8.1a.53.53 0 0 1 0 1.06zm2.1-.53a.53.53 0 0 1-1.06 0V9.3a.53.53 0 0 1 1.06 0zm4.3 0a.53.53 0 0 1-.37.5.5.5 0 0 1-.6-.18l-2-2.7v2.38a.53.53 0 0 1-1.06 0V9.3a.53.53 0 0 1 .95-.32l2.02 2.7V9.3a.53.53 0 0 1 1.06 0zm3.3-2.47a.53.53 0 0 1 0 1.06h-1.4v.88h1.4a.53.53 0 0 1 0 1.06h-1.94a.53.53 0 0 1-.53-.53V9.3a.53.53 0 0 1 .53-.53h1.94a.53.53 0 0 1 0 1.06h-1.4v.88z"/></svg></a>
@@ -100,6 +87,11 @@
         </div>
       </div>
 
+      <div class="nd-back"><a class="btn ghost" href="about-news.html">← กลับไปหน้าข่าวสาร</a></div>
+    </article>
+
+    <!-- sidebar -->
+    <aside class="nd-side">
       <div class="nd-card">
         <h4>ข่าวที่เกี่ยวข้อง</h4>
         <div class="rel-list" id="dMore"></div>
@@ -152,11 +144,9 @@ window.NEWS = [
   var ev = NEWS.filter(function(e){return e.id===id;})[0] || NEWS[0];
 
   document.title = ev.title + ' · SUACC';
-  document.getElementById('dCat').textContent = ev.tag;
   document.getElementById('dTitle').textContent = ev.title;
   document.getElementById('dDate').textContent = 'เผยแพร่เมื่อ ' + ev.date;
-  document.getElementById('sDate').textContent = ev.date;
-  document.getElementById('sCat').textContent = ev.tag;
+  document.getElementById('dCat').textContent = ev.tag;
   var hero = document.getElementById('dHero');
   hero.src = ev.img; hero.alt = ev.title;
 
