@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ระบบจัดการ · ข่าวจัดซื้อจัดจ้าง · SUACC</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  body{background:#eef2f1}
+  /* ===== admin chrome ===== */
+  .ad-top{background:#0c2e29;color:#fff;position:sticky;top:0;z-index:40}
+  .ad-top .in{max-width:1080px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .ad-brand{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:700;font-size:18px}
+  .ad-brand .dot{width:30px;height:30px;border-radius:8px;background:var(--green);display:flex;align-items:center;justify-content:center;color:#0c2e29;font-size:18px}
+  .ad-top .links{display:flex;align-items:center;gap:18px;font-size:14.5px}
+  .ad-top .links a{color:#cfe6e0}
+  .ad-top .links a:hover{color:#fff}
+  .ad-wrap{max-width:1080px;margin:0 auto;padding:30px 24px 70px}
+  .ad-h1{font-family:var(--head);font-size:30px;color:#0c2e29;margin:6px 0 4px}
+  .ad-lead{color:var(--muted);margin:0 0 26px;font-size:15.5px}
+  .ad-note{background:#fff6e5;border:1px solid #f0d9a6;color:#8a6d1f;border-radius:12px;padding:12px 16px;font-size:14px;margin-bottom:26px}
+  /* cards */
+  .ad-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin-bottom:26px;box-shadow:0 10px 30px rgba(13,13,13,.04)}
+  .ad-card h2{font-family:var(--head);font-size:22px;color:#0c2e29;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+  .ad-card .cdesc{color:var(--muted);font-size:14.5px;margin:0 0 20px}
+  .ad-card h2 .n{width:30px;height:30px;border-radius:8px;background:#eafaf6;color:var(--green-d);font-size:16px;display:inline-flex;align-items:center;justify-content:center}
+  /* form bits */
+  .fld{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+  .fld label{font-size:14px;font-weight:700;color:var(--green-d)}
+  .fld input,.fld select{height:48px;border:1.5px solid var(--line);border-radius:11px;padding:0 14px;font-family:inherit;font-size:15.5px;color:var(--ink);background:#fff}
+  .fld input:focus,.fld select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(3,191,158,.15)}
+  .fld input[type=file]{padding:11px 14px;height:auto}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .btn-a{height:46px;padding:0 24px;border:none;border-radius:11px;background:var(--green-d);color:#fff;font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+  .btn-a:hover{background:var(--green)}
+  .btn-a svg{width:17px;height:17px}
+  .btn-g{height:38px;padding:0 15px;border:1.5px solid var(--line);border-radius:9px;background:#fff;font-family:inherit;font-weight:700;font-size:13.5px;cursor:pointer;color:var(--ink);transition:.15s}
+  .btn-g:hover{border-color:var(--green);color:var(--green-d)}
+  .btn-g.danger:hover{border-color:#c0392b;color:#c0392b}
+  /* type chips list */
+  .tylist{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+  .tyrow{display:flex;align-items:center;gap:12px;background:#f7faf9;border:1px solid var(--line);border-radius:12px;padding:10px 12px 10px 16px}
+  .tyrow .grip{color:var(--muted);flex-shrink:0}
+  .tyrow .name{flex:1;font-weight:600;font-size:15px;color:var(--ink);min-width:0}
+  .tyrow input.edit{flex:1;height:40px;border:1.5px solid var(--green);border-radius:9px;padding:0 12px;font-family:inherit;font-size:15px}
+  .tyrow .acts{display:flex;gap:7px;flex-shrink:0}
+  .addrow{display:flex;gap:10px;align-items:flex-end}
+  .addrow .fld{flex:1;margin:0}
+  /* table */
+  .ad-table{width:100%;border-collapse:collapse}
+  .ad-table th{background:#0c2e29;color:#fff;text-align:left;padding:13px 16px;font-size:14px;font-weight:700;white-space:nowrap}
+  .ad-table th:first-child{border-radius:10px 0 0 0}.ad-table th:last-child{border-radius:0 10px 0 0}
+  .ad-table td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle;font-size:14.5px}
+  .ad-tag{display:inline-block;font-size:12.5px;font-weight:700;color:var(--green-d);background:#eafaf6;border:1px solid rgba(3,191,158,.22);border-radius:999px;padding:5px 13px}
+  .ad-file{display:inline-flex;align-items:center;gap:7px;color:var(--green-d);font-weight:600;font-size:13.5px}
+  .ad-file svg{width:15px;height:15px}
+  .ad-file .ext{font-size:11px;font-weight:800;color:#c0392b;border:1px solid #f0c4bf;border-radius:5px;padding:1px 5px}
+  .empty{padding:30px;text-align:center;color:var(--muted)}
+  @media(max-width:720px){.row2{grid-template-columns:1fr}.ad-table thead{display:none}
+    .ad-table,.ad-table tbody,.ad-table tr,.ad-table td{display:block;width:100%}
+    .ad-table tr{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;padding:6px 0}
+    .ad-table td{border:none;padding:6px 16px}}
+</style>
+</head>
+<body>
+
+<header class="ad-top">
+  <div class="in">
+    <div class="ad-brand"><span class="dot">✦</span> SUACC · ระบบจัดการเนื้อหา</div>
+    <div class="links">
+      <a href="about-procurement.html" target="_blank" rel="noopener">↗ ดูหน้าเว็บจริง</a>
+      <a href="#" onclick="return false">ผู้ดูแลระบบ ▾</a>
+    </div>
+  </div>
+</header>
+
+<div class="ad-wrap">
+  <p class="eyebrow" style="color:var(--green-d)">Admin · Procurement</p>
+  <h1 class="ad-h1">จัดการข่าวจัดซื้อจัดจ้าง</h1>
+  <p class="ad-lead">เพิ่ม/ลด/แก้ไขประเภทประกาศ (ตัวเลือก dropdown) และจัดการรายการประกาศพร้อมแนบไฟล์เอกสาร</p>
+
+  <div class="ad-note">
+    ℹ️ <b>ตัวอย่างระบบ (Prototype):</b> ข้อมูลที่เพิ่ม/แก้ไขในหน้านี้บันทึกไว้ในเบราว์เซอร์เครื่องนี้ชั่วคราว (localStorage) เพื่อสาธิตการทำงาน — ระบบจริงจะบันทึกลงฐานข้อมูลบนเซิร์ฟเวอร์ และไฟล์ที่อัปโหลดจะถูกเก็บจริงพร้อมเปิดในแท็บใหม่
+  </div>
+
+  <!-- 1. จัดการประเภทประกาศ (dropdown) -->
+  <div class="ad-card">
+    <h2><span class="n">1</span> ประเภทประกาศ (ตัวเลือก Dropdown)</h2>
+    <p class="cdesc">หัวข้อเหล่านี้จะไปแสดงเป็นตัวเลือกในช่อง “ประเภทประกาศ” บนหน้าค้นหา</p>
+    <div class="tylist" id="tyList"></div>
+    <form class="addrow" id="tyAdd">
+      <div class="fld"><label for="tyNew">เพิ่มประเภทใหม่</label>
+        <input type="text" id="tyNew" placeholder="เช่น ประกาศขายทอดตลาด" autocomplete="off" required></div>
+      <button class="btn-a" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> เพิ่ม</button>
+    </form>
+  </div>
+
+  <!-- 2. จัดการรายการประกาศ -->
+  <div class="ad-card">
+    <h2><span class="n">2</span> เพิ่มประกาศใหม่</h2>
+    <p class="cdesc">กรอกข้อมูลประกาศและแนบไฟล์ (รองรับ PDF / Word)</p>
+    <form id="itAdd">
+      <div class="fld"><label for="itTitle">หัวข้อประกาศ</label>
+        <input type="text" id="itTitle" placeholder="เช่น ประกาศผู้ชนะการเสนอราคา…" autocomplete="off" required></div>
+      <div class="row2">
+        <div class="fld"><label for="itType">ประเภทประกาศ</label><select id="itType" required></select></div>
+        <div class="fld"><label for="itDate">วันที่ประกาศ</label><input type="text" id="itDate" placeholder="เช่น 20 ก.ย. 2569" autocomplete="off" required></div>
+      </div>
+      <div class="fld"><label for="itFile">แนบไฟล์เอกสาร (.pdf, .doc, .docx)</label>
+        <input type="file" id="itFile" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"></div>
+      <button class="btn-a" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> บันทึกประกาศ</button>
+    </form>
+  </div>
+
+  <div class="ad-card">
+    <h2><span class="n">3</span> รายการประกาศทั้งหมด <span id="itCount" style="font-size:14px;color:var(--muted);font-weight:400;margin-left:4px"></span></h2>
+    <p class="cdesc">คลิกชื่อไฟล์เพื่อเปิดในแท็บใหม่ · แก้ไข/ลบได้</p>
+    <div style="overflow-x:auto">
+      <table class="ad-table">
+        <thead><tr><th>ประเภท</th><th>หัวข้อประกาศ</th><th>วันที่</th><th>ไฟล์</th><th style="width:150px">จัดการ</th></tr></thead>
+        <tbody id="itRows"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   ระบบจัดการหลังบ้าน — ข่าวจัดซื้อจัดจ้าง (Prototype)
+   บันทึกใน localStorage · ระบบจริงใช้ฐานข้อมูล + อัปโหลดไฟล์บนเซิร์ฟเวอร์
+   ============================================================ */
+(function(){
+  var SAMPLE = 'docs/sample-procurement.pdf'; // ไฟล์ตัวอย่าง (prototype) — ระบบจริง = URL ไฟล์ที่อัปโหลด
+  var KT='suacc_proc_types', KI='suacc_proc_items';
+
+  var DEFAULT_TYPES = [
+    'แผนการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ','ประกาศร่าง TOR / ร่างเอกสารประกวดราคา',
+    'ประกาศเชิญชวน / ประกาศจัดซื้อจัดจ้าง','ยกเลิกประกาศจัดซื้อจัดจ้าง','ราคากลางจัดซื้อจัดจ้าง',
+    'ประกาศผู้ชนะการเสนอราคา','ประกาศผู้ชนะเสนอราคา / รายไตรมาส','ความก้าวหน้าการจัดซื้อจัดจ้างหรือการจัดหาพัสดุ',
+    'รายงานสรุปผลการจัดซื้อจัดจ้างหรือการจัดหาพัสดุประจำปี','สัญญาซื้อ / สัญญาจ้าง','สำเนาใบสั่งซื้อ','รายงานการตรวจสอบพัสดุประจำปี'
+  ];
+  var DEFAULT_ITEMS = [
+    {id:1, type:'ประกาศผู้ชนะการเสนอราคา', title:'ประกาศผู้ชนะการเสนอราคา ซื้อครุภัณฑ์จัดแสดงนิทรรศการถาวร โดยวิธี e-bidding', date:'20 ก.ย. 2569', file:'ประกาศผู้ชนะ-ครุภัณฑ์นิทรรศการ.pdf'},
+    {id:2, type:'ราคากลางจัดซื้อจัดจ้าง', title:'ประกาศราคากลาง ซื้อครุภัณฑ์จัดแสดงนิทรรศการถาวร', date:'14 ก.ย. 2569', file:'ราคากลาง-ครุภัณฑ์.docx'},
+    {id:3, type:'ประกาศเชิญชวน / ประกาศจัดซื้อจัดจ้าง', title:'ประกวดราคาซื้อครุภัณฑ์จัดแสดงนิทรรศการ ด้วยวิธี e-bidding', date:'15 ก.ย. 2569', file:'ประกวดราคา-ebidding.pdf'}
+  ];
+
+  function load(k, def){ try{ var v=JSON.parse(localStorage.getItem(k)); return v||def; }catch(e){ return def; } }
+  function save(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  var types = load(KT, DEFAULT_TYPES.slice());
+  var items = load(KI, DEFAULT_ITEMS.slice());
+  var nextId = items.reduce(function(m,i){return Math.max(m,i.id||0);},0)+1;
+
+  var tyList=document.getElementById('tyList');
+  var itType=document.getElementById('itType');
+  var itRows=document.getElementById('itRows');
+  var itCount=document.getElementById('itCount');
+
+  var ICON_EDIT='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>';
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+
+  /* ---- ประเภท (dropdown) ---- */
+  function renderTypes(){
+    tyList.innerHTML = types.map(function(t,i){
+      return '<div class="tyrow" data-i="'+i+'">'+
+        '<span class="grip">≡</span>'+
+        '<span class="name">'+esc(t)+'</span>'+
+        '<span class="acts">'+
+          '<button class="btn-g" data-act="edit">'+ICON_EDIT+' แก้ไข</button>'+
+          '<button class="btn-g danger" data-act="del">ลบ</button>'+
+        '</span></div>';
+    }).join('') || '<div class="empty">ยังไม่มีประเภท</div>';
+    // sync dropdown ในฟอร์มเพิ่มประกาศ
+    itType.innerHTML = types.map(function(t){ return '<option value="'+esc(t)+'">'+esc(t)+'</option>'; }).join('');
+  }
+
+  tyList.addEventListener('click', function(e){
+    var btn=e.target.closest('button'); if(!btn) return;
+    var row=e.target.closest('.tyrow'); var i=parseInt(row.getAttribute('data-i'),10);
+    var act=btn.getAttribute('data-act');
+    if(act==='del'){
+      if(confirm('ลบประเภท “'+types[i]+'” ?')){ types.splice(i,1); save(KT,types); renderTypes(); }
+    } else if(act==='edit'){
+      var cur=types[i];
+      row.innerHTML='<span class="grip">≡</span><input class="edit" value="'+esc(cur)+'">'+
+        '<span class="acts"><button class="btn-a" style="height:38px;padding:0 16px" data-act="save">บันทึก</button>'+
+        '<button class="btn-g" data-act="cancel">ยกเลิก</button></span>';
+      var inp=row.querySelector('input.edit'); inp.focus();
+      row.querySelector('[data-act=save]').onclick=function(){ var v=inp.value.trim(); if(v){ types[i]=v; save(KT,types);} renderTypes(); };
+      row.querySelector('[data-act=cancel]').onclick=function(){ renderTypes(); };
+      inp.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ev.preventDefault();row.querySelector('[data-act=save]').click();} });
+    }
+  });
+
+  document.getElementById('tyAdd').addEventListener('submit', function(e){
+    e.preventDefault();
+    var inp=document.getElementById('tyNew'); var v=inp.value.trim();
+    if(!v) return;
+    if(types.indexOf(v)>=0){ alert('มีประเภทนี้อยู่แล้ว'); return; }
+    types.push(v); save(KT,types); inp.value=''; renderTypes();
+  });
+
+  /* ---- รายการประกาศ ---- */
+  function extOf(name){ var m=/\.([a-z0-9]+)$/i.exec(name||''); return m?m[1].toUpperCase():'FILE'; }
+  function renderItems(){
+    itCount.textContent = '('+items.length+' รายการ)';
+    if(!items.length){ itRows.innerHTML='<tr><td colspan="5" class="empty">ยังไม่มีประกาศ</td></tr>'; return; }
+    itRows.innerHTML = items.map(function(it){
+      var ext=extOf(it.file);
+      var fileCell = it.file
+        ? '<a class="ad-file" href="'+SAMPLE+'" target="_blank" rel="noopener" title="เปิดในแท็บใหม่"><span class="ext">'+ext+'</span>'+esc(it.file)+'</a>'
+        : '<span style="color:var(--muted);font-size:13px">— ไม่มีไฟล์ —</span>';
+      return '<tr data-id="'+it.id+'">'+
+        '<td><span class="ad-tag">'+esc(it.type)+'</span></td>'+
+        '<td style="font-weight:600;max-width:360px">'+esc(it.title)+'</td>'+
+        '<td style="white-space:nowrap;color:var(--muted)">'+esc(it.date)+'</td>'+
+        '<td>'+fileCell+'</td>'+
+        '<td><button class="btn-g" data-act="edit">แก้ไข</button> <button class="btn-g danger" data-act="del">ลบ</button></td>'+
+      '</tr>';
+    }).join('');
+  }
+
+  itRows.addEventListener('click', function(e){
+    var btn=e.target.closest('button[data-act]'); if(!btn) return;
+    var tr=e.target.closest('tr'); var id=parseInt(tr.getAttribute('data-id'),10);
+    var idx=items.findIndex(function(x){return x.id===id;});
+    if(idx<0) return;
+    if(btn.getAttribute('data-act')==='del'){
+      if(confirm('ลบประกาศนี้ ?')){ items.splice(idx,1); save(KI,items); renderItems(); }
+    } else {
+      var it=items[idx];
+      var nt=prompt('แก้ไขหัวข้อประกาศ:', it.title); if(nt===null) return;
+      var nd=prompt('แก้ไขวันที่ประกาศ:', it.date); if(nd===null) return;
+      it.title=nt.trim()||it.title; it.date=nd.trim()||it.date; save(KI,items); renderItems();
+    }
+  });
+
+  document.getElementById('itAdd').addEventListener('submit', function(e){
+    e.preventDefault();
+    var title=document.getElementById('itTitle').value.trim();
+    var type=itType.value;
+    var date=document.getElementById('itDate').value.trim();
+    var f=document.getElementById('itFile').files[0];
+    if(!title||!type||!date) return;
+    items.unshift({ id:nextId++, type:type, title:title, date:date, file: f?f.name:'' });
+    save(KI,items);
+    e.target.reset();
+    renderItems();
+    window.scrollTo({top:document.querySelector('.ad-card:last-child').offsetTop-20,behavior:'smooth'});
+  });
+
+  renderTypes();
+  renderItems();
+})();
+</script>
+</body>
+</html>

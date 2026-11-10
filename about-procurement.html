@@ -261,7 +261,7 @@
           '<td><span class="eg-type">' + TYPES[d.t] + '</span></td>' +
           '<td><div class="eg-title">' + d.title + '</div></td>' +
           '<td><span class="eg-date">' + d.date + '</span></td>' +
-          '<td class="c"><a class="eg-view" href="#" aria-label="ดูรายละเอียด">' + ARROW + '</a></td>' +
+          '<td class="c"><a class="eg-view" href="' + (d.file || 'docs/sample-procurement.pdf') + '" target="_blank" rel="noopener" aria-label="เปิดเอกสาร (แท็บใหม่)">' + ARROW + '</a></td>' +
         '</tr>';
       }).join('');
     }
